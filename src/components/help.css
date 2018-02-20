@@ -1,0 +1,12 @@
+.help-icon {
+  color: gray;
+  padding: 3px;
+}
+
+.help-icon:hover {
+  color: rgb(60, 141, 188);
+}
+
+.on-dark:hover {
+  color: white;
+}
