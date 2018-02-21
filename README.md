@@ -13,13 +13,17 @@ Learn more at [https://www.easydoccontents.com](https://www.easydoccontents.com)
 The required dependencies are:
 
 - React JS 16.2.0 or higher
+- react-bootstrap ^0.32.1
+- bootstrap-css-only ^3.3.7
+- font-awesome ^4.7.0
+- edc-client-js ^2.0.0
 
 ## Importing the help component
 
 You can import your library with NPM in any React application by running:
 
 ```bash
-$ npm install edc-popover-react --save
+$ npm i edc-popover-react
 ```
 
 with YARN, use:

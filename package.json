@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap-css-only": "^3.3.7",
     "edc-client-js": "^2.0.0",
     "font-awesome": "^4.7.0",
     "prop-types": "^15.6.0",
@@ -11,11 +12,23 @@
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1"
   },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
   "scripts": {
+    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "^1.10.2",
+    "typescript": "^2.7.2"
+  }
 }

@@ -1,12 +1,17 @@
 .help-icon {
-  color: gray;
+  color: rgba(0, 0, 0, 0.3);
   padding: 3px;
+  font-size: 1.15em;
 }
 
 .help-icon:hover {
   color: rgb(60, 141, 188);
 }
 
-.on-dark:hover {
+.help-icon.on-dark {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.help-icon.on-dark:hover {
   color: white;
 }
