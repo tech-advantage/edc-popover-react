@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
 import { EdcHelp } from '../components/EdcHelp';
-import { PopoverConfigurationProvider } from '../components/PopoverConfigurationProvider';
+import { EdcConfigurationProvider } from '../components/EdcConfigurationProvider';
 
 class App extends Component {
   render() {
     return (
-      <PopoverConfigurationProvider
+      <EdcConfigurationProvider
         icon="fa-question-circle-o"
-        pluginId=""
-        helpPath=""
-        docPath=""
+        pluginId="edchelp"
+        helpPath="/help"
+        docPath="/doc"
       >
         <div className="App">
           <header className="App-header">
             <h1 className="App-title">edc Popover React Component</h1>
             On dark background:{' '}
-            <EdcHelp mainKey="key" subKey="subKey" dark={true} />
+            <EdcHelp mainKey="fr.techad.edc" subKey="help.center" dark={true} />
           </header>
           <p className="App-intro">
             Integration example for{' '}
@@ -25,10 +25,10 @@ class App extends Component {
           </p>
           <p>
             On white background:
-            <EdcHelp mainKey="key" subKey="subKey" />
+            <EdcHelp mainKey="fr.techad.edc" subKey="help.center" />
           </p>
         </div>
-      </PopoverConfigurationProvider>
+      </EdcConfigurationProvider>
     );
   }
 }

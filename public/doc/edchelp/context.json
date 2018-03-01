@@ -1,0 +1,13 @@
+{
+  "fr.techad.edc": {
+    "help.center": {
+      "en": {
+        "description": "This is the description",
+        "url": "edchelp/html/en/1/800/index.html",
+        "label": "Help Title",
+        "articles": [],
+        "links": []
+      }
+    }
+  }
+}

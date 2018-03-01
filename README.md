@@ -46,7 +46,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 This module needs a basic configuration. 
 
-To provide this configuration, use the PopoverConfigurationProvider component on top of your App DOM.
+To provide this configuration, use the EdcConfigurationProvider component on top of your App DOM.
 
 Parameters to set are : 
 
@@ -63,12 +63,12 @@ In your main application module, for example `App`:
 
 ```javascript
 import 'font-awesome/css/font-awesome.min.css';
-import { EdcHelp, PopoverConfigurationProvider } from 'edc-popover-react';
+import { EdcHelp, EdcConfigurationProvider } from 'edc-popover-react';
 
 class App extends Component {
   render() {
     return (
-      <PopoverConfigurationProvider icon="fa-question-circle-o" pluginId={myPluginId} helpPath={myHelpPath} docPath={myDocPath}>
+      <EdcConfigurationProvider icon="fa-question-circle-o" pluginId={myPluginId} helpPath={myHelpPath} docPath={myDocPath}>
         <div className="App">
           <header>
             <h1 className="App-title">edc Popover React Component</h1>
@@ -77,7 +77,7 @@ class App extends Component {
             Popover in a React app: <EdcHelp mainKey="key" subKey="subKey"/>
           </p>
         </div>
-      </PopoverConfigurationProvider>
+      </EdcConfigurationProvider>
     );
   }
 }

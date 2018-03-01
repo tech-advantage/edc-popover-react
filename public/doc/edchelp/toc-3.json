@@ -1,0 +1,41 @@
+{
+  "id": "3",
+  "en": {
+    "label": "Q&A",
+    "topics": [
+      {
+        "id": "2",
+        "label": "Doc sCuGh",
+        "type": "DOCUMENT",
+        "url": "edchelp/html/en/3/2.html",
+        "topics": [],
+        "links": []
+      },
+      {
+        "id": "5",
+        "label": "chapter JHnfE",
+        "type": "CHAPTER",
+        "url": "edchelp/html/en/3/5.html",
+        "topics": [
+          {
+            "id": "17",
+            "label": "Doc wXteX",
+            "type": "DOCUMENT",
+            "url": "edchelp/html/en/3/17.html",
+            "topics": [],
+            "links": []
+          },
+          {
+            "id": "22",
+            "label": "Doc zCnag",
+            "type": "DOCUMENT",
+            "url": "edchelp/html/en/3/22.html",
+            "topics": [],
+            "links": []
+          }
+        ],
+        "links": []
+      }
+    ]
+  }
+}

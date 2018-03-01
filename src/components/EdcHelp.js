@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { OverlayTrigger } from 'react-bootstrap';
-//import { EdcClient } from 'edc-client-js';
+import { EdcClient } from 'edc-client-js/dist/edc-client.js';
 import 'font-awesome/css/font-awesome.min.css';
 import './help.css';
 import { EdcPopover } from './EdcPopover';
@@ -9,9 +9,36 @@ import { EdcPopover } from './EdcPopover';
 const DEFAULT_ICON = 'fa-question-circle-o';
 
 export class EdcHelp extends Component {
-  state = {
-    title: 'Title'
-  };
+  constructor(props, context) {
+    super(props);
+
+    this.state = {
+      helper: { label: 'Hello' }
+    };
+  }
+
+  componentDidMount() {
+    const _this = this;
+
+    let edcClient = new EdcClient(
+      this.context.docPath,
+      this.context.pluginId,
+      true
+    );
+
+    edcClient
+      .getHelper(this.props.mainKey, this.props.subKey)
+      .then(helper => {
+        console.log('Helper: ' + helper);
+        if (helper) {
+          console.log('Title: ' + helper.label);
+          _this.setState({
+            helper
+          });
+        }
+      })
+      .catch(error => console.log('Erreur: ' + error));
+  }
 
   render() {
     let { icon } = this.context;
@@ -29,14 +56,14 @@ export class EdcHelp extends Component {
       icon = icon + ' on-dark';
     }
 
-    //let edcClient = new EdcClient('/doc/')
-    //edcClient.getContext().then((json) => this.state.title = json.fr.techad.edc.help.center.label)
-
+    // TODO il faudrait passer les données async par une fonction
+    // ex: onMount={contentProvider}
     const popovr = (
-      //  <Popover id="popover-positioned-bottom" title="Popover Bottom">
-      //    <strong>Need some help?</strong> Check this info.
-      //  </Popover>
-      <EdcPopover id="popover-positioned-bottom" title={this.state.title} />
+      <EdcPopover
+        id="popover-positioned-bottom"
+        title={this.state.helper.label}
+        contentH={this.state.helper.description}
+      />
     );
 
     return (
@@ -52,7 +79,10 @@ export class EdcHelp extends Component {
   }
 
   static contextTypes = {
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    pluginId: PropTypes.string.isRequired,
+    helpPath: PropTypes.string,
+    docPath: PropTypes.string.isRequired
   };
 
   // mainKey is used because key is reserved in React

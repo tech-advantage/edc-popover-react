@@ -1,7 +1,7 @@
 import { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 
-export class PopoverConfigurationProvider extends Component {
+export class EdcConfigurationProvider extends Component {
   getChildContext() {
     return {
       pluginId: this.props.pluginId,

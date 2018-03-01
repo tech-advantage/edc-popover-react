@@ -4,10 +4,6 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 
 export class EdcPopover extends Component {
   render() {
-    return (
-      <Popover {...this.props}>
-        <strong>Need some help?</strong> Check this info.
-      </Popover>
-    );
+    return <Popover {...this.props}>{this.props.contentH}</Popover>;
   }
 }
