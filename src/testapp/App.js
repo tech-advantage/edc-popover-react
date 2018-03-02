@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+
 import { EdcHelp } from '../components/EdcHelp';
 import { EdcConfigurationProvider } from '../components/EdcConfigurationProvider';
 

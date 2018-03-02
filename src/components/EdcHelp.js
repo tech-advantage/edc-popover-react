@@ -2,24 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { OverlayTrigger } from 'react-bootstrap';
 import { EdcClient } from 'edc-client-js/dist/edc-client.js';
-import 'font-awesome/css/font-awesome.min.css';
-import './help.css';
 import { EdcPopover } from './EdcPopover';
+import './help.css';
 
 const DEFAULT_ICON = 'fa-question-circle-o';
 
 export class EdcHelp extends Component {
   constructor(props, context) {
     super(props);
-
     this.state = {
-      helper: { label: 'Hello' }
+      helper: {
+        label: '',
+        description: ''
+      }
     };
   }
 
   componentDidMount() {
-    const _this = this;
-
     let edcClient = new EdcClient(
       this.context.docPath,
       this.context.pluginId,
@@ -29,10 +28,11 @@ export class EdcHelp extends Component {
     edcClient
       .getHelper(this.props.mainKey, this.props.subKey)
       .then(helper => {
-        console.log('Helper: ' + helper);
+        //console.log('Helper: ' + helper);
         if (helper) {
-          console.log('Title: ' + helper.label);
-          _this.setState({
+          //console.log('Title: ' + helper.label);
+          // setState will trigger a render with updated state
+          this.setState({
             helper
           });
         }
@@ -56,13 +56,11 @@ export class EdcHelp extends Component {
       icon = icon + ' on-dark';
     }
 
-    // TODO il faudrait passer les données async par une fonction
-    // ex: onMount={contentProvider}
-    const popovr = (
+    const popover = (
       <EdcPopover
         id="popover-positioned-bottom"
         title={this.state.helper.label}
-        contentH={this.state.helper.description}
+        content={this.state.helper.description}
       />
     );
 
@@ -71,7 +69,7 @@ export class EdcHelp extends Component {
         trigger="click"
         rootClose
         placement="bottom"
-        overlay={popovr}
+        overlay={popover}
       >
         <i className={icon} />
       </OverlayTrigger>
