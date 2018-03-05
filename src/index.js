@@ -1,11 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './testapp/App';
+import { EdcHelp } from './components/EdcHelp';
+import { EdcConfigurationProvider } from './components/EdcConfigurationProvider';
 
-export { EdcHelp } from './components/EdcHelp';
-//export {
-//  PopoverConfigurationProvider
-//} from './src/components/PopoverConfigurationProvider';
-
-ReactDOM.render(<App />, document.getElementById('root'));
+export { EdcHelp, EdcConfigurationProvider };

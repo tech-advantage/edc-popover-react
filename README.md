@@ -1,3 +1,6 @@
+# Work in progress!
+This module is not yet available on npmjs
+
 ## edc-popover-react
 This is a react implementation of edc popover displaying the contextual help
 

@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+
+// font-awesome and bootstrap 3 css are required with edc-popover-react
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 
-import { EdcHelp } from '../components/EdcHelp';
-import { EdcConfigurationProvider } from '../components/EdcConfigurationProvider';
+// import edc components
+import { EdcHelp, EdcConfigurationProvider } from 'edc-popover-react';
 
 class App extends Component {
   render() {
+    // provide help installation settings as well as icon (if different from default)
     return (
       <EdcConfigurationProvider
         icon="fa-question-circle-o"

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { OverlayTrigger } from 'react-bootstrap';
-import { EdcClient } from 'edc-client-js/dist/edc-client.js';
+import { EdcClient } from 'edc-client-js';
 import { EdcPopover } from './EdcPopover';
 import './help.css';
 

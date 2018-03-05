@@ -1,7 +1,11 @@
 {
-  "name": "component",
-  "version": "0.1.0",
-  "private": true,
+  "name": "edc-popover-react",
+  "version": "0.0.1",
+  "description": "React component for edc help",
+  "main": "build/index.js",
+  "peerDependencies": {
+    "react": "^16.2.0"
+  },
   "dependencies": {
     "bootstrap-css-only": "^3.3.7",
     "edc-client-js": "^2.0.0",
@@ -10,7 +14,7 @@
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "webpack": "3.8.1"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
@@ -20,14 +24,28 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch",
+    "build": "webpack"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.10",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
-    "prettier": "^1.10.2"
+    "prettier": "^1.10.2",
+    "style-loader": "^0.20.2"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "stage-0",
+      "react"
+    ]
   }
 }
