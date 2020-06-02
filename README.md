@@ -1,4 +1,4 @@
-## edc-popover-react
+## edc-popover-react [![Build Status](https://travis-ci.org/tech-advantage/edc-popover-react.svg?branch=master)](https://travis-ci.org/tech-advantage/edc-popover-react)
 This is a react implementation of edc popover displaying the contextual help
 
 _This project is meant to be used with **easy doc contents** (aka edc)._
