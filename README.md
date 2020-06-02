@@ -13,3 +13,12 @@ Learn more at [https://www.easydoccontents.com](https://www.easydoccontents.com)
 The required dependencies are:
 
 - React JS 16.0.0 or higher
+
+## Tests
+
+#### UI components
+
+edc-popover-react uses [Storybook](https://storybook.js.org/) for isolated UI components testing, it can be started with :
+```bash
+npm run storybook
+```
