@@ -12,7 +12,7 @@ Learn more at [https://www.easydoccontents.com](https://www.easydoccontents.com)
 
 The required dependencies are:
 
-- React JS 16.0.0 or higher
+- React JS 16.4.0 or higher
 
 ## Tests
 

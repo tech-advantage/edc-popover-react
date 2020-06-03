@@ -1,10 +1,10 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import { AbstractConfigProvider, ConfigContext } from './AbstractConfigProvider'
 
-export class ExampleConfigProvider extends AbstractConfigProvider {
+class ExampleConfigProvider extends AbstractConfigProvider {
   getPluginId(): string {
-    return 'edchelp-test'
+    return 'edchelp-test-jest'
   }
 
   getDocPath(): string {
@@ -22,7 +22,7 @@ export class ExampleConfigProvider extends AbstractConfigProvider {
 
 describe('ConfigProvider', () => {
   it('should allow to fetch the ConfigContext', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ExampleConfigProvider>
         <button>
           <ConfigContext.Consumer>

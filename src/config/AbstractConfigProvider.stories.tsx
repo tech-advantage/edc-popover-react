@@ -1,10 +1,9 @@
 import React from 'react'
-import { ExampleConfigProvider } from './AbstractConfigProvider.spec'
-import { ConfigContext } from './AbstractConfigProvider'
+import { AbstractConfigProvider, ConfigContext } from './AbstractConfigProvider'
 
 export default { title: 'AbstractConfigProvider' }
 
-export const withDefaultIcon = () => (
+export const withExampleConsumer = () => (
   <ExampleConfigProvider>
     <button>
       <ConfigContext.Consumer>
@@ -13,3 +12,21 @@ export const withDefaultIcon = () => (
     </button>
   </ExampleConfigProvider>
 )
+
+class ExampleConfigProvider extends AbstractConfigProvider {
+  getPluginId(): string {
+    return 'edchelp-test-storybook'
+  }
+
+  getDocPath(): string {
+    return '/doc'
+  }
+
+  getHelpPath(): string {
+    return '/help'
+  }
+
+  getI18nPath(): string {
+    return '/doc/i18n'
+  }
+}
