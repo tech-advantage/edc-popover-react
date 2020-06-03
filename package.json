@@ -23,11 +23,13 @@
     "storybook": "start-storybook"
   },
   "dependencies": {
-    "font-awesome": "^4.7.0",
-    "react-bootstrap": "0.33.1"
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "edc-client-js": "^3.0.1",
+    "react-bootstrap": "0.33.1",
+    "react-redux": "^7.2.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
