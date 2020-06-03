@@ -24,9 +24,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
-    "edc-client-js": "^3.0.1",
-    "react-bootstrap": "0.33.1",
-    "react-redux": "^7.2.0"
+    "react-bootstrap": "0.33.1"
   },
   "peerDependencies": {
     "react": "^16.4.0"
