@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './EdcHelp.scss'
-import 'font-awesome/scss/font-awesome.scss'
+import '@fortawesome/fontawesome-free/scss/fontawesome.scss'
 
 export class EdcHelp extends Component {
   render() {

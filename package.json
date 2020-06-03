@@ -23,7 +23,7 @@
     "storybook": "start-storybook"
   },
   "dependencies": {
-    "font-awesome": "^4.7.0",
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "react-bootstrap": "0.33.1"
   },
   "peerDependencies": {
