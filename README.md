@@ -31,7 +31,7 @@ yarn add edc-popover-react
 ### Setup
 
 To work properly, this module needs a basic configuration, you must implement your own configuration by extending `AbstractPopoverConfigProvider` like the example below:
-```typescript
+```typescript jsx
 import { AbstractPopoverConfigProvider } from 'edc-popover-react'
 
 class ExampleConfigProvider extends AbstractPopoverConfigProvider {
@@ -71,10 +71,53 @@ Optional methods that can be overridden :
 |---|---|---|---|
 | getIcon | string | The font awesome icon | fa-question-circle-o |
 
+
+Because `AbstractPopoverConfigProvider` extends `React.Component`, the final step is to surround your contents with your freshly implemented provider:
+```typescript jsx
+render(){
+  return (
+  ...
+  <ExampleConfigProvider>
+    ...
+    <EdcHelp />
+    ...
+    <EdcHelp />
+    ...
+    <EdcHelp />
+  </ExampleConfigProvider>
+  ...
+  )
+}
+```
+
+You can also reuse your provider to make your app more flexible:
+
+```typescript jsx
+render(){
+  return (
+  ...
+  <ExampleConfigProvider>
+    ...
+    <EdcHelp />
+    ...
+    <EdcHelp />
+    ...
+  </ExampleConfigProvider>
+  ...
+  <ExampleConfigProvider>
+    ...
+    <EdcHelp />
+    ...
+  </ExampleConfigProvider>
+  ...
+  )
+}
+```
+
 ### Usage
 
 The main component is `EdcHelp`, you can use the component as follows:
-```typescript
+```typescript jsx
 import { EdcHelp } from 'edc-popover-react'
 
 ...
@@ -82,12 +125,28 @@ import { EdcHelp } from 'edc-popover-react'
 ...
 ```
 
+**:warning: All `EdcHelp` components must be surrounded by your implemented provider** (see [Setup section](#Setup))
+
 ## Tests
 
-#### UI components
+### Unit
 
-edc-popover-react uses [Storybook](https://storybook.js.org/) for isolated UI components testing, it can be started with :
+edc-popover-react uses [Jest](https://jestjs.io/) and [Enzyme](https://enzymejs.github.io/enzyme/) for unit testing, you can test it by running:
+```bash
+npm test
+```
+or
+```bash
+yarn test
+```
+### UI components
+
+edc-popover-react uses [Storybook](https://storybook.js.org/) for isolated UI components testing, you can test it by running:
 ```bash
 npm run storybook
+```
+or
+```bash
+yarn run storybook
 ```
 
