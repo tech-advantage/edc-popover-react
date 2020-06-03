@@ -1,4 +1,4 @@
-export class EdcConfig {
+export class PopoverConfig {
   pluginId: string | undefined
   helpPath: string | undefined
   docPath: string | undefined

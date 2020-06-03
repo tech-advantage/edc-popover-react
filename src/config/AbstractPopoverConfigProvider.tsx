@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { EdcConfig } from './EdcConfig'
+import { PopoverConfig } from './PopoverConfig'
 
-export const ConfigContext = React.createContext<EdcConfig>(new EdcConfig())
+export const ConfigContext = React.createContext<PopoverConfig>(
+  new PopoverConfig()
+)
 
 export abstract class AbstractPopoverConfigProvider extends Component {
   abstract getPluginId(): string
@@ -20,7 +22,7 @@ export abstract class AbstractPopoverConfigProvider extends Component {
     return (
       <ConfigContext.Provider
         value={
-          new EdcConfig(
+          new PopoverConfig(
             this.getPluginId(),
             this.getHelpPath(),
             this.getDocPath(),
