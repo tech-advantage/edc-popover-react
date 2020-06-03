@@ -14,6 +14,15 @@ The required dependencies are:
 
 - React JS 16.4.0 or higher
 
+## Usage
+
+The main component is `EdcHelp`, you can use the component as follows :
+```React
+...
+<EdcHelp />
+...
+```
+
 ## Tests
 
 #### UI components
@@ -22,3 +31,4 @@ edc-popover-react uses [Storybook](https://storybook.js.org/) for isolated UI co
 ```bash
 npm run storybook
 ```
+
