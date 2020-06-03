@@ -22,17 +22,22 @@
     "test:watch": "react-scripts test --env=jsdom",
     "storybook": "start-storybook"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "react-bootstrap": "0.33.1"
+  },
   "peerDependencies": {
     "react": "^16.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
+    "@storybook/addon-actions": "^5.3.19",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.19",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/enzyme": "^3.10.5",
     "@types/jest": "^25.1.4",
     "@types/node": "^12.12.38",
     "@types/react": "^16.9.27",
@@ -42,6 +47,8 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
@@ -54,11 +61,13 @@
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
     "microbundle-crl": "^0.13.10",
+    "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
+    "react-test-renderer": "^16.13.1",
     "typescript": "^3.7.5"
   },
   "files": [
