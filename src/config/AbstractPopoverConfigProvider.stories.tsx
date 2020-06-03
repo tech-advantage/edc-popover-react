@@ -1,5 +1,8 @@
 import React from 'react'
-import { AbstractConfigProvider, ConfigContext } from './AbstractConfigProvider'
+import {
+  AbstractPopoverConfigProvider,
+  ConfigContext
+} from './AbstractPopoverConfigProvider'
 
 export default { title: 'AbstractConfigProvider' }
 
@@ -13,7 +16,7 @@ export const withExampleConsumer = () => (
   </ExampleConfigProvider>
 )
 
-class ExampleConfigProvider extends AbstractConfigProvider {
+class ExampleConfigProvider extends AbstractPopoverConfigProvider {
   getPluginId(): string {
     return 'edchelp-test-storybook'
   }

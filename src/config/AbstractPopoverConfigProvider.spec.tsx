@@ -1,8 +1,11 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { AbstractConfigProvider, ConfigContext } from './AbstractConfigProvider'
+import {
+  AbstractPopoverConfigProvider,
+  ConfigContext
+} from './AbstractPopoverConfigProvider'
 
-class ExampleConfigProvider extends AbstractConfigProvider {
+class ExampleConfigProvider extends AbstractPopoverConfigProvider {
   getPluginId(): string {
     return 'edchelp-test-jest'
   }

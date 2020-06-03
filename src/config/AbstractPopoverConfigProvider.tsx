@@ -3,7 +3,7 @@ import { EdcConfig } from './EdcConfig'
 
 export const ConfigContext = React.createContext<EdcConfig>(new EdcConfig())
 
-export abstract class AbstractConfigProvider extends Component {
+export abstract class AbstractPopoverConfigProvider extends Component {
   abstract getPluginId(): string
 
   abstract getHelpPath(): string
