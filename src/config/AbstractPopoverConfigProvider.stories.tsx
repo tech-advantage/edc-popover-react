@@ -8,36 +8,44 @@ export default { title: 'AbstractConfigProvider' }
 
 export const withExampleConsumer: FunctionComponent = () => (
   <ExampleConfigProvider>
+    <h1>No results should be empty</h1>
+    <hr />
+    <hr />
     <h4>Fetch plugin id from context (provider =&gt; consumer)</h4>
     <div>
       <ConfigContext.Consumer>
-        {(value): string | undefined => value.getPluginId()}
+        {(value): string => 'Result: ' + value.getPluginId()}
       </ConfigContext.Consumer>
     </div>
+    <hr />
     <h4>Fetch doc path from context (provider =&gt; consumer)</h4>
     <div>
       <ConfigContext.Consumer>
-        {(value): string | undefined => value.getDocPath()}
+        {(value): string => 'Result: ' + value.getDocPath()}
       </ConfigContext.Consumer>
     </div>
+    <hr />
     <h4>Fetch help path from context (provider =&gt; consumer)</h4>
     <div>
       <ConfigContext.Consumer>
-        {(value): string | undefined => value.getHelpPath()}
+        {(value): string => 'Result: ' + value.getHelpPath()}
       </ConfigContext.Consumer>
     </div>
+    <hr />
     <h4>Fetch icon from context (provider =&gt; consumer)</h4>
     <div>
       <ConfigContext.Consumer>
-        {(value): string | undefined => value.getIcon()}
+        {(value): string => 'Result: ' + value.getIcon()}
       </ConfigContext.Consumer>
     </div>
-    <h4>Fetch icon from context (provider =&gt; consumer)</h4>
+    <hr />
+    <h4>Fetch i18n path from context (provider =&gt; consumer)</h4>
     <div>
       <ConfigContext.Consumer>
-        {(value): string | undefined => value.getIcon()}
+        {(value): string => 'Result: ' + value.geti18nPath()}
       </ConfigContext.Consumer>
     </div>
+    <hr />
   </ExampleConfigProvider>
 )
 
