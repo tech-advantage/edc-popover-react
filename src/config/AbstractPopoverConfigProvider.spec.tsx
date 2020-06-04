@@ -23,7 +23,18 @@ class ExampleConfigProvider extends AbstractPopoverConfigProvider {
   }
 }
 
-describe('ConfigProvider', () => {
+function exceptAllPropsOk(
+  wrapper: ReactWrapper,
+  rightVals: AbstractPopoverConfigProvider
+): void {
+  expect(wrapper.find('#pluginId').text()).toEqual(rightVals.getPluginId())
+  expect(wrapper.find('#helpPath').text()).toEqual(rightVals.getHelpPath())
+  expect(wrapper.find('#docPath').text()).toEqual(rightVals.getDocPath())
+  expect(wrapper.find('#i18nPath').text()).toEqual(rightVals.getI18nPath())
+  expect(wrapper.find('#icon').text()).toEqual(rightVals.getIcon())
+}
+
+describe('AbstractPopoverConfigProvider', () => {
   const rightVals = new ExampleConfigProvider({})
 
   it('should allow to fetch all props from ConfigContext', () => {
@@ -31,27 +42,27 @@ describe('ConfigProvider', () => {
       <ExampleConfigProvider>
         <button id='pluginId'>
           <ConfigContext.Consumer>
-            {(value) => value.pluginId}
+            {(value): string | undefined => value.getPluginId()}
           </ConfigContext.Consumer>
         </button>
         <button id='helpPath'>
           <ConfigContext.Consumer>
-            {(value) => value.helpPath}
+            {(value): string | undefined => value.getHelpPath()}
           </ConfigContext.Consumer>
         </button>
         <button id='docPath'>
           <ConfigContext.Consumer>
-            {(value) => value.docPath}
+            {(value): string | undefined => value.getDocPath()}
           </ConfigContext.Consumer>
         </button>
         <button id='i18nPath'>
           <ConfigContext.Consumer>
-            {(value) => value.i18nPath}
+            {(value): string | undefined => value.geti18nPath()}
           </ConfigContext.Consumer>
         </button>
         <button id='icon'>
           <ConfigContext.Consumer>
-            {(value) => value.icon}
+            {(value): string | undefined => value.getIcon()}
           </ConfigContext.Consumer>
         </button>
       </ExampleConfigProvider>
@@ -66,52 +77,41 @@ describe('ConfigProvider', () => {
         <ExampleConfigProvider>
           <button id='pluginId'>
             <ConfigContext.Consumer>
-              {(value) => value.pluginId}
+              {(value): string | undefined => value.getPluginId()}
             </ConfigContext.Consumer>
           </button>
         </ExampleConfigProvider>
         <ExampleConfigProvider>
           <button id='helpPath'>
             <ConfigContext.Consumer>
-              {(value) => value.helpPath}
+              {(value): string | undefined => value.getHelpPath()}
             </ConfigContext.Consumer>
           </button>
         </ExampleConfigProvider>
         <ExampleConfigProvider>
           <button id='docPath'>
             <ConfigContext.Consumer>
-              {(value) => value.docPath}
+              {(value): string | undefined => value.getDocPath()}
             </ConfigContext.Consumer>
           </button>
         </ExampleConfigProvider>
         <ExampleConfigProvider>
           <button id='i18nPath'>
             <ConfigContext.Consumer>
-              {(value) => value.i18nPath}
+              {(value): string | undefined => value.geti18nPath()}
             </ConfigContext.Consumer>
           </button>
         </ExampleConfigProvider>
         <ExampleConfigProvider>
           <button id='icon'>
             <ConfigContext.Consumer>
-              {(value) => value.icon}
+              {(value): string | undefined => value.getIcon()}
             </ConfigContext.Consumer>
           </button>
-        </ExampleConfigProvider>{' '}
+        </ExampleConfigProvider>
       </>
     )
 
     exceptAllPropsOk(wrapper, rightVals)
   })
 })
-
-function exceptAllPropsOk(
-  wrapper: ReactWrapper,
-  rightVals: AbstractPopoverConfigProvider
-): void {
-  expect(wrapper.find('#pluginId').text()).toEqual(rightVals.getPluginId())
-  expect(wrapper.find('#helpPath').text()).toEqual(rightVals.getHelpPath())
-  expect(wrapper.find('#docPath').text()).toEqual(rightVals.getDocPath())
-  expect(wrapper.find('#i18nPath').text()).toEqual(rightVals.getI18nPath())
-  expect(wrapper.find('#icon').text()).toEqual(rightVals.getIcon())
-}

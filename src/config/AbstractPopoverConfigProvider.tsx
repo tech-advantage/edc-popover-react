@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { PopoverConfig } from './PopoverConfig'
+import React, { Component, ReactNode } from 'react'
+import { PopoverConfigHandler } from './PopoverConfigHandler'
 
-export const ConfigContext = React.createContext<PopoverConfig>(
-  new PopoverConfig()
+export const ConfigContext = React.createContext<PopoverConfigHandler>(
+  new PopoverConfigHandler()
 )
 
 export abstract class AbstractPopoverConfigProvider extends Component {
@@ -15,14 +15,14 @@ export abstract class AbstractPopoverConfigProvider extends Component {
   abstract getI18nPath(): string
 
   getIcon(): string {
-    return 'fa-question-circle-o'
+    return 'far fa-question-circle'
   }
 
-  render() {
+  render(): ReactNode {
     return (
       <ConfigContext.Provider
         value={
-          new PopoverConfig(
+          new PopoverConfigHandler(
             this.getPluginId(),
             this.getHelpPath(),
             this.getDocPath(),

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import {
   AbstractPopoverConfigProvider,
   ConfigContext
@@ -6,13 +6,38 @@ import {
 
 export default { title: 'AbstractConfigProvider' }
 
-export const withExampleConsumer = () => (
+export const withExampleConsumer: FunctionComponent = () => (
   <ExampleConfigProvider>
-    <button>
+    <h4>Fetch plugin id from context (provider =&gt; consumer)</h4>
+    <div>
       <ConfigContext.Consumer>
-        {(value) => value.pluginId}
+        {(value): string | undefined => value.getPluginId()}
       </ConfigContext.Consumer>
-    </button>
+    </div>
+    <h4>Fetch doc path from context (provider =&gt; consumer)</h4>
+    <div>
+      <ConfigContext.Consumer>
+        {(value): string | undefined => value.getDocPath()}
+      </ConfigContext.Consumer>
+    </div>
+    <h4>Fetch help path from context (provider =&gt; consumer)</h4>
+    <div>
+      <ConfigContext.Consumer>
+        {(value): string | undefined => value.getHelpPath()}
+      </ConfigContext.Consumer>
+    </div>
+    <h4>Fetch icon from context (provider =&gt; consumer)</h4>
+    <div>
+      <ConfigContext.Consumer>
+        {(value): string | undefined => value.getIcon()}
+      </ConfigContext.Consumer>
+    </div>
+    <h4>Fetch icon from context (provider =&gt; consumer)</h4>
+    <div>
+      <ConfigContext.Consumer>
+        {(value): string | undefined => value.getIcon()}
+      </ConfigContext.Consumer>
+    </div>
   </ExampleConfigProvider>
 )
 
