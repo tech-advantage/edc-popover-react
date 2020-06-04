@@ -11,6 +11,8 @@ describe('PopoverConfigHandler', () => {
     expect(defaultPopover.getHelpPath() === undefined)
     expect(defaultPopover.getEdcClient() === undefined)
     expect(defaultPopover.isEmpty())
+    expect(defaultPopover.createEdcClient() === undefined)
+    expect(defaultPopover.createEdcClient('mypluginid') === undefined)
   })
 
   it('should create an filled PopoverConfigHandler (all vars are instancied)', () => {
@@ -33,6 +35,8 @@ describe('PopoverConfigHandler', () => {
     expect(defaultPopover.getDocPath() === docPath)
     expect(defaultPopover.getHelpPath() === helpPath)
     expect(defaultPopover.getEdcClient() !== undefined)
+    expect(defaultPopover.createEdcClient() === undefined)
+    expect(defaultPopover.createEdcClient('mypluginid') !== undefined)
     expect(!defaultPopover.isEmpty())
   })
 })
