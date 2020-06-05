@@ -30,85 +30,68 @@ yarn add edc-popover-react
 
 ### Setup
 
-To work properly, this module needs a basic configuration, you must implement your own configuration by extending `AbstractPopoverConfigProvider` like the example below:
+To work properly, this module needs a basic configuration, you must implement your own configuration by using a high-level Component `PopoverConfigProvider` like the example below:
 ```typescript jsx
-import { AbstractPopoverConfigProvider } from 'edc-popover-react'
+import { PopoverProvider } from 'edc-popover-react'
+import { EdcHelp } from 'edc-popover-react'
+...
 
-class ExampleConfigProvider extends AbstractPopoverConfigProvider {
-  getPluginId(): string {
-    return 'edchelp-test'
-  }
-
-  getDocPath(): string {
-    return '/doc'
-  }
-
-  getHelpPath(): string {
-    return '/help'
-  }
-
-  getI18nPath(): string {
-    return '/doc/i18n'
-  }
-
-  //Optional
-  getIcon(): string {
-    return 'fa-question-circle-o'
-  }
-}
+<PopoverProvider
+        pluginId='myedchelp'
+        docPath='/doc'
+        helpPath='/help'
+        i18nPath='/doc/i18n'
+      >
+    ...
+   <EdcHelp .../>
+    ...
+   <EdcHelp .../>
+    ...
+</PopoverProvider>
 ```
 
-Methods to implement are :
-| Method | Return type | Description |
+Props to specify are :
+| Prop | Type | Description |
 |---|---|---|
-| getPluginId | string | The identifier of the target plugin documentation export |
-| getHelpPath | string | The path to edc-help-ng application |
-| getDocPath  | string | The path to exported documentation |
-| getI18nPath | string | The path to translation json files |
+| pluginId | string | The identifier of the target plugin documentation export |
+| helpPath | string | The path to edc-help-ng application |
+| docPath  | string | The path to exported documentation |
+| i18nPath | string | The path to translation json files |
 
-Optional methods that can be overridden :
+Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| getIcon | string | The font awesome icon | fa-question-circle-o |
+| icon | string | The icon class | far fa-question-circle |
 
-
-Because `AbstractPopoverConfigProvider` extends `React.Component`, the final step is to surround your contents with your freshly implemented provider:
+You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
 render(){
   return (
   ...
-  <ExampleConfigProvider>
+  <PopoverProvider
+          pluginId='myedchelp'
+          docPath='/doc'
+          helpPath='/help'
+          i18nPath='/doc/i18n'
+        >
     ...
-    <EdcHelp />
+    <EdcHelp .../>
     ...
-    <EdcHelp />
+    <EdcHelp .../>
     ...
-    <EdcHelp />
-  </ExampleConfigProvider>
+  </PopoverProvider>
   ...
-  )
-}
-```
-
-You can also reuse your provider to make your app more flexible:
-
-```typescript jsx
-render(){
-  return (
-  ...
-  <ExampleConfigProvider>
+  <PopoverProvider
+          pluginId='myedchelp'
+          docPath='/doc'
+          helpPath='/help'
+          i18nPath='/doc/i18n'
+          icon='far corst'
+        >
     ...
-    <EdcHelp />
+    <EdcHelp .../>
     ...
-    <EdcHelp />
-    ...
-  </ExampleConfigProvider>
-  ...
-  <ExampleConfigProvider>
-    ...
-    <EdcHelp />
-    ...
-  </ExampleConfigProvider>
+  </PopoverProvider>
   ...
   )
 }
@@ -121,11 +104,11 @@ The main component is `EdcHelp`, you can use the component as follows:
 import { EdcHelp } from 'edc-popover-react'
 
 ...
-<EdcHelp />
+<EdcHelp mainKey='mKey' subKey='sub'/>
 ...
 ```
 
-**:warning: All `EdcHelp` components must be surrounded by your implemented provider** (see [Setup section](#Setup))
+**:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup section](#Setup))
 
 ## Tests
 
