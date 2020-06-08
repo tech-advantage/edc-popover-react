@@ -4,6 +4,7 @@ import { PopoverConfig } from '../config/PopoverConfigProvider'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
 import React, { SetStateAction } from 'react'
 import { buildData } from './EdcHelpHandler'
+import { mount } from 'enzyme'
 
 const article1 = new Article()
 article1.label = 'Article1'
@@ -30,8 +31,14 @@ const edcHelpProps: EdcHelpProps = {
   subKey: 'subKey'
 }
 
+function getText(jsxOrStr: string | JSX.Element): string {
+  return React.isValidElement(jsxOrStr)
+    ? mount(jsxOrStr as JSX.Element).text()
+    : (jsxOrStr as string)
+}
+
 describe('EdcHelpHandler', () => {
-  it('should give correct data with correct input', async () => {
+  it('should give correct data with correct input', (done) => {
     jest
       .spyOn(HelperFactory.prototype, 'getHelp')
       .mockReturnValue(Promise.resolve(correctHelper))
@@ -40,19 +47,21 @@ describe('EdcHelpHandler', () => {
       dataAction: SetStateAction<PopoverData>
     ) => {
       const data = dataAction as PopoverData
+
       expect(data.fetched).toBeTruthy()
-      expect(data.title).toEqual(correctHelper.label)
-      expect(data.content).toContain(article1.label)
-      expect(data.content).toContain(link1.label)
-      expect(data.content).toContain(correctHelper.description)
+      expect(getText(data.title)).toEqual(correctHelper.label)
+      expect(getText(data.content)).toContain(article1.label)
+      expect(getText(data.content)).toContain(link1.label)
+      expect(getText(data.content)).toContain(correctHelper.description)
       expect(data.icon).toContain(popoverConfig.icon)
       expect(data.id).toBeDefined()
+      done()
     }
 
-    await buildData(popoverConfig, edcHelpProps, callback, true)
+    buildData(popoverConfig, edcHelpProps, callback, true)
   })
 
-  it('should catch and display a thrown error with undefined helper', async () => {
+  it('should catch and display a thrown error with undefined helper', (done) => {
     const errorMsg = 'MyErrorMsg'
     jest.spyOn(HelperFactory.prototype, 'getHelp').mockReturnValue(
       new Promise<Helper>(() => {
@@ -65,16 +74,17 @@ describe('EdcHelpHandler', () => {
     ) => {
       const data = dataAction as PopoverData
       expect(data.fetched).toBeTruthy()
-      expect(data.title).not.toEqual(correctHelper.label)
-      expect(data.content).toContain(errorMsg)
+      expect(getText(data.title)).not.toEqual(correctHelper.label)
+      expect(getText(data.content)).toContain(errorMsg)
       expect(data.icon).not.toContain(popoverConfig.icon)
       expect(data.id).toBeDefined()
+      done()
     }
 
-    await buildData(popoverConfig, edcHelpProps, callback, true)
+    buildData(popoverConfig, edcHelpProps, callback, true)
   })
 
-  it('should catch and display a message if no provider is a deep parent', async () => {
+  it('should catch and display a message if no provider is a deep parent', (done) => {
     jest
       .spyOn(HelperFactory.prototype, 'getHelp')
       .mockReturnValue(Promise.resolve(correctHelper))
@@ -87,15 +97,16 @@ describe('EdcHelpHandler', () => {
     ) => {
       const data = dataAction as PopoverData
       expect(data.fetched).toBeTruthy()
-      expect(data.title).not.toEqual(correctHelper.label)
-      expect(data.content).not.toContain(article1.label)
-      expect(data.content).not.toContain(link1.label)
-      expect(data.content).not.toContain(correctHelper.description)
+      expect(getText(data.title)).not.toEqual(correctHelper.label)
+      expect(getText(data.content)).not.toContain(article1.label)
+      expect(getText(data.content)).not.toContain(link1.label)
+      expect(getText(data.content)).not.toContain(correctHelper.description)
       expect(data.icon).not.toContain(popoverConfig.icon)
       expect(data.id).toBeDefined()
+      done()
     }
 
-    await buildData(popoverConfig, edcHelpProps, callback, true)
+    buildData(popoverConfig, edcHelpProps, callback, true)
     popoverConfig.helpFactory = savedFactory
   })
 })
