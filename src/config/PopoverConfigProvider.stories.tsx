@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { PopoverConfigContext, PopoverProvider } from './PopoverConfigProvider'
 
-export default { title: 'AbstractConfigProvider' }
+export default { title: 'PopoverConfigProvider' }
 
 export const withExampleConsumer: FunctionComponent = () => (
   <PopoverProvider

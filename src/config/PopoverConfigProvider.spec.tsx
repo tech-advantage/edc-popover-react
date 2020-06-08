@@ -24,7 +24,7 @@ describe('AbstractPopoverConfigProvider', () => {
     ...{
       pluginId: 'mypluginid',
       docPath: '/',
-      helpPath: '/help',
+      helpPath: '/help/',
       i18nPath: '/doc/i18n'
     }
   }

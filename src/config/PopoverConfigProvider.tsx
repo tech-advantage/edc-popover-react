@@ -1,5 +1,5 @@
 import React from 'react'
-import { EdcClient } from 'edc-client-js'
+import { HelperFactory } from '../helper/HelperFactory'
 
 export type PopoverConfig = {
   pluginId: string
@@ -7,7 +7,7 @@ export type PopoverConfig = {
   docPath: string
   i18nPath: string
   icon?: string
-  edcClient?: EdcClient
+  helpFactory?: HelperFactory
 }
 
 export const defaultConfig: PopoverConfig = {
@@ -26,17 +26,13 @@ export function PopoverProvider(
   props: PopoverConfig & { children: React.ReactNode }
 ): JSX.Element {
   const { children, ...value } = props
-  value.edcClient =
-    value.pluginId && !value.edcClient
-      ? new EdcClient(
-          value.docPath,
-          value.helpPath,
-          value.pluginId,
-          true,
-          value.i18nPath
-        )
-      : undefined
 
+  if (!value.helpFactory) {
+    value.helpFactory = new HelperFactory(value)
+  }
+
+  value.docPath = value.docPath.replace(/[/]*$/gm, '') + '/'
+  value.helpPath = value.helpPath.replace(/[/]*$/gm, '') + '/'
   return (
     <PopoverConfigContext.Provider value={{ ...defaultConfig, ...value }}>
       {children}
