@@ -12,7 +12,11 @@ Learn more at [https://www.easydoccontents.com](https://www.easydoccontents.com)
 
 The required dependencies are:
 
-- React JS 16.4.0 or higher
+- [ReactJS](https://reactjs.org/) 16.4.0 or higher
+- [FontAwesome](https://github.com/FortAwesome/Font-Awesome) 5.13.0 or higher
+- [bootstrap](https://getbootstrap.com/) 4.5.0 or higher
+- [edc-client-js](https://github.com/tech-advantage/edc-client-js) 3.0.1 or higher
+- [react-bootstrap](https://react-bootstrap.github.io/) 1.0.1 or higher
 
 ## Usage
 
@@ -104,11 +108,16 @@ The main component is `EdcHelp`, you can use the component as follows:
 import { EdcHelp } from 'edc-popover-react'
 
 ...
-<EdcHelp mainKey='mKey' subKey='sub'/>
+<EdcHelp mainKey='myKey' subKey='mySubKey'/>
 ...
 ```
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup section](#Setup))
+
+### Customization
+You can customize the design of the popover with CSS classes as below:
+
+![CSS Classes](CSSClasses.png "CSS Classes")
 
 ## Tests
 

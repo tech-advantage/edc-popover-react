@@ -5,7 +5,7 @@ import './EdcHelp.scss'
 import { PopoverConfigContext } from '../config/PopoverConfigProvider'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
-import { buildData } from './EdcHelpHandler'
+import { buildData, getId } from './EdcHelpHandler'
 
 const defaultProps: EdcHelpProps = {
   pluginId: undefined,
@@ -24,7 +24,7 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
   // setData can be used to rerender the Component with new data (useful for async task)
   const [data, setData] = useState<PopoverData>({
     fetched: false,
-    id: 'popover ' + finalProps.mainKey + ' ' + finalProps.subKey,
+    id: getId(finalProps),
     title: 'Loading...',
     content: 'Loading...',
     icon: config.icon || ''
@@ -48,7 +48,9 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
         placement={finalProps.placement}
         overlay={
           <Popover id={data.id}>
-            <Popover.Title as='h3'>{data.title}</Popover.Title>
+            <Popover.Title as='h3' className='popover-title'>
+              {data.title}
+            </Popover.Title>
             <Popover.Content>{data.content}</Popover.Content>
           </Popover>
         }

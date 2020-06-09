@@ -9,7 +9,7 @@ function open(link?: string): void {
   }
 }
 
-function getId(props: EdcHelpProps): string {
+export function getId(props: EdcHelpProps): string {
   return `popover ${props.pluginId ? `${props.pluginId} ` : ''} ${
     props.mainKey
   } ${props.subKey}`
@@ -21,19 +21,17 @@ export function buildContent(
   props: EdcHelpProps
 ): JSX.Element {
   return (
-    <div>
-      <article className='description'>{helper.description}</article>
-      <div className='see-also'>
-        <div className='need-more'>
-          <span className='title'>
-            <strong>Need more...</strong>
-          </span>
+    <div className='popover-content'>
+      <article className='popover-desc'>{helper.description}</article>
+      <div className='popover-section'>
+        <div className='popover-need-more'>
+          <span className='popover-section-title'>Need more...</span>
           <ul>
             {helper.articles.map((value, index) => {
               return (
                 <li key={index}>
                   <button
-                    className='link-button'
+                    className='popover-section-item'
                     onClick={(): void =>
                       open(
                         config.helpFactory?.getContextUrl(
@@ -53,16 +51,14 @@ export function buildContent(
             })}
           </ul>
         </div>
-        <div className='related'>
-          <span className='title'>
-            <strong>Related topics</strong>
-          </span>
+        <div className='popover-related-topics'>
+          <span className='popover-section-title'>Related topics</span>
           <ul>
             {helper.links.map((value, index) => {
               return (
                 <li key={index}>
                   <button
-                    className='link-button'
+                    className='popover-section-item'
                     onClick={(): void =>
                       open(
                         config.helpFactory?.getDocumentationUrl(
