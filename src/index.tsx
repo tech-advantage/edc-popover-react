@@ -1,3 +1,2 @@
 export { EdcHelp } from './components/EdcHelp'
-export { AbstractPopoverConfigProvider } from './config/AbstractPopoverConfigProvider'
-export { PopoverConfigHandler } from './config/PopoverConfigHandler'
+export { PopoverProvider } from './config/PopoverConfigProvider'
