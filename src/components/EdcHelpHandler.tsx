@@ -1,6 +1,6 @@
 import { PopoverConfig } from '../config/PopoverConfigProvider'
 import React from 'react'
-import { Helper } from 'edc-client-js'
+import { Helper, PopoverLabel } from 'edc-client-js'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
 
 function open(link?: string): void {
@@ -18,63 +18,68 @@ export function getId(props: EdcHelpProps): string {
 export function buildContent(
   config: PopoverConfig,
   helper: Helper,
-  props: EdcHelpProps
+  props: EdcHelpProps,
+  labels: PopoverLabel
 ): JSX.Element {
   return (
     <div className='popover-content'>
       <article className='popover-desc'>{helper.description}</article>
       <div className='popover-section'>
-        <div className='popover-need-more'>
-          <span className='popover-section-title'>Need more...</span>
-          <ul>
-            {helper.articles.map((value, index) => {
-              return (
-                <li key={index}>
-                  <button
-                    className='popover-section-item'
-                    onClick={(): void =>
-                      open(
-                        config.helpFactory?.getContextUrl(
-                          props.mainKey,
-                          props.subKey,
-                          index,
-                          props.lang,
-                          props.pluginId
+        {helper.articles && helper.articles.length > 0 && (
+          <div className='popover-need-more'>
+            <span className='popover-section-title'>{labels.articles}</span>
+            <ul>
+              {helper.articles.map((value, index) => {
+                return (
+                  <li key={index}>
+                    <button
+                      className='popover-section-item'
+                      onClick={(): void =>
+                        open(
+                          config.helpFactory?.getContextUrl(
+                            props.mainKey,
+                            props.subKey,
+                            index,
+                            props.lang,
+                            props.pluginId
+                          )
                         )
-                      )
-                    }
-                  >
-                    {value.label}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <div className='popover-related-topics'>
-          <span className='popover-section-title'>Related topics</span>
-          <ul>
-            {helper.links.map((value, index) => {
-              return (
-                <li key={index}>
-                  <button
-                    className='popover-section-item'
-                    onClick={(): void =>
-                      open(
-                        config.helpFactory?.getDocumentationUrl(
-                          value.id,
-                          props.lang
+                      }
+                    >
+                      {value.label}
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
+        {helper.links && helper.links.length > 0 && (
+          <div className='popover-related-topics'>
+            <span className='popover-section-title'>{labels.links}</span>
+            <ul>
+              {helper.links.map((value, index) => {
+                return (
+                  <li key={index}>
+                    <button
+                      className='popover-section-item'
+                      onClick={(): void =>
+                        open(
+                          config.helpFactory?.getDocumentationUrl(
+                            value.id,
+                            props.lang
+                          )
                         )
-                      )
-                    }
-                  >
-                    {value.label}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+                      }
+                    >
+                      {value.label}
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -111,12 +116,18 @@ export function buildData(
       props.lang
     )
 
+    const popoverLabels = config.helpFactory.getPopoverLabels(
+      props.lang,
+      props.pluginId
+    )
+
     if (!helperProvider) {
       console.error("Can't instanciate edc-client-js helper !")
       setData(failedData)
     } else {
-      helperProvider
-        .then((helper: Helper) => {
+      Promise.all([helperProvider, popoverLabels])
+        .then((values) => {
+          const helper = values[0]
           if (isMounted) {
             setData(
               !helper
@@ -124,7 +135,7 @@ export function buildData(
                 : {
                     fetched: true,
                     id: id,
-                    content: buildContent(config, helper, props),
+                    content: buildContent(config, helper, props, values[1]),
                     title: helper.label,
                     icon: config.icon || ''
                   }

@@ -20,10 +20,10 @@ function DefaultProvider(
     <PopoverProvider
       {...{
         ...{
-          pluginId: 'edchelp',
-          docPath: 'https://demo.easydoccontents.com/doc',
+          pluginId: 'edc',
+          docPath: './doc',
           helpPath: 'https://demo.easydoccontents.com/help',
-          i18nPath: 'https://demo.easydoccontents.com/doc/i18n'
+          i18nPath: './doc/i18n'
         },
         ...props
       }}
@@ -42,6 +42,12 @@ export const withDefaultIcon: FunctionComponent = () => (
 export const withCustomIcon: FunctionComponent = () => (
   <DefaultProvider icon='fas fa-ad'>
     <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+  </DefaultProvider>
+)
+
+export const withCustomLanguage: FunctionComponent = () => (
+  <DefaultProvider>
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' lang='fr' />
   </DefaultProvider>
 )
 
