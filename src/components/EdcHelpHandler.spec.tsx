@@ -1,5 +1,5 @@
 import { HelperFactory } from '../helper/HelperFactory'
-import { Helper, Article, Link, ArticleType } from 'edc-client-js'
+import { Helper, Article, Link, ArticleType, PopoverLabel } from 'edc-client-js'
 import { PopoverConfig } from '../config/PopoverConfigProvider'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
 import React, { SetStateAction } from 'react'
@@ -16,6 +16,10 @@ correctHelper.label = 'myTitle'
 correctHelper.description = 'myDescription'
 correctHelper.articles = [article1]
 correctHelper.links = [link1]
+
+const correctPopoverLabel = new PopoverLabel()
+correctPopoverLabel.articles = 'Need more...'
+correctPopoverLabel.links = 'Related topics'
 
 const popoverConfig: PopoverConfig = {
   pluginId: 'myPluginId',
@@ -43,6 +47,10 @@ describe('EdcHelpHandler', () => {
       .spyOn(HelperFactory.prototype, 'getHelp')
       .mockReturnValue(Promise.resolve(correctHelper))
 
+    jest
+      .spyOn(HelperFactory.prototype, 'getPopoverLabels')
+      .mockReturnValue(Promise.resolve(correctPopoverLabel))
+
     const callback: React.Dispatch<React.SetStateAction<PopoverData>> = (
       dataAction: SetStateAction<PopoverData>
     ) => {
@@ -69,6 +77,10 @@ describe('EdcHelpHandler', () => {
       })
     )
 
+    jest
+      .spyOn(HelperFactory.prototype, 'getPopoverLabels')
+      .mockReturnValue(Promise.resolve(correctPopoverLabel))
+
     const callback: React.Dispatch<React.SetStateAction<PopoverData>> = (
       dataAction: SetStateAction<PopoverData>
     ) => {
@@ -88,6 +100,10 @@ describe('EdcHelpHandler', () => {
     jest
       .spyOn(HelperFactory.prototype, 'getHelp')
       .mockReturnValue(Promise.resolve(correctHelper))
+
+    jest
+      .spyOn(HelperFactory.prototype, 'getPopoverLabels')
+      .mockReturnValue(Promise.resolve(correctPopoverLabel))
 
     const savedFactory = popoverConfig.helpFactory
     popoverConfig.helpFactory = undefined

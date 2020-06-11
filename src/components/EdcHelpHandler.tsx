@@ -121,23 +121,22 @@ export function buildData(
       console.error("Can't instanciate edc-client-js helper !")
       setData(failedData)
     } else {
-      helperProvider
-        .then((helper: Helper) => {
-          popoverLabels.then((labels: PopoverLabel) => {
-            if (isMounted) {
-              setData(
-                !helper
-                  ? failedData
-                  : {
-                      fetched: true,
-                      id: id,
-                      content: buildContent(config, helper, props, labels),
-                      title: helper.label,
-                      icon: config.icon || ''
-                    }
-              )
-            }
-          })
+      Promise.all([helperProvider, popoverLabels])
+        .then((values) => {
+          const helper = values[0]
+          if (isMounted) {
+            setData(
+              !helper
+                ? failedData
+                : {
+                    fetched: true,
+                    id: id,
+                    content: buildContent(config, helper, props, values[1]),
+                    title: helper.label,
+                    icon: config.icon || ''
+                  }
+            )
+          }
         })
         .catch((err: Error) => {
           console.error(err)
