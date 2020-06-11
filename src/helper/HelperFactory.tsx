@@ -1,4 +1,4 @@
-import { EdcClient, Helper } from 'edc-client-js'
+import { EdcClient, Helper, PopoverLabel } from 'edc-client-js'
 import { PopoverConfig } from '../config/PopoverConfigProvider'
 
 export class HelperFactory {
@@ -59,5 +59,15 @@ export class HelperFactory {
     return !this.edcClient
       ? undefined
       : this.edcClient.getDocumentationWebHelpUrl(docId, lang)
+  }
+
+  getPopoverLabels(lang?: string, pluginId?: string): Promise<PopoverLabel> {
+    return !this.edcClient
+      ? undefined
+      : this.edcClient.getPopoverLabels(lang, pluginId)
+  }
+
+  getEdcClient(): EdcClient | undefined {
+    return this.edcClient
   }
 }

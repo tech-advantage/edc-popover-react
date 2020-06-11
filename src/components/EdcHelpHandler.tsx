@@ -1,6 +1,6 @@
 import { PopoverConfig } from '../config/PopoverConfigProvider'
 import React from 'react'
-import { Helper } from 'edc-client-js'
+import { Helper, PopoverLabel } from 'edc-client-js'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
 
 function open(link?: string): void {
@@ -18,14 +18,15 @@ export function getId(props: EdcHelpProps): string {
 export function buildContent(
   config: PopoverConfig,
   helper: Helper,
-  props: EdcHelpProps
+  props: EdcHelpProps,
+  labels: PopoverLabel
 ): JSX.Element {
   return (
     <div className='popover-content'>
       <article className='popover-desc'>{helper.description}</article>
       <div className='popover-section'>
         <div className='popover-need-more'>
-          <span className='popover-section-title'>Need more...</span>
+          <span className='popover-section-title'>{labels.articles}</span>
           <ul>
             {helper.articles.map((value, index) => {
               return (
@@ -52,7 +53,7 @@ export function buildContent(
           </ul>
         </div>
         <div className='popover-related-topics'>
-          <span className='popover-section-title'>Related topics</span>
+          <span className='popover-section-title'>{labels.links}</span>
           <ul>
             {helper.links.map((value, index) => {
               return (
@@ -111,25 +112,32 @@ export function buildData(
       props.lang
     )
 
+    const popoverLabels = config.helpFactory.getPopoverLabels(
+      props.lang,
+      props.pluginId
+    )
+
     if (!helperProvider) {
       console.error("Can't instanciate edc-client-js helper !")
       setData(failedData)
     } else {
       helperProvider
         .then((helper: Helper) => {
-          if (isMounted) {
-            setData(
-              !helper
-                ? failedData
-                : {
-                    fetched: true,
-                    id: id,
-                    content: buildContent(config, helper, props),
-                    title: helper.label,
-                    icon: config.icon || ''
-                  }
-            )
-          }
+          popoverLabels.then((labels: PopoverLabel) => {
+            if (isMounted) {
+              setData(
+                !helper
+                  ? failedData
+                  : {
+                      fetched: true,
+                      id: id,
+                      content: buildContent(config, helper, props, labels),
+                      title: helper.label,
+                      icon: config.icon || ''
+                    }
+              )
+            }
+          })
         })
         .catch((err: Error) => {
           console.error(err)
