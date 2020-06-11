@@ -25,57 +25,61 @@ export function buildContent(
     <div className='popover-content'>
       <article className='popover-desc'>{helper.description}</article>
       <div className='popover-section'>
-        <div className='popover-need-more'>
-          <span className='popover-section-title'>{labels.articles}</span>
-          <ul>
-            {helper.articles.map((value, index) => {
-              return (
-                <li key={index}>
-                  <button
-                    className='popover-section-item'
-                    onClick={(): void =>
-                      open(
-                        config.helpFactory?.getContextUrl(
-                          props.mainKey,
-                          props.subKey,
-                          index,
-                          props.lang,
-                          props.pluginId
+        {helper.articles && helper.articles.length > 0 && (
+          <div className='popover-need-more'>
+            <span className='popover-section-title'>{labels.articles}</span>
+            <ul>
+              {helper.articles.map((value, index) => {
+                return (
+                  <li key={index}>
+                    <button
+                      className='popover-section-item'
+                      onClick={(): void =>
+                        open(
+                          config.helpFactory?.getContextUrl(
+                            props.mainKey,
+                            props.subKey,
+                            index,
+                            props.lang,
+                            props.pluginId
+                          )
                         )
-                      )
-                    }
-                  >
-                    {value.label}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <div className='popover-related-topics'>
-          <span className='popover-section-title'>{labels.links}</span>
-          <ul>
-            {helper.links.map((value, index) => {
-              return (
-                <li key={index}>
-                  <button
-                    className='popover-section-item'
-                    onClick={(): void =>
-                      open(
-                        config.helpFactory?.getDocumentationUrl(
-                          value.id,
-                          props.lang
+                      }
+                    >
+                      {value.label}
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
+        {helper.links && helper.links.length > 0 && (
+          <div className='popover-related-topics'>
+            <span className='popover-section-title'>{labels.links}</span>
+            <ul>
+              {helper.links.map((value, index) => {
+                return (
+                  <li key={index}>
+                    <button
+                      className='popover-section-item'
+                      onClick={(): void =>
+                        open(
+                          config.helpFactory?.getDocumentationUrl(
+                            value.id,
+                            props.lang
+                          )
                         )
-                      )
-                    }
-                  >
-                    {value.label}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+                      }
+                    >
+                      {value.label}
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   )
