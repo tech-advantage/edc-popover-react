@@ -125,4 +125,44 @@ describe('EdcHelpHandler', () => {
     buildData(popoverConfig, edcHelpProps, callback, true)
     popoverConfig.helpFactory = savedFactory
   })
+
+  it('should handle default translation in context if not overriden by props', (done) => {
+    jest
+      .spyOn(HelperFactory.prototype, 'getHelp')
+      .mockReturnValue(Promise.resolve(correctHelper))
+    jest
+      .spyOn(HelperFactory.prototype, 'getContextUrl')
+      .mockReturnValue('contextUrl')
+    jest
+      .spyOn(HelperFactory.prototype, 'getDocumentationUrl')
+      .mockReturnValue('docuUrl')
+    jest
+      .spyOn(HelperFactory.prototype, 'getPopoverLabels')
+      .mockReturnValue(Promise.resolve(correctPopoverLabel))
+
+    const callback: React.Dispatch<React.SetStateAction<PopoverData>> = () => {
+      expect(HelperFactory.prototype.getHelp).toHaveBeenCalledWith(
+        edcHelpProps.mainKey,
+        edcHelpProps.subKey,
+        undefined,
+        'fr'
+      )
+      expect(HelperFactory.prototype.getDocumentationUrl).toHaveBeenCalledWith(
+        link1.id,
+        'fr'
+      )
+      expect(HelperFactory.prototype.getContextUrl).toHaveBeenCalledWith(
+        edcHelpProps.mainKey,
+        edcHelpProps.subKey,
+        0,
+        'fr',
+        undefined
+      )
+      popoverConfig.lang = undefined
+      done()
+    }
+
+    popoverConfig.lang = 'fr'
+    buildData(popoverConfig, edcHelpProps, callback, true)
+  })
 })

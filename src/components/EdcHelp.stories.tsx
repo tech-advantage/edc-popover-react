@@ -23,7 +23,8 @@ function DefaultProvider(
           pluginId: 'edc',
           docPath: './doc',
           helpPath: 'https://demo.easydoccontents.com/help',
-          i18nPath: './doc/i18n'
+          i18nPath: './doc/i18n',
+          lang: 'en'
         },
         ...props
       }}

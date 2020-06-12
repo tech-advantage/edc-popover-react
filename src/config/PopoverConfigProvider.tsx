@@ -1,5 +1,6 @@
 import React from 'react'
 import { HelperFactory } from '../helper/HelperFactory'
+import { OverlayTriggerType } from 'react-bootstrap/OverlayTrigger'
 
 export type PopoverConfig = {
   pluginId: string
@@ -7,6 +8,8 @@ export type PopoverConfig = {
   docPath: string
   i18nPath: string
   icon?: string
+  lang?: string
+  trigger?: OverlayTriggerType
   helpFactory?: HelperFactory
 }
 

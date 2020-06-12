@@ -44,7 +44,7 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
   return (
     <div className='help-container'>
       <OverlayTrigger
-        trigger={finalProps.trigger}
+        trigger={finalProps.trigger || config.trigger || 'click'}
         placement={finalProps.placement}
         overlay={
           <Popover id={data.id}>

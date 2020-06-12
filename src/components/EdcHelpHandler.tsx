@@ -9,8 +9,15 @@ function open(link?: string): void {
   }
 }
 
+function getLang(
+  config: PopoverConfig,
+  props: EdcHelpProps
+): string | undefined {
+  return props.lang || config.lang
+}
+
 export function getId(props: EdcHelpProps): string {
-  return `popover ${props.pluginId ? `${props.pluginId} ` : ''} ${
+  return `popover ${props.pluginId ? `${props.pluginId} ` : ''}${
     props.mainKey
   } ${props.subKey}`
 }
@@ -21,6 +28,7 @@ export function buildContent(
   props: EdcHelpProps,
   labels: PopoverLabel
 ): JSX.Element {
+  const lang = getLang(config, props)
   return (
     <div className='popover-content'>
       <article className='popover-desc'>{helper.description}</article>
@@ -30,21 +38,19 @@ export function buildContent(
             <span className='popover-section-title'>{labels.articles}</span>
             <ul>
               {helper.articles.map((value, index) => {
+                // Loads url whilst loading popover, instead of loading during onClick
+                const url = config.helpFactory?.getContextUrl(
+                  props.mainKey,
+                  props.subKey,
+                  index,
+                  lang,
+                  props.pluginId
+                )
                 return (
                   <li key={index}>
                     <button
                       className='popover-section-item'
-                      onClick={(): void =>
-                        open(
-                          config.helpFactory?.getContextUrl(
-                            props.mainKey,
-                            props.subKey,
-                            index,
-                            props.lang,
-                            props.pluginId
-                          )
-                        )
-                      }
+                      onClick={(): void => open(url)}
                     >
                       {value.label}
                     </button>
@@ -59,18 +65,16 @@ export function buildContent(
             <span className='popover-section-title'>{labels.links}</span>
             <ul>
               {helper.links.map((value, index) => {
+                // Loads url whilst loading popover, instead of loading during onClick
+                const url = config.helpFactory?.getDocumentationUrl(
+                  value.id,
+                  lang
+                )
                 return (
                   <li key={index}>
                     <button
                       className='popover-section-item'
-                      onClick={(): void =>
-                        open(
-                          config.helpFactory?.getDocumentationUrl(
-                            value.id,
-                            props.lang
-                          )
-                        )
-                      }
+                      onClick={(): void => open(url)}
                     >
                       {value.label}
                     </button>
@@ -92,6 +96,7 @@ export function buildData(
   isMounted: boolean
 ): void {
   const id = getId(props)
+  const lang = getLang(config, props)
   if (!config.helpFactory) {
     setData({
       fetched: true,
@@ -113,11 +118,11 @@ export function buildData(
       props.mainKey,
       props.subKey,
       props.pluginId,
-      props.lang
+      lang
     )
 
     const popoverLabels = config.helpFactory.getPopoverLabels(
-      props.lang,
+      lang,
       props.pluginId
     )
 
