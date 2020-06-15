@@ -8,16 +8,15 @@ export class HelperFactory {
   constructor(popoverConfig?: PopoverConfig) {
     this.popoverConfig = popoverConfig
     if (popoverConfig) {
-      this.edcClient =
-        popoverConfig.pluginId && !popoverConfig.helpFactory
-          ? new EdcClient(
-              popoverConfig.docPath,
-              popoverConfig.helpPath,
-              popoverConfig.pluginId,
-              true,
-              popoverConfig.i18nPath
-            )
-          : undefined
+      this.edcClient = popoverConfig.pluginId
+        ? new EdcClient(
+            popoverConfig.docPath,
+            popoverConfig.helpPath,
+            popoverConfig.pluginId,
+            true,
+            popoverConfig.i18nPath
+          )
+        : undefined
     }
   }
 

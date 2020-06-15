@@ -1,5 +1,6 @@
 import React from 'react'
 import { HelperFactory } from '../helper/HelperFactory'
+import { OverlayTriggerType } from 'react-bootstrap/OverlayTrigger'
 
 export type PopoverConfig = {
   pluginId: string
@@ -7,7 +8,9 @@ export type PopoverConfig = {
   docPath: string
   i18nPath: string
   icon?: string
-  helpFactory?: HelperFactory
+  lang?: string
+  trigger?: OverlayTriggerType | OverlayTriggerType[]
+  helpFactory?: Function
 }
 
 export const defaultConfig: PopoverConfig = {
@@ -28,7 +31,7 @@ export function PopoverProvider(
   const { children, ...value } = props
 
   if (!value.helpFactory) {
-    value.helpFactory = new HelperFactory(value)
+    value.helpFactory = (): HelperFactory => new HelperFactory(value)
   }
 
   value.docPath = value.docPath.replace(/[/]*$/gm, '') + '/'

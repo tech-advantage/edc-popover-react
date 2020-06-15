@@ -57,15 +57,17 @@ import { EdcHelp } from 'edc-popover-react'
 Props to specify are :
 | Prop | Type | Description |
 |---|---|---|
-| pluginId | string | The identifier of the target plugin documentation export |
-| helpPath | string | The path to edc-help-ng application |
-| docPath  | string | The path to exported documentation |
-| i18nPath | string | The path to translation json files |
+| pluginId | `string` | The identifier of the target plugin documentation export |
+| helpPath | `string` | The path to edc-help-ng application |
+| docPath  | `string` | The path to exported documentation |
+| i18nPath | `string` | The path to translation json files |
 
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | string | The icon class | far fa-question-circle |
+| icon | `string` | The icon class | `far fa-question-circle` |
+| lang | `string` | The default language | `en` |
+| trigger | `OverlayTriggerType | OverlayTriggerType[]` | The trigger type | `click` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
