@@ -2,6 +2,7 @@ import { PopoverConfig } from '../config/PopoverConfigProvider'
 import React from 'react'
 import { Helper, PopoverLabel } from 'edc-client-js'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
+import { HelperFactory } from '../helper/HelperFactory'
 
 function open(link?: string): void {
   if (link) {
@@ -22,8 +23,16 @@ export function getId(props: EdcHelpProps): string {
   } ${props.subKey}`
 }
 
+export function getIcon(
+  config: PopoverConfig,
+  props: EdcHelpProps
+): string | undefined {
+  return props.icon || config.icon
+}
+
 export function buildContent(
   config: PopoverConfig,
+  helperFactory: HelperFactory,
   helper: Helper,
   props: EdcHelpProps,
   labels: PopoverLabel
@@ -39,7 +48,7 @@ export function buildContent(
             <ul>
               {helper.articles.map((value, index) => {
                 // Loads url whilst loading popover, instead of loading during onClick
-                const url = config.helpFactory?.getContextUrl(
+                const url = helperFactory.getContextUrl(
                   props.mainKey,
                   props.subKey,
                   index,
@@ -48,12 +57,12 @@ export function buildContent(
                 )
                 return (
                   <li key={index}>
-                    <button
+                    <span
                       className='popover-section-item'
                       onClick={(): void => open(url)}
                     >
                       {value.label}
-                    </button>
+                    </span>
                   </li>
                 )
               })}
@@ -66,18 +75,15 @@ export function buildContent(
             <ul>
               {helper.links.map((value, index) => {
                 // Loads url whilst loading popover, instead of loading during onClick
-                const url = config.helpFactory?.getDocumentationUrl(
-                  value.id,
-                  lang
-                )
+                const url = helperFactory.getDocumentationUrl(value.id, lang)
                 return (
                   <li key={index}>
-                    <button
+                    <span
                       className='popover-section-item'
                       onClick={(): void => open(url)}
                     >
                       {value.label}
-                    </button>
+                    </span>
                   </li>
                 )
               })}
@@ -114,17 +120,16 @@ export function buildData(
       title: 'Error',
       icon: 'fas fa-exclamation-circle text-danger'
     }
-    const helperProvider = config.helpFactory.getHelp(
+    const helperFact = config.helpFactory()
+
+    const helperProvider = helperFact.getHelp(
       props.mainKey,
       props.subKey,
       props.pluginId,
       lang
     )
 
-    const popoverLabels = config.helpFactory.getPopoverLabels(
-      lang,
-      props.pluginId
-    )
+    const popoverLabels = helperFact.getPopoverLabels(lang, props.pluginId)
 
     if (!helperProvider) {
       console.error("Can't instanciate edc-client-js helper !")
@@ -140,9 +145,15 @@ export function buildData(
                 : {
                     fetched: true,
                     id: id,
-                    content: buildContent(config, helper, props, values[1]),
+                    content: buildContent(
+                      config,
+                      helperFact,
+                      helper,
+                      props,
+                      values[1]
+                    ),
                     title: helper.label,
-                    icon: config.icon || ''
+                    icon: getIcon(config, props) || ''
                   }
             )
           }

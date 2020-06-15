@@ -10,7 +10,7 @@ type ProviderProps = {
   helpPath?: string
   i18nPath?: string
   icon?: string
-  helpFactory?: HelperFactory
+  helpFactory?: Function
 }
 
 function DefaultProvider(
@@ -48,7 +48,26 @@ export const withCustomIcon: FunctionComponent = () => (
 
 export const withCustomLanguage: FunctionComponent = () => (
   <DefaultProvider>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' lang='fr' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
+  </DefaultProvider>
+)
+
+export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
+  <DefaultProvider>
+    <h4>Default language</h4>
+    <EdcHelp mainKey='fr.techad.edc.editor' subKey='parameters' />
+    <hr />
+    <h4>FR language override</h4>
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
+    <hr />
+    <h4>Custom icon and fallback language</h4>
+    <EdcHelp
+      mainKey='fr.techad.edc'
+      subKey='documentation_type'
+      lang='zz'
+      icon='fab fa-angular'
+    />
+    <hr />
   </DefaultProvider>
 )
 
@@ -71,18 +90,14 @@ export const withFailingDocPath: FunctionComponent = () => (
     docPath='nonexistingdocpath'
     helpPath='ohno'
     i18nPath='ohnono'
-    helpFactory={new HelperFactory()}
+    helpFactory={(): HelperFactory => new HelperFactory()}
   >
-    <EdcHelp
-      mainKey='fr.techad.edc'
-      subKey='documentation_type'
-      trigger='hover'
-    />
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
   </DefaultProvider>
 )
 
 export const withWrongKeys: FunctionComponent = () => (
   <DefaultProvider>
-    <EdcHelp mainKey='fr.techad.edc' subKey='nonexistingkey' trigger='hover' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='nonexistingkey' />
   </DefaultProvider>
 )

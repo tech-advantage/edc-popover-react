@@ -10,7 +10,7 @@ export type PopoverConfig = {
   icon?: string
   lang?: string
   trigger?: OverlayTriggerType
-  helpFactory?: HelperFactory
+  helpFactory?: Function
 }
 
 export const defaultConfig: PopoverConfig = {
@@ -31,7 +31,7 @@ export function PopoverProvider(
   const { children, ...value } = props
 
   if (!value.helpFactory) {
-    value.helpFactory = new HelperFactory(value)
+    value.helpFactory = (): HelperFactory => new HelperFactory(value)
   }
 
   value.docPath = value.docPath.replace(/[/]*$/gm, '') + '/'

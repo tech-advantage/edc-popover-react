@@ -28,7 +28,8 @@ const popoverConfig: PopoverConfig = {
   i18nPath: '/doc/i18n',
   icon: 'myIcon'
 }
-popoverConfig.helpFactory = new HelperFactory(popoverConfig)
+popoverConfig.helpFactory = (): HelperFactory =>
+  new HelperFactory(popoverConfig)
 
 const edcHelpProps: EdcHelpProps = {
   mainKey: 'mainKey',
@@ -105,9 +106,6 @@ describe('EdcHelpHandler', () => {
       .spyOn(HelperFactory.prototype, 'getPopoverLabels')
       .mockReturnValue(Promise.resolve(correctPopoverLabel))
 
-    const savedFactory = popoverConfig.helpFactory
-    popoverConfig.helpFactory = undefined
-
     const callback: React.Dispatch<React.SetStateAction<PopoverData>> = (
       dataAction: SetStateAction<PopoverData>
     ) => {
@@ -123,7 +121,6 @@ describe('EdcHelpHandler', () => {
     }
 
     buildData(popoverConfig, edcHelpProps, callback, true)
-    popoverConfig.helpFactory = savedFactory
   })
 
   it('should handle default translation in context if not overriden by props', (done) => {

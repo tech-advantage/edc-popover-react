@@ -5,7 +5,7 @@ import './EdcHelp.scss'
 import { PopoverConfigContext } from '../config/PopoverConfigProvider'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
-import { buildData, getId } from './EdcHelpHandler'
+import { buildData, getIcon, getId } from './EdcHelpHandler'
 
 const defaultProps: EdcHelpProps = {
   pluginId: undefined,
@@ -27,7 +27,7 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
     id: getId(finalProps),
     title: 'Loading...',
     content: 'Loading...',
-    icon: config.icon || ''
+    icon: getIcon(config, props) || ''
   })
 
   // Make async tasks cancellable if component is unmounted (effect cleanup)
@@ -56,7 +56,7 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
         }
       >
         <i
-          className={data.icon + ' help-icon ' + (finalProps.dark && 'on-dark')}
+          className={data.icon + ' help-icon' + (finalProps.dark && ' on-dark')}
         />
       </OverlayTrigger>
     </div>

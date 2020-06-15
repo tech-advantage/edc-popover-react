@@ -9,6 +9,7 @@ export type EdcHelpProps = {
   dark?: boolean
   lang?: string
   trigger?: OverlayTriggerType
+  icon?: string
 }
 
 export type PopoverData = {
