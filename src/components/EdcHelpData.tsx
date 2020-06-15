@@ -8,7 +8,7 @@ export type EdcHelpProps = {
   placement?: Placement
   dark?: boolean
   lang?: string
-  trigger?: OverlayTriggerType
+  trigger?: OverlayTriggerType | OverlayTriggerType[]
   icon?: string
 }
 

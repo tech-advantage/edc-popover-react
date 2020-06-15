@@ -81,6 +81,16 @@ export const withHoverTrigger: FunctionComponent = () => (
   </DefaultProvider>
 )
 
+export const withHoverFocusTrigger: FunctionComponent = () => (
+  <DefaultProvider>
+    <EdcHelp
+      mainKey='fr.techad.edc'
+      subKey='documentation_type'
+      trigger={['hover', 'focus']}
+    />
+  </DefaultProvider>
+)
+
 export const withNoProvider: FunctionComponent = () => (
   <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
 )

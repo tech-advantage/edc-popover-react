@@ -56,7 +56,9 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
         }
       >
         <i
-          className={data.icon + ' help-icon' + (finalProps.dark && ' on-dark')}
+          className={
+            data.icon + ' help-icon' + (finalProps.dark ? ' on-dark' : '')
+          }
         />
       </OverlayTrigger>
     </div>

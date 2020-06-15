@@ -9,7 +9,7 @@ export type PopoverConfig = {
   i18nPath: string
   icon?: string
   lang?: string
-  trigger?: OverlayTriggerType
+  trigger?: OverlayTriggerType | OverlayTriggerType[]
   helpFactory?: Function
 }
 
