@@ -67,7 +67,7 @@ Optional prop that can be overridden :
 |---|---|---|---|
 | icon | `EdcIcon | string` | The icon class | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
-| trigger | `OverlayTriggerType | OverlayTriggerType[]` | The trigger type | `click` |
+| trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
@@ -130,7 +130,7 @@ Optional prop that can be overridden :
 | pluginId | `string` | A custom pluginId | `undefined` (keeps the pluginId from the provider) |
 | dark | `boolean` | true if dark mode enabled | `false` |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
-| trigger | `OverlayTriggerType | OverlayTriggerType[]` | A trigger | `click` |
+| trigger | `OverlayTriggerType \| OverlayTriggerType[]` | A trigger | `click` |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup section](#Setup))
 
