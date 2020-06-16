@@ -9,6 +9,12 @@ describe('EdcIcon', () => {
     subKey: 'dummy'
   }
 
+  const dummyDarkEdcHelpProps: EdcHelpProps = {
+    mainKey: 'dummy',
+    subKey: 'dummy',
+    dark: true
+  }
+
   const defaultStringIcon: EdcIconData = 'myClass'
   const cssEdcIcon: EdcIconData = {
     type: 'class',
@@ -42,5 +48,13 @@ describe('EdcIcon', () => {
     expect(wrapper.find('i').length).toEqual(1)
     expect(cssEdcIcon.content).not.toBeUndefined()
     expect(wrapper.find('i').hasClass(cssEdcIcon.content || '')).toBeTruthy()
+  })
+
+  it('should handle dark mode when enabled', () => {
+    const wrapper = mount(
+      <EdcIcon icon={cssEdcIcon} edcHelpProps={dummyDarkEdcHelpProps} />
+    )
+
+    expect(wrapper.find('i').hasClass('on-dark')).toBeTruthy()
   })
 })

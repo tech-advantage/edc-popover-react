@@ -23,11 +23,6 @@ export function EdcIcon(props: EdcIconProps): JSX.Element {
     return <i {...props} className={`${props.icon.content} ${cssClass}`} />
   }
   return (
-    <img
-      {...props}
-      className={cssClass}
-      src={props.icon.content}
-      alt='Popover icon'
-    />
+    <img {...props} className={cssClass} src={props.icon.content} alt='Help' />
   )
 }
