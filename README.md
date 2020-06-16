@@ -65,7 +65,7 @@ Props to specify for the `PopoverProvider` :
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `EdcIcon \| string` | The icon class | `far fa-question-circle` |
+| icon | `EdcIcon` | The icon (see [Icons](#Icons) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
 
@@ -131,11 +131,27 @@ Optional prop that can be overridden :
 | dark | `boolean` | true if dark mode enabled | `false` |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | A trigger | `click` |
+| icon | `EdcIcon` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup section](#Setup))
 
 ### Customization
-You can customize the design of the popover with CSS classes as below:
+
+#### Icons
+
+The popover icons support 2 formats:
+ - A CSS class (Font Awesome, Glyphicon, ...) using a `<i />`
+ - An image which will have the same size as the text (height: 1em;) (PNG, JPG, SVG, ...) using a `<img />`
+
+You can choose with the `type` prop:
+ - `class`: The `content` must represent the CSS class
+ - `url`: The `content` must represent the image's URL
+
+If a `string` is provided to an EdcIcon, it will be interpreted as a CSS class by default.
+
+#### CSS
+
+You can customize the popover's design with CSS classes as below:
 
 ![CSS Classes](CSSClasses.png "CSS Classes")
 
