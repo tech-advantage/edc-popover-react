@@ -1,12 +1,6 @@
 import { Placement } from 'react-bootstrap/Overlay'
 import { OverlayTriggerType } from 'react-bootstrap/OverlayTrigger'
-
-export type EdcIconData =
-  | string
-  | {
-      type: 'class' | 'url'
-      content?: string
-    }
+import { EdcIconData } from './EdcIcon'
 
 export type EdcHelpProps = {
   pluginId?: string

@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelperFactory } from '../helper/HelperFactory'
 import { OverlayTriggerType } from 'react-bootstrap/OverlayTrigger'
-import { EdcIconData } from '../components/EdcHelpData'
+import { EdcIconData } from '../components/EdcIcon'
 
 export type PopoverConfig = {
   pluginId: string

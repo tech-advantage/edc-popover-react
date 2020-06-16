@@ -4,8 +4,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import './EdcHelp.scss'
 import { PopoverConfigContext } from '../config/PopoverConfigProvider'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
-import { EdcHelpProps, EdcIconData, PopoverData } from './EdcHelpData'
+import { EdcHelpProps, PopoverData } from './EdcHelpData'
 import { buildData, getIcon, getId } from './EdcHelpHandler'
+import { EdcIcon } from './EdcIcon'
 
 const defaultProps: EdcHelpProps = {
   pluginId: undefined,
@@ -15,30 +16,6 @@ const defaultProps: EdcHelpProps = {
   dark: false,
   lang: undefined,
   trigger: 'click'
-}
-
-type EdcIconProps = {
-  icon: EdcIconData
-  edcHelpProps: EdcHelpProps
-}
-
-function EdcIcon(props: EdcIconProps): JSX.Element {
-  const cssClass = 'help-icon' + (props.edcHelpProps.dark ? ' on-dark' : '')
-
-  if (typeof props.icon === 'string') {
-    return <i {...props} className={`${props.icon} ${cssClass}`} />
-  }
-  if (props.icon.type === 'class') {
-    return <i {...props} className={`${props.icon.content} ${cssClass}`} />
-  }
-  return (
-    <img
-      {...props}
-      className={cssClass}
-      src={props.icon.content}
-      alt='Popover icon'
-    />
-  )
 }
 
 export function EdcHelp(props: EdcHelpProps): JSX.Element {

@@ -1,8 +1,9 @@
 import { PopoverConfig } from '../config/PopoverConfigProvider'
 import React from 'react'
 import { Helper, PopoverLabel } from 'edc-client-js'
-import { EdcHelpProps, EdcIconData, PopoverData } from './EdcHelpData'
+import { EdcHelpProps, PopoverData } from './EdcHelpData'
 import { HelperFactory } from '../helper/HelperFactory'
+import { EdcIconData } from './EdcIcon'
 
 function open(link?: string): void {
   if (link) {
