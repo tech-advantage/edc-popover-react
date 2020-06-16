@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { PopoverProvider } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
-import { EdcIcon } from './EdcHelpData'
+import { EdcIconData } from './EdcHelpData'
 
 export default { title: 'EdcHelp' }
 
@@ -10,7 +10,7 @@ type ProviderProps = {
   docPath?: string
   helpPath?: string
   i18nPath?: string
-  icon?: EdcIcon
+  icon?: EdcIconData
   helpFactory?: Function
 }
 

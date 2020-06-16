@@ -1,14 +1,14 @@
 import React from 'react'
 import { HelperFactory } from '../helper/HelperFactory'
 import { OverlayTriggerType } from 'react-bootstrap/OverlayTrigger'
-import { EdcIcon } from '../components/EdcHelpData'
+import { EdcIconData } from '../components/EdcHelpData'
 
 export type PopoverConfig = {
   pluginId: string
   helpPath: string
   docPath: string
   i18nPath: string
-  icon?: EdcIcon
+  icon?: EdcIconData
   lang?: string
   trigger?: OverlayTriggerType | OverlayTriggerType[]
   helpFactory?: Function

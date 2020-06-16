@@ -65,7 +65,7 @@ Props to specify for the `PopoverProvider` :
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `EdcIcon` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
+| icon | `EdcIconData` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
 
@@ -131,7 +131,7 @@ Optional prop that can be overridden :
 | dark | `boolean` | true if dark mode enabled | `false` |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | A trigger | `click` |
-| icon | `EdcIcon` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
+| icon | `EdcIconData` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
@@ -147,7 +147,7 @@ You can choose with the `type` prop:
  - `class`: The `content` must represent the CSS class
  - `url`: The `content` must represent the image's URL
 
-If a `string` is provided to an EdcIcon, it will be interpreted as a CSS class by default.
+If a `string` is provided to an EdcIconData, it will be interpreted as a CSS class by default.
 
 #### CSS
 

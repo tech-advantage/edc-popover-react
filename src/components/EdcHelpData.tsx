@@ -1,7 +1,7 @@
 import { Placement } from 'react-bootstrap/Overlay'
 import { OverlayTriggerType } from 'react-bootstrap/OverlayTrigger'
 
-export type EdcIcon =
+export type EdcIconData =
   | string
   | {
       type: 'class' | 'url'
@@ -16,7 +16,7 @@ export type EdcHelpProps = {
   dark?: boolean
   lang?: string
   trigger?: OverlayTriggerType | OverlayTriggerType[]
-  icon?: EdcIcon
+  icon?: EdcIconData
 }
 
 export type PopoverData = {
@@ -24,5 +24,5 @@ export type PopoverData = {
   id: string
   title: string | JSX.Element
   content: string | JSX.Element
-  icon: EdcIcon
+  icon: EdcIconData
 }
