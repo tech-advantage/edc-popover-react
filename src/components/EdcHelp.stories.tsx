@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { PopoverProvider } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
+import { EdcIcon } from './EdcHelpData'
 
 export default { title: 'EdcHelp' }
 
@@ -9,7 +10,7 @@ type ProviderProps = {
   docPath?: string
   helpPath?: string
   i18nPath?: string
-  icon?: string
+  icon?: EdcIcon
   helpFactory?: Function
 }
 
@@ -40,14 +41,21 @@ export const withDefaultIcon: FunctionComponent = () => (
   </DefaultProvider>
 )
 
-export const withCustomIcon: FunctionComponent = () => (
+export const withCustomIconClass: FunctionComponent = () => (
   <DefaultProvider icon='fas fa-ad'>
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+  </DefaultProvider>
+)
+
+export const withCustomIconSVG: FunctionComponent = () => (
+  <DefaultProvider icon={{ type: 'url', content: '/icon.svg' }}>
     <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
   </DefaultProvider>
 )
 
 export const withCustomLanguage: FunctionComponent = () => (
   <DefaultProvider>
+    <h4>lang: 'fr'</h4>
     <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
   </DefaultProvider>
 )
@@ -55,12 +63,14 @@ export const withCustomLanguage: FunctionComponent = () => (
 export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
   <DefaultProvider>
     <h4>Default language</h4>
+    <h4>lang: default</h4>
     <EdcHelp mainKey='fr.techad.edc.editor' subKey='parameters' />
     <hr />
-    <h4>FR language override</h4>
+    <h4>lang: 'fr'</h4>
     <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
     <hr />
     <h4>Custom icon and fallback language</h4>
+    <h4>lang: 'zz'</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='documentation_type'

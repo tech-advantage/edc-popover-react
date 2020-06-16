@@ -4,7 +4,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import './EdcHelp.scss'
 import { PopoverConfigContext } from '../config/PopoverConfigProvider'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
-import { EdcHelpProps, PopoverData } from './EdcHelpData'
+import { EdcHelpProps, EdcIcon, PopoverData } from './EdcHelpData'
 import { buildData, getIcon, getId } from './EdcHelpHandler'
 
 const defaultProps: EdcHelpProps = {
@@ -15,6 +15,18 @@ const defaultProps: EdcHelpProps = {
   dark: false,
   lang: undefined,
   trigger: 'click'
+}
+
+function getDisplayComponent(icon: EdcIcon, props: EdcHelpProps): JSX.Element {
+  const cssClass = 'help-icon' + (props.dark ? ' on-dark' : '')
+
+  if (typeof icon === 'string') {
+    return <i className={`${icon} ${cssClass}`} />
+  }
+  if (icon.type === 'class') {
+    return <i className={`${icon.content} ${cssClass}`} />
+  }
+  return <img className={cssClass} src={icon.content} alt='Popover icon' />
 }
 
 export function EdcHelp(props: EdcHelpProps): JSX.Element {
@@ -55,11 +67,7 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
           </Popover>
         }
       >
-        <i
-          className={
-            data.icon + ' help-icon' + (finalProps.dark ? ' on-dark' : '')
-          }
-        />
+        {getDisplayComponent(data.icon, finalProps)}
       </OverlayTrigger>
     </div>
   )
