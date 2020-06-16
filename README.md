@@ -65,7 +65,7 @@ Props to specify for the `PopoverProvider` :
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `EdcIcon | string` | The icon class | `far fa-question-circle` |
+| icon | `EdcIcon \| string` | The icon class | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
 
