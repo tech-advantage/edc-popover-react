@@ -54,7 +54,7 @@ import { EdcHelp } from 'edc-popover-react'
 </PopoverProvider>
 ```
 
-Props to specify are :
+Props to specify for the `PopoverProvider` :
 | Prop | Type | Description |
 |---|---|---|
 | pluginId | `string` | The identifier of the target plugin documentation export |
@@ -65,9 +65,9 @@ Props to specify are :
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `string` | The icon class | `far fa-question-circle` |
+| icon | `EdcIconData` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
-| trigger | `OverlayTriggerType | OverlayTriggerType[]` | The trigger type | `click` |
+| trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
@@ -114,10 +114,44 @@ import { EdcHelp } from 'edc-popover-react'
 ...
 ```
 
-**:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup section](#Setup))
+All EdcHelp props that override the Provider are in the EdcHelp scope and completely isolated.
+
+You can safely use several languages without modifying the provider !
+
+Props to specify for the `EdcHelp` :
+| Prop | Type | Description |
+|---|---|---|
+| mainKey | `string` | The main key of the contextual help |
+| subKey | `string` | The sub key of the contextual help |
+
+Optional prop that can be overridden :
+| Method | Return type | Description | Default value |
+|---|---|---|---|
+| pluginId | `string` | A custom pluginId | `undefined` (keeps the pluginId from the provider) |
+| dark | `boolean` | true if dark mode enabled | `false` |
+| lang | `string` | A language | `undefined` (keeps the language from the provider) |
+| trigger | `OverlayTriggerType \| OverlayTriggerType[]` | A trigger | `click` |
+| icon | `EdcIconData` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
+
+**:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
 ### Customization
-You can customize the design of the popover with CSS classes as below:
+
+#### Icons
+
+The popover icons support 2 formats:
+ - A CSS class (Font Awesome, Glyphicon, ...) using a `<i />`
+ - An image which will have the same size as the text (height: 1em;) (PNG, JPG, SVG, ...) using a `<img />`
+
+You can choose with the `type` prop:
+ - `class`: The `content` must represent the CSS class
+ - `url`: The `content` must represent the image's URL
+
+If a `string` is provided to an EdcIconData, it will be interpreted as a CSS class by default.
+
+#### CSS
+
+You can customize the popover's design with CSS classes as below:
 
 ![CSS Classes](CSSClasses.png "CSS Classes")
 
@@ -135,7 +169,7 @@ yarn test
 ```
 ### UI components
 
-edc-popover-react uses [Storybook](https://storybook.js.org/) for isolated UI components testing, you can test it by running:
+edc-popover-react uses [Storybook](https://storybook.js.org/) for isolated UI components and features testing, you can test it by running:
 ```bash
 npm run storybook
 ```

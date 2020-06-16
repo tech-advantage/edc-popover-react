@@ -3,6 +3,7 @@ import React from 'react'
 import { Helper, PopoverLabel } from 'edc-client-js'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
 import { HelperFactory } from '../helper/HelperFactory'
+import { EdcIconData } from './EdcIcon'
 
 function open(link?: string): void {
   if (link) {
@@ -26,7 +27,7 @@ export function getId(props: EdcHelpProps): string {
 export function getIcon(
   config: PopoverConfig,
   props: EdcHelpProps
-): string | undefined {
+): EdcIconData | undefined {
   return props.icon || config.icon
 }
 

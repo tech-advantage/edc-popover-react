@@ -11,6 +11,19 @@ describe('EdcHelp', () => {
       docPath='/doc'
       helpPath='/help'
       i18nPath='/doc/i18n'
+      icon='fas fa-test'
+    >
+      <EdcHelp mainKey='a' subKey='b' trigger='click' />
+    </PopoverProvider>
+  )
+
+  const casualEdcHelpSVG = mount(
+    <PopoverProvider
+      pluginId='myedchelp'
+      docPath='/doc'
+      helpPath='/help'
+      i18nPath='/doc/i18n'
+      icon={{ type: 'url', content: '/icon.svg' }}
     >
       <EdcHelp mainKey='a' subKey='b' trigger='click' />
     </PopoverProvider>
@@ -44,11 +57,20 @@ describe('EdcHelp', () => {
 
   const malformedEdcHelp = mount(<EdcHelp mainKey='a' subKey='b' />)
 
-  it('should render a red cross if no provider as present as far parents', () => {
-    expect(malformedEdcHelp.find('i').hasClass('fa-times'))
+  it('should render a yellow triangle icon if no provider are present as ', () => {
+    expect(
+      malformedEdcHelp.find('i').hasClass('fa-exclamation-triangle')
+    ).toBeTruthy()
   })
+
   it('should render a <i /> to display the icon', () => {
     expect(casualEdcHelpClick.find('i').length).toEqual(1)
+  })
+  it('should correctly display a SVG in a img div', () => {
+    expect(casualEdcHelpSVG.find('img').length).toEqual(1)
+  })
+  it('should correctly display a SVG in a img div', () => {
+    expect(casualEdcHelpSVG.find('img').length).toEqual(1)
   })
   it('should display a popover on click', () => {
     casualEdcHelpClick.find(OverlayTrigger).simulate('click')

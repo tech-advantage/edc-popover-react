@@ -6,6 +6,7 @@ import { PopoverConfigContext } from '../config/PopoverConfigProvider'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { EdcHelpProps, PopoverData } from './EdcHelpData'
 import { buildData, getIcon, getId } from './EdcHelpHandler'
+import { EdcIcon } from './EdcIcon'
 
 const defaultProps: EdcHelpProps = {
   pluginId: undefined,
@@ -55,11 +56,7 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
           </Popover>
         }
       >
-        <i
-          className={
-            data.icon + ' help-icon' + (finalProps.dark ? ' on-dark' : '')
-          }
-        />
+        <EdcIcon icon={data.icon} edcHelpProps={finalProps} />
       </OverlayTrigger>
     </div>
   )
