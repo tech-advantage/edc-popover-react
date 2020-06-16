@@ -11,6 +11,7 @@ describe('EdcHelp', () => {
       docPath='/doc'
       helpPath='/help'
       i18nPath='/doc/i18n'
+      icon='fas fa-test'
     >
       <EdcHelp mainKey='a' subKey='b' trigger='click' />
     </PopoverProvider>
@@ -64,6 +65,9 @@ describe('EdcHelp', () => {
 
   it('should render a <i /> to display the icon', () => {
     expect(casualEdcHelpClick.find('i').length).toEqual(1)
+  })
+  it('should correctly display a SVG in a img div', () => {
+    expect(casualEdcHelpSVG.find('img').length).toEqual(1)
   })
   it('should correctly display a SVG in a img div', () => {
     expect(casualEdcHelpSVG.find('img').length).toEqual(1)

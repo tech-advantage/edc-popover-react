@@ -54,7 +54,7 @@ import { EdcHelp } from 'edc-popover-react'
 </PopoverProvider>
 ```
 
-Props to specify are :
+Props to specify for the `PopoverProvider` :
 | Prop | Type | Description |
 |---|---|---|
 | pluginId | `string` | The identifier of the target plugin documentation export |
@@ -65,7 +65,7 @@ Props to specify are :
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `string` | The icon class | `far fa-question-circle` |
+| icon | `EdcIcon | string` | The icon class | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | trigger | `OverlayTriggerType | OverlayTriggerType[]` | The trigger type | `click` |
 
@@ -113,6 +113,24 @@ import { EdcHelp } from 'edc-popover-react'
 <EdcHelp mainKey='myKey' subKey='mySubKey'/>
 ...
 ```
+
+All EdcHelp props that override the Provider are in the EdcHelp scope and completely isolated.
+
+You can safely use several languages without modifying the provider !
+
+Props to specify for the `EdcHelp` :
+| Prop | Type | Description |
+|---|---|---|
+| mainKey | `string` | The main key of the contextual help |
+| subKey | `string` | The sub key of the contextual help |
+
+Optional prop that can be overridden :
+| Method | Return type | Description | Default value |
+|---|---|---|---|
+| pluginId | `string` | A custom pluginId | `undefined` (keeps the pluginId from the provider) |
+| dark | `boolean` | true if dark mode enabled | `false` |
+| lang | `string` | A language | `undefined` (keeps the language from the provider) |
+| trigger | `OverlayTriggerType | OverlayTriggerType[]` | A trigger | `click` |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup section](#Setup))
 
