@@ -65,7 +65,7 @@ Props to specify for the `PopoverProvider` :
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `EdcIcon` | The icon (see [Icons](#Icons) | `far fa-question-circle` |
+| icon | `EdcIcon` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
 
@@ -133,7 +133,7 @@ Optional prop that can be overridden :
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | A trigger | `click` |
 | icon | `EdcIcon` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
 
-**:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup section](#Setup))
+**:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
 ### Customization
 
@@ -169,7 +169,7 @@ yarn test
 ```
 ### UI components
 
-edc-popover-react uses [Storybook](https://storybook.js.org/) for isolated UI components testing, you can test it by running:
+edc-popover-react uses [Storybook](https://storybook.js.org/) for isolated UI components and features testing, you can test it by running:
 ```bash
 npm run storybook
 ```
