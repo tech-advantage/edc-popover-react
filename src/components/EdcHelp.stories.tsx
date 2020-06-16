@@ -53,6 +53,12 @@ export const withCustomIconSVG: FunctionComponent = () => (
   </DefaultProvider>
 )
 
+export const withCustomIconPNG: FunctionComponent = () => (
+  <DefaultProvider icon={{ type: 'url', content: '/icon.png' }}>
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+  </DefaultProvider>
+)
+
 export const withCustomLanguage: FunctionComponent = () => (
   <DefaultProvider>
     <h4>lang: 'fr'</h4>
