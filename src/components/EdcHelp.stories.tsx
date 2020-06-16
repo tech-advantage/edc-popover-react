@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
-import { PopoverProvider } from '..'
+import { EdcIconData, PopoverProvider } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
-import { EdcIconData } from './EdcHelpData'
 
 export default { title: 'EdcHelp' }
 

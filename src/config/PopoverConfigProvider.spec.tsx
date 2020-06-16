@@ -58,7 +58,7 @@ describe('AbstractPopoverConfigProvider', () => {
         </button>
         <button id='icon'>
           <PopoverConfigContext.Consumer>
-            {(value): string | undefined => value.icon}
+            {(value): string | undefined => value.icon?.toString()}
           </PopoverConfigContext.Consumer>
         </button>
       </PopoverProvider>
@@ -126,7 +126,7 @@ describe('AbstractPopoverConfigProvider', () => {
         >
           <button id='icon'>
             <PopoverConfigContext.Consumer>
-              {(value): string | undefined => value.icon}
+              {(value): string | undefined => value.icon?.toString()}
             </PopoverConfigContext.Consumer>
           </button>
         </PopoverProvider>
