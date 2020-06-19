@@ -70,6 +70,43 @@ describe('EdcPopover', () => {
       wrapper
         .find(EdcIcon)
         .hasClass(popoverData.failBehaviorData.errorIcon.toString())
+    ).toBeTruthy()
+  })
+  it('should handle properly the failed behavior : NO_POPOVER', () => {
+    config.failBehavior = {
+      popover: 'NO_POPOVER',
+      icon: 'ERROR'
+    }
+    const wrapper = mount(
+      <EdcPopover edcHelp={edcHelpProps} config={config} data={popoverData} />
     )
+    wrapper.simulate('click')
+
+    expect(wrapper.find(PopoverContent).length).not.toBeTruthy()
+    expect(wrapper.find(PopoverTitle).length).not.toBeTruthy()
+    expect(
+      wrapper
+        .find(EdcIcon)
+        .hasClass(popoverData.failBehaviorData.errorIcon.toString())
+    ).toBeTruthy()
+  })
+  it('should handle properly the correct behavior', () => {
+    config.failBehavior = {
+      popover: 'ERROR_SHOWN',
+      icon: 'ERROR'
+    }
+    popoverData.triggerError = false
+    const wrapper = mount(
+      <EdcPopover edcHelp={edcHelpProps} config={config} data={popoverData} />
+    )
+    wrapper.simulate('click')
+
+    expect(wrapper.find(PopoverTitle).text()).toEqual(popoverData.title)
+    expect(wrapper.find(PopoverContent).text()).toEqual(popoverData.content)
+    expect(
+      wrapper
+        .find(EdcIcon)
+        .hasClass(popoverData.failBehaviorData.displayIcon.toString())
+    ).toBeTruthy()
   })
 })
