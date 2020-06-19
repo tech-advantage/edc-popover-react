@@ -12,7 +12,7 @@ export type EdcPopoverProps = {
   data: PopoverData
 }
 
-function getEdcIcon(props: EdcPopoverProps): JSX.Element {
+export function getEdcIcon(props: EdcPopoverProps): JSX.Element {
   return (
     <EdcIcon
       data={props.data}
@@ -26,7 +26,7 @@ function getEdcIcon(props: EdcPopoverProps): JSX.Element {
  * Can't create a functional component, OverlayTrigger cannot handle properly custom React Components
  * Temporary workaround: Function returning JSX.Element
  */
-function getEdcPopover(data: PopoverData): JSX.Element {
+export function getEdcPopover(data: PopoverData): JSX.Element {
   return (
     <Popover id={data.id}>
       <Popover.Title as='h3' className='popover-title'>
@@ -37,7 +37,7 @@ function getEdcPopover(data: PopoverData): JSX.Element {
   )
 }
 
-function getOverlayTrigger(
+export function getOverlayTrigger(
   overlay: OverlayChildren,
   props: EdcPopoverProps
 ): JSX.Element {
