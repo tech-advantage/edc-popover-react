@@ -1,9 +1,13 @@
 import { PopoverConfig } from '../config/PopoverConfigProvider'
 import React from 'react'
 import { Helper, PopoverLabel } from 'edc-client-js'
-import { EdcHelpProps, PopoverData } from './EdcHelpData'
+import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { HelperFactory } from '../helper/HelperFactory'
-import { EdcIconData } from './EdcIcon'
+import { EdcIconData } from '..'
+import { BehaviorData } from '../data/FailBehavior'
+
+const errorProviderIcon = 'fas fa-exclamation-triangle'
+const errorDebugIcon = 'fas fa-exclamation-circle'
 
 function open(link?: string): void {
   if (link) {
@@ -104,69 +108,110 @@ export function buildData(
 ): void {
   const id = getId(props)
   const lang = getLang(config, props)
+
+  const behaviorData: BehaviorData = {
+    displayIcon: getIcon(config, props) || '',
+    errorIcon: errorDebugIcon
+  }
+
   if (!config.helpFactory) {
+    behaviorData.errorIcon = errorProviderIcon
+    behaviorData.forceBehavior = {
+      popover: 'ERROR_SHOWN',
+      icon: 'ERROR'
+    }
     setData({
       fetched: true,
+      triggerError: true,
       id: id,
       content: 'This EdcHelp is not a deep child of a PopoverConfigProvider',
       title: 'Failed to find a provider',
-      icon: 'fas fa-exclamation-triangle text-warning'
+      failBehaviorData: behaviorData
     })
-  } else {
-    const failedData = {
-      fetched: true,
-      id: id,
-      content:
-        'An error occured when fetching data !\nCheck keys provided to the EdcHelp component',
-      title: 'Error',
-      icon: 'fas fa-exclamation-circle text-danger'
+    return
+  }
+
+  const failedData: PopoverData = {
+    fetched: true,
+    triggerError: true,
+    id: id,
+    content: "Can't fetch data, check your pluginId and docPath !",
+    title: 'Error',
+    failBehaviorData: behaviorData
+  }
+
+  const helperFact = config.helpFactory()
+
+  const helperProvider = helperFact.getHelp(
+    props.mainKey,
+    props.subKey,
+    props.pluginId,
+    lang
+  )
+
+  const popoverLabels = helperFact.getPopoverLabels(lang, props.pluginId)
+
+  if (!popoverLabels && isMounted) {
+    behaviorData.errorIcon = errorDebugIcon
+    behaviorData.forceBehavior = {
+      popover: 'ERROR_SHOWN',
+      icon: 'ERROR'
     }
-    const helperFact = config.helpFactory()
+    setData(failedData)
+    return
+  }
 
-    const helperProvider = helperFact.getHelp(
-      props.mainKey,
-      props.subKey,
-      props.pluginId,
-      lang
-    )
+  popoverLabels
+    .then((labels: PopoverLabel) => {
+      behaviorData.friendlyMsg = labels.comingSoon
+      behaviorData.iconAlt = labels.iconAlt
 
-    const popoverLabels = helperFact.getPopoverLabels(lang, props.pluginId)
+      failedData.content = labels.errors.failedData || failedData.content
 
-    if (!helperProvider) {
-      console.error("Can't instanciate edc-client-js helper !")
-      setData(failedData)
-    } else {
-      Promise.all([helperProvider, popoverLabels])
-        .then((values) => {
-          const helper = values[0]
+      if (!helperProvider) {
+        behaviorData.errorIcon = errorDebugIcon
+        behaviorData.forceBehavior = {
+          popover: 'ERROR_SHOWN',
+          icon: 'ERROR'
+        }
+        setData(failedData)
+        return
+      }
+
+      helperProvider
+        .then((helper: Helper) => {
           if (isMounted) {
             setData(
               !helper
                 ? failedData
                 : {
                     fetched: true,
+                    triggerError: false,
                     id: id,
                     content: buildContent(
                       config,
                       helperFact,
                       helper,
                       props,
-                      values[1]
+                      labels
                     ),
                     title: helper.label,
-                    icon: getIcon(config, props) || ''
+                    failBehaviorData: behaviorData
                   }
             )
           }
         })
         .catch((err: Error) => {
           console.error(err)
-          const describedFail = { ...failedData }
-          describedFail.content = err.name + ': ' + err.message
           if (isMounted) {
-            setData(describedFail)
+            setData(failedData)
           }
         })
-    }
-  }
+    })
+    .catch((err: Error) => {
+      console.error(err)
+      if (isMounted) {
+        setData(failedData)
+      }
+    })
 }

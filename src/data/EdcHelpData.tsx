@@ -1,6 +1,7 @@
 import { Placement } from 'react-bootstrap/Overlay'
 import { OverlayTriggerType } from 'react-bootstrap/OverlayTrigger'
-import { EdcIconData } from './EdcIcon'
+import { EdcIconData } from '..'
+import { BehaviorData } from './FailBehavior'
 
 export type EdcHelpProps = {
   pluginId?: string
@@ -15,8 +16,9 @@ export type EdcHelpProps = {
 
 export type PopoverData = {
   fetched: boolean
+  triggerError: boolean
   id: string
   title: string | JSX.Element
   content: string | JSX.Element
-  icon: EdcIconData
+  failBehaviorData: BehaviorData
 }

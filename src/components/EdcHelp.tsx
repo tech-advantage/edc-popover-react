@@ -3,10 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './EdcHelp.scss'
 import { PopoverConfigContext } from '../config/PopoverConfigProvider'
-import { OverlayTrigger, Popover } from 'react-bootstrap'
-import { EdcHelpProps, PopoverData } from './EdcHelpData'
-import { buildData, getIcon, getId } from './EdcHelpHandler'
-import { EdcIcon } from './EdcIcon'
+import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
+import { buildData, getIcon, getId } from '../handlers/EdcHelpHandler'
+import { EdcPopover } from './EdcPopover'
 
 const defaultProps: EdcHelpProps = {
   pluginId: undefined,
@@ -25,10 +24,14 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
   // setData can be used to rerender the Component with new data (useful for async task)
   const [data, setData] = useState<PopoverData>({
     fetched: false,
+    triggerError: false,
     id: getId(finalProps),
     title: 'Loading...',
     content: 'Loading...',
-    icon: getIcon(config, props) || ''
+    failBehaviorData: {
+      displayIcon: getIcon(config, props) || '',
+      errorIcon: ''
+    }
   })
 
   // Make async tasks cancellable if component is unmounted (effect cleanup)
@@ -44,20 +47,7 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
 
   return (
     <div className='help-container'>
-      <OverlayTrigger
-        trigger={finalProps.trigger || config.trigger || 'click'}
-        placement={finalProps.placement}
-        overlay={
-          <Popover id={data.id}>
-            <Popover.Title as='h3' className='popover-title'>
-              {data.title}
-            </Popover.Title>
-            <Popover.Content>{data.content}</Popover.Content>
-          </Popover>
-        }
-      >
-        <EdcIcon icon={data.icon} edcHelpProps={finalProps} />
-      </OverlayTrigger>
+      <EdcPopover edcHelp={finalProps} config={config} data={data} />
     </div>
   )
 }

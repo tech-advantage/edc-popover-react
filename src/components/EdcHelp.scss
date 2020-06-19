@@ -31,6 +31,16 @@
   cursor: pointer;
 }
 
+.help-icon-disabled {
+  height: 1em;
+  opacity: 0.55;
+}
+
+.help-icon-hidden {
+  height: 1em;
+  opacity: 0.0;
+}
+
 .help-container {
   padding-left: 5px;
   vertical-align: text-top;
