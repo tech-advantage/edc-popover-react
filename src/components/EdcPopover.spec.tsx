@@ -14,11 +14,7 @@ describe('EdcPopover', () => {
     pluginId: 'pluginId',
     helpPath: 'helpPath',
     docPath: 'failingDocPath',
-    i18nPath: 'i18n',
-    failBehavior: {
-      popover: 'ERROR_SHOWN',
-      icon: 'ERROR'
-    }
+    i18nPath: 'i18n'
   }
   const popoverData: PopoverData = {
     fetched: true,
@@ -32,6 +28,22 @@ describe('EdcPopover', () => {
       friendlyMsg: 'myFriendlyMessage'
     }
   }
+  it('should handle properly the default behavior : FRIENDLY_MSG and SHOWN', () => {
+    const wrapper = mount(
+      <EdcPopover edcHelp={edcHelpProps} config={config} data={popoverData} />
+    )
+    wrapper.simulate('click')
+
+    expect(wrapper.find(PopoverTitle).text()).toContain(
+      popoverData.failBehaviorData.friendlyMsg
+    )
+    expect(wrapper.find(PopoverContent).text()).toEqual('')
+    expect(
+      wrapper
+        .find('i')
+        .hasClass(popoverData.failBehaviorData.displayIcon.toString())
+    ).toBeTruthy()
+  })
 
   it('should handle properly the failed behavior : ERROR_SHOWN', () => {
     config.failBehavior = {

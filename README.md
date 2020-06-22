@@ -68,6 +68,7 @@ Optional prop that can be overridden :
 | icon | `EdcIconData` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
+| failBehavior | `FailBehavior` | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
@@ -136,6 +137,24 @@ Optional prop that can be overridden :
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
 ### Customization
+
+#### Fail behavior
+
+You can customize the popover's behavior when an error occurs with the `FailBehavior` object.
+
+There are separate behaviors for the help icon, and the popover itself.
+For the help icon when an error occurs:
+ - `SHOWN` The help icon is shown as usual
+ - `DISABLED` The help icon is greyed out
+ - `HIDDEN` The help icon is completely hidden (but stays in DOM to avoid breaking the UI)
+ - `ERROR` The help icon is replaced by an exclamation point (`fas fa-exclamation-circle`)
+
+For the popover when an error occurs:
+ - `ERROR_SHOWN` An error message is shown in the popover
+ - `FRIENDLY_MSG` A friendly and translated message is shown in the popover
+ - `NO_POPOVER` No popover appears when the help icon is triggered
+
+By default, the icon is `SHOWN` and the popover is set to `FRIENDLY_MSG`.
 
 #### Icons
 
