@@ -18,7 +18,7 @@ The required dependencies are:
 - [edc-client-js](https://github.com/tech-advantage/edc-client-js) 3.0.1 or higher
 - [react-bootstrap](https://react-bootstrap.github.io/) 1.0.1 or higher
 
-## Usage
+## How to use
 
 ### Import
 
@@ -136,9 +136,9 @@ Optional prop that can be overridden :
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
-### Customization
+## Customization
 
-#### Fail behavior
+### Fail behavior
 
 You can customize the popover's behavior when an error occurs with the `FailBehavior` object.
 
@@ -156,7 +156,7 @@ For the popover when an error occurs:
 
 By default, the icon is `SHOWN` and the popover is set to `FRIENDLY_MSG`.
 
-#### Icons
+### Icons
 
 The popover icons support 2 formats:
  - A CSS class (Font Awesome, Glyphicon, ...) using a `<i />`
@@ -168,7 +168,7 @@ You can choose with the `type` prop:
 
 If a `string` is provided to an EdcIconData, it will be interpreted as a CSS class by default.
 
-#### CSS
+### CSS
 
 You can customize the popover's design with CSS classes as below:
 
