@@ -115,6 +115,10 @@ export const withErrorsBehavior: FunctionComponent = () => (
     </DefaultProvider>
     <hr />
     <h3>When error happen</h3>
+    <h6>Default behavior (should be popover:FRIENDLY_MSG icon:SHOWN)</h6>
+    <DefaultProvider>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
     <h6>popover:ERROR_SHOWN icon:SHOWN</h6>
     <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'SHOWN' }}>
       <EdcHelp mainKey='main' subKey='sub' />
