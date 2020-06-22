@@ -35,8 +35,6 @@ export function EdcIcon(props: EdcIconProps): JSX.Element {
 
     newFailBehavior = data.failBehaviorData.forceBehavior || newFailBehavior
 
-    console.log(newFailBehavior)
-
     switch (newFailBehavior.icon) {
       case 'SHOWN':
         cssClass += 'help-icon'

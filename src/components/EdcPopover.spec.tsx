@@ -4,7 +4,6 @@ import React from 'react'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { PopoverConfig } from '../config/PopoverConfigProvider'
 import { PopoverContent, PopoverTitle } from 'react-bootstrap'
-import { EdcIcon } from './EdcIcon'
 
 describe('EdcPopover', () => {
   const edcHelpProps: EdcHelpProps = {
@@ -48,7 +47,7 @@ describe('EdcPopover', () => {
     expect(wrapper.find(PopoverTitle).text()).toContain(popoverData.title)
     expect(
       wrapper
-        .find(EdcIcon)
+        .find('i')
         .hasClass(popoverData.failBehaviorData.errorIcon.toString())
     )
   })
@@ -68,7 +67,7 @@ describe('EdcPopover', () => {
     )
     expect(
       wrapper
-        .find(EdcIcon)
+        .find('i')
         .hasClass(popoverData.failBehaviorData.errorIcon.toString())
     ).toBeTruthy()
   })
@@ -86,7 +85,7 @@ describe('EdcPopover', () => {
     expect(wrapper.find(PopoverTitle).length).not.toBeTruthy()
     expect(
       wrapper
-        .find(EdcIcon)
+        .find('i')
         .hasClass(popoverData.failBehaviorData.errorIcon.toString())
     ).toBeTruthy()
   })
@@ -105,7 +104,7 @@ describe('EdcPopover', () => {
     expect(wrapper.find(PopoverContent).text()).toEqual(popoverData.content)
     expect(
       wrapper
-        .find(EdcIcon)
+        .find('i')
         .hasClass(popoverData.failBehaviorData.displayIcon.toString())
     ).toBeTruthy()
   })
