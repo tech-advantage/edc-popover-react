@@ -18,7 +18,7 @@ The required dependencies are:
 - [edc-client-js](https://github.com/tech-advantage/edc-client-js) 3.0.1 or higher
 - [react-bootstrap](https://react-bootstrap.github.io/) 1.0.1 or higher
 
-## Usage
+## How to use
 
 ### Import
 
@@ -68,6 +68,7 @@ Optional prop that can be overridden :
 | icon | `EdcIconData` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
+| failBehavior | `FailBehavior` | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
@@ -135,9 +136,29 @@ Optional prop that can be overridden :
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
-### Customization
+## Customization
 
-#### Icons
+### Fail behavior
+
+You can customize the popover's behavior when an error occurs with the `FailBehavior` object.
+
+There are separate behaviors for the help icon, and the popover itself.
+For the help icon when an error occurs:
+ - `SHOWN` The help icon is shown as usual
+ - `DISABLED` The help icon is greyed out
+ - `HIDDEN` The help icon is completely hidden (but stays in DOM to avoid breaking the UI)
+ - `ERROR` The help icon is replaced by an exclamation point (`fas fa-exclamation-circle`)
+
+For the popover when an error occurs:
+ - `ERROR_SHOWN` An error message is shown in the popover
+ - `FRIENDLY_MSG` A friendly and translated message is shown in the popover
+ - `NO_POPOVER` No popover appears when the help icon is triggered
+
+By default, the icon is `SHOWN` and the popover is set to `FRIENDLY_MSG`.
+
+**:warning: In case of a missing provider error, an error is always shown !**
+
+### Icons
 
 The popover icons support 2 formats:
  - A CSS class (Font Awesome, Glyphicon, ...) using a `<i />`
@@ -149,7 +170,7 @@ You can choose with the `type` prop:
 
 If a `string` is provided to an EdcIconData, it will be interpreted as a CSS class by default.
 
-#### CSS
+### CSS
 
 You can customize the popover's design with CSS classes as below:
 

@@ -1,15 +1,18 @@
 import React, { FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
-import { EdcIconData, PopoverProvider } from '..'
+import { EdcIconData, FailBehavior, PopoverProvider } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
 
 export default { title: 'EdcHelp' }
 
 type ProviderProps = {
-  docPath?: string
+  pluginId?: string
   helpPath?: string
+  docPath?: string
   i18nPath?: string
   icon?: EdcIconData
+  lang?: string
+  failBehavior?: FailBehavior
   helpFactory?: Function
 }
 
@@ -54,7 +57,8 @@ export const withCustomIconSVG: FunctionComponent = () => (
 
 export const withCustomIconPNG: FunctionComponent = () => (
   <DefaultProvider icon={{ type: 'url', content: '/icon.png' }}>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <h4>lang: 'fr'</h4>
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' lang='fr' />
   </DefaultProvider>
 )
 
@@ -65,24 +69,10 @@ export const withCustomLanguage: FunctionComponent = () => (
   </DefaultProvider>
 )
 
-export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
+export const withCustomPlacements: FunctionComponent = () => (
   <DefaultProvider>
-    <h4>Default language</h4>
-    <h4>lang: default</h4>
-    <EdcHelp mainKey='fr.techad.edc.editor' subKey='parameters' />
-    <hr />
     <h4>lang: 'fr'</h4>
     <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
-    <hr />
-    <h4>Custom icon and fallback language</h4>
-    <h4>lang: 'zz'</h4>
-    <EdcHelp
-      mainKey='fr.techad.edc'
-      subKey='documentation_type'
-      lang='zz'
-      icon='fab fa-angular'
-    />
-    <hr />
   </DefaultProvider>
 )
 
@@ -103,6 +93,92 @@ export const withHoverFocusTrigger: FunctionComponent = () => (
       subKey='documentation_type'
       trigger={['hover', 'focus']}
     />
+  </DefaultProvider>
+)
+
+export const withCustomCss: FunctionComponent = () => (
+  <DefaultProvider>
+    <style>
+      {`.popover-title, .popover-desc {
+          color: #ab3794;
+        }
+
+        .popover-header {
+          background-color: #dbefff;
+          border-bottom: 0;
+        }
+
+        .popover-body {
+          background-color: #dbefff;
+          border: 3px solid #ff2233;
+        }`}
+    </style>
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+  </DefaultProvider>
+)
+
+export const withErrorsBehavior: FunctionComponent = () => (
+  <>
+    <h3>When no error happen (all popovers must be acting as usual)</h3>
+    <h6>popover:ERROR_SHOWN icon:SHOWN</h6>
+    <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'SHOWN' }}>
+      <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
+    </DefaultProvider>
+    <h6>popover:FRIENDLY_MSG icon:DISABLED</h6>
+    <DefaultProvider
+      failBehavior={{ popover: 'FRIENDLY_MSG', icon: 'DISABLED' }}
+    >
+      <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
+    </DefaultProvider>
+    <h6>popover:NO_POPOVER icon:HIDDEN</h6>
+    <DefaultProvider failBehavior={{ popover: 'NO_POPOVER', icon: 'HIDDEN' }}>
+      <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
+    </DefaultProvider>
+    <hr />
+    <h3>When error happen</h3>
+    <h6>Default behavior (should be popover:FRIENDLY_MSG icon:SHOWN)</h6>
+    <DefaultProvider>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <h6>popover:ERROR_SHOWN icon:SHOWN</h6>
+    <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'SHOWN' }}>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <h6>popover:FRIENDLY_MSG icon:DISABLED</h6>
+    <DefaultProvider
+      failBehavior={{ popover: 'FRIENDLY_MSG', icon: 'DISABLED' }}
+    >
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <h6>popover:NO_POPOVER icon:HIDDEN</h6>
+    <DefaultProvider failBehavior={{ popover: 'NO_POPOVER', icon: 'HIDDEN' }}>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <h6>popover:ERROR_SHOWN icon:ERROR</h6>
+    <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+  </>
+)
+
+export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
+  <DefaultProvider>
+    <h4>Default language</h4>
+    <h4>lang: default</h4>
+    <EdcHelp mainKey='fr.techad.edc.editor' subKey='parameters' />
+    <hr />
+    <h4>lang: 'fr'</h4>
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
+    <hr />
+    <h4>Custom icon and fallback language</h4>
+    <h4>lang: 'zz'</h4>
+    <EdcHelp
+      mainKey='fr.techad.edc'
+      subKey='documentation_type'
+      lang='zz'
+      icon='fab fa-angular'
+    />
+    <hr />
   </DefaultProvider>
 )
 

@@ -1,9 +1,20 @@
 import React from 'react'
 import { EdcIcon, EdcIconData } from './EdcIcon'
 import { mount } from 'enzyme'
-import { EdcHelpProps } from './EdcHelpData'
+import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 
 describe('EdcIcon', () => {
+  const data: PopoverData = {
+    fetched: true,
+    triggerError: false,
+    id: 'myId',
+    title: 'myTitle',
+    content: 'myContent',
+    failBehaviorData: {
+      displayIcon: 'displayIcon',
+      errorIcon: 'errorIcon'
+    }
+  }
   const dummyEdcHelpProps: EdcHelpProps = {
     mainKey: 'dummy',
     subKey: 'dummy'
@@ -26,24 +37,39 @@ describe('EdcIcon', () => {
   }
 
   it('should display an <i /> when EdcIconData is just a string', () => {
+    data.failBehaviorData.displayIcon = defaultStringIcon
     const wrapper = mount(
-      <EdcIcon icon={defaultStringIcon} edcHelpProps={dummyEdcHelpProps} />
+      <EdcIcon
+        data={data}
+        edcHelpProps={dummyEdcHelpProps}
+        failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
+      />
     )
     expect(wrapper.find('i').length).toEqual(1)
     expect(wrapper.find('i').hasClass(defaultStringIcon)).toBeTruthy()
   })
 
   it('should display an <img /> when EdcIconData has provided an URL', () => {
+    data.failBehaviorData.displayIcon = urlEdcIcon
     const wrapper = mount(
-      <EdcIcon icon={urlEdcIcon} edcHelpProps={dummyEdcHelpProps} />
+      <EdcIcon
+        data={data}
+        edcHelpProps={dummyEdcHelpProps}
+        failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
+      />
     )
     expect(wrapper.find('img').length).toEqual(1)
     expect(wrapper.find('img').prop('src')).toEqual(urlEdcIcon.content)
   })
 
   it('should display an <i /> when EdcIconData has provided a CSS class', () => {
+    data.failBehaviorData.displayIcon = cssEdcIcon
     const wrapper = mount(
-      <EdcIcon icon={cssEdcIcon} edcHelpProps={dummyEdcHelpProps} />
+      <EdcIcon
+        data={data}
+        edcHelpProps={dummyEdcHelpProps}
+        failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
+      />
     )
     expect(wrapper.find('i').length).toEqual(1)
     expect(cssEdcIcon.content).not.toBeUndefined()
@@ -51,8 +77,13 @@ describe('EdcIcon', () => {
   })
 
   it('should handle dark mode when enabled', () => {
+    data.failBehaviorData.displayIcon = cssEdcIcon
     const wrapper = mount(
-      <EdcIcon icon={cssEdcIcon} edcHelpProps={dummyDarkEdcHelpProps} />
+      <EdcIcon
+        data={data}
+        failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
+        edcHelpProps={dummyDarkEdcHelpProps}
+      />
     )
 
     expect(wrapper.find('i').hasClass('on-dark')).toBeTruthy()
