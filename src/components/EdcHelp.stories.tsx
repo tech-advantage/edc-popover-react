@@ -96,6 +96,27 @@ export const withHoverFocusTrigger: FunctionComponent = () => (
   </DefaultProvider>
 )
 
+export const withCustomCss: FunctionComponent = () => (
+  <DefaultProvider>
+    <style>
+      {`.popover-title, .popover-desc {
+          color: #ab3794;
+        }
+
+        .popover-header {
+          background-color: #dbefff;
+          border-bottom: 0;
+        }
+
+        .popover-body {
+          background-color: #dbefff;
+          border: 3px solid #ff2233;
+        }`}
+    </style>
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+  </DefaultProvider>
+)
+
 export const withErrorsBehavior: FunctionComponent = () => (
   <>
     <h3>When no error happen (all popovers must be acting as usual)</h3>
