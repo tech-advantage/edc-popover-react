@@ -45,6 +45,7 @@ export function getOverlayTrigger(
     <OverlayTrigger
       overlay={overlay}
       trigger={props.edcHelp.trigger || props.config.trigger || 'click'}
+      rootClose
       placement={props.edcHelp.placement}
     >
       {getEdcIcon(props)}
