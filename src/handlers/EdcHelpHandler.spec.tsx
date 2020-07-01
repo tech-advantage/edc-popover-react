@@ -69,7 +69,6 @@ describe('EdcHelpHandler', () => {
     ) => {
       const data = dataAction as PopoverData
 
-      expect(data.fetched).toBeTruthy()
       expect(getText(data.title)).toEqual(correctHelper.label)
       expect(getText(data.content)).toContain(article1.label)
       expect(getText(data.content)).toContain(link1.label)
@@ -97,7 +96,6 @@ describe('EdcHelpHandler', () => {
       dataAction: SetStateAction<PopoverData>
     ) => {
       const data = dataAction as PopoverData
-      expect(data.fetched).toBeTruthy()
       expect(getText(data.title)).not.toEqual(correctHelper.label)
       expect(getText(data.content)).toContain(correctPopoverError.failedData)
       expect(data.id).toBeDefined()
@@ -120,7 +118,6 @@ describe('EdcHelpHandler', () => {
       dataAction: SetStateAction<PopoverData>
     ) => {
       const data = dataAction as PopoverData
-      expect(data.fetched).toBeTruthy()
       expect(getText(data.title)).not.toEqual(correctHelper.label)
       expect(getText(data.content)).not.toContain(article1.label)
       expect(getText(data.content)).not.toContain(link1.label)

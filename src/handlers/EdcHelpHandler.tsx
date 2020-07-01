@@ -121,7 +121,6 @@ export function buildData(
       icon: 'ERROR'
     }
     setData({
-      fetched: true,
       triggerError: true,
       id: id,
       content: 'This EdcHelp is not a deep child of a PopoverConfigProvider',
@@ -132,7 +131,6 @@ export function buildData(
   }
 
   const failedData: PopoverData = {
-    fetched: true,
     triggerError: true,
     id: id,
     content: "Can't fetch data, check your pluginId and docPath !",
@@ -185,7 +183,6 @@ export function buildData(
               !helper
                 ? failedData
                 : {
-                    fetched: true,
                     triggerError: false,
                     id: id,
                     content: buildContent(
