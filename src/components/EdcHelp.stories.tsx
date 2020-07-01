@@ -51,6 +51,8 @@ class DefaultProvider extends React.Component<ProviderProps> {
         <select onChange={this.handleChange}>
           <option value='en'>en</option>
           <option value='fr'>fr</option>
+          <option value='es'>es</option>
+          <option value='zh'>zh</option>
         </select>
         <br />
         <br />
