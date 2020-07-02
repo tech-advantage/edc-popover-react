@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { ChangeEvent, FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { EdcIconData, FailBehavior, PopoverProvider } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
@@ -16,25 +16,50 @@ type ProviderProps = {
   helpFactory?: Function
 }
 
-function DefaultProvider(
+class DefaultProvider extends React.Component<ProviderProps> {
   props: ProviderProps & { children: React.ReactNode }
-): JSX.Element {
-  return (
-    <PopoverProvider
-      {...{
-        ...{
-          pluginId: 'edc',
-          docPath: './doc',
-          helpPath: 'https://demo.easydoccontents.com/help',
-          i18nPath: './doc/i18n',
-          lang: 'en'
-        },
-        ...props
-      }}
-    >
-      {props.children}
-    </PopoverProvider>
-  )
+  lang: string
+
+  constructor(props: ProviderProps & { children: React.ReactNode }) {
+    super(props)
+    this.props = props
+
+    this.handleChange = this.handleChange.bind(this)
+    this.lang = 'en'
+  }
+
+  handleChange(event: ChangeEvent<HTMLSelectElement>) {
+    this.lang = event.target.value
+    this.forceUpdate(() => console.log('Lang updated'))
+  }
+
+  render() {
+    return (
+      <PopoverProvider
+        {...{
+          ...{
+            pluginId: 'edc',
+            docPath: './doc',
+            helpPath: 'https://demo.easydoccontents.com/help',
+            i18nPath: './doc/i18n',
+            lang: this.lang
+          },
+          ...this.props
+        }}
+      >
+        Language:
+        <select onChange={this.handleChange}>
+          <option value='en'>en</option>
+          <option value='fr'>fr</option>
+          <option value='es'>es</option>
+          <option value='zh'>zh</option>
+        </select>
+        <br />
+        <br />
+        {this.props.children}
+      </PopoverProvider>
+    )
+  }
 }
 
 export const withDefaultIcon: FunctionComponent = () => (
@@ -62,7 +87,7 @@ export const withCustomIconPNG: FunctionComponent = () => (
   </DefaultProvider>
 )
 
-export const withCustomLanguage: FunctionComponent = () => (
+export const withLanguageOverride: FunctionComponent = () => (
   <DefaultProvider>
     <h4>lang: 'fr'</h4>
     <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
@@ -164,10 +189,10 @@ export const withErrorsBehavior: FunctionComponent = () => (
 export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
   <DefaultProvider>
     <h4>Default language</h4>
-    <h4>lang: default</h4>
+    <h4>lang: default ('en')</h4>
     <EdcHelp mainKey='fr.techad.edc.editor' subKey='parameters' />
     <hr />
-    <h4>lang: 'fr'</h4>
+    <h4>lang: As selected</h4>
     <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
     <hr />
     <h4>Custom icon and fallback language</h4>

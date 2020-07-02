@@ -15,7 +15,6 @@ export type EdcHelpProps = {
 }
 
 export type PopoverData = {
-  fetched: boolean
   triggerError: boolean
   id: string
   title: string | JSX.Element
