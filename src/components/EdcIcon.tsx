@@ -47,7 +47,7 @@ export function EdcIcon(props: EdcIconProps): JSX.Element {
         break
       case 'ERROR':
         forceCss = true
-        cssClass += 'help-icon'
+        cssClass += 'help-icon-error'
         icon = getIconContent(behaviorData.errorIcon)
     }
   } else {

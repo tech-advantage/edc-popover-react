@@ -28,12 +28,12 @@ class DefaultProvider extends React.Component<ProviderProps> {
     this.lang = 'en'
   }
 
-  handleChange(event: ChangeEvent<HTMLSelectElement>) {
+  handleChange(event: ChangeEvent<HTMLSelectElement>): void {
     this.lang = event.target.value
     this.forceUpdate(() => console.log('Lang updated'))
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <PopoverProvider
         {...{
@@ -144,6 +144,24 @@ export const withCustomCss: FunctionComponent = () => (
 
 export const withErrorsBehavior: FunctionComponent = () => (
   <>
+    <style>
+      {`.help-icon {
+          color: #ab3794;
+        }
+
+        .help-icon-disabled {
+          color: #ab3794;
+        }
+
+        .help-icon-hidden {
+          color: #ab3794;
+        }
+
+        .help-icon-error {
+          color: #ff0000;
+        }`}
+    </style>
+    <h2>Custom style</h2>
     <h3>When no error happen (all popovers must be acting as usual)</h3>
     <h6>popover:ERROR_SHOWN icon:SHOWN</h6>
     <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'SHOWN' }}>
@@ -183,6 +201,7 @@ export const withErrorsBehavior: FunctionComponent = () => (
     <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}>
       <EdcHelp mainKey='main' subKey='sub' />
     </DefaultProvider>
+    <br style={{ marginBottom: 200 }} />
   </>
 )
 

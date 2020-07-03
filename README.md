@@ -172,9 +172,22 @@ If a `string` is provided to an EdcIconData, it will be interpreted as a CSS cla
 
 ### CSS
 
+#### Popover
+
 You can customize the popover's design with CSS classes as below:
 
 ![CSS Classes](CSSClasses.png "CSS Classes")
+
+#### Help icon
+
+Each behavior (see [Fail behavior](#Fail-behavior)) can be customized as below:
+
+| Behavior | CSS selector |
+|---|---|
+| `SHOWN` | `.help-icon` |
+| `DISABLED` | `.help-icon-disabled` |
+| `HIDDEN` | `.help-icon-hidden` |
+| `ERROR` | `.help-icon-error` |
 
 ## Tests
 
