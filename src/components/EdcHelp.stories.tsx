@@ -96,8 +96,16 @@ export const withLanguageOverride: FunctionComponent = () => (
 
 export const withCustomPlacements: FunctionComponent = () => (
   <DefaultProvider>
-    <h4>lang: 'fr'</h4>
-    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
+    <h4>Auto</h4>
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='auto' />
+    <h4>Top</h4>
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='top' />
+    <h4>Bottom</h4>
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='bottom' />
+    <h4>Left</h4>
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='left' />
+    <h4>Right</h4>
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='right' />
   </DefaultProvider>
 )
 
