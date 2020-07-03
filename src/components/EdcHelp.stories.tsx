@@ -2,6 +2,7 @@ import React, { ChangeEvent, FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { EdcIconData, FailBehavior, PopoverProvider } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
+import { Placement } from 'react-bootstrap/Overlay'
 
 export default { title: 'EdcHelp' }
 
@@ -11,6 +12,8 @@ type ProviderProps = {
   docPath?: string
   i18nPath?: string
   icon?: EdcIconData
+  placement?: Placement
+  dark?: boolean
   lang?: string
   failBehavior?: FailBehavior
   helpFactory?: Function
@@ -91,6 +94,12 @@ export const withLanguageOverride: FunctionComponent = () => (
   <DefaultProvider>
     <h4>lang: 'fr'</h4>
     <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
+  </DefaultProvider>
+)
+
+export const withDarkMode: FunctionComponent = () => (
+  <DefaultProvider dark>
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
   </DefaultProvider>
 )
 

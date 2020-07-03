@@ -5,7 +5,7 @@ import { PopoverConfig } from '../config/PopoverConfigProvider'
 import { OverlayChildren } from 'react-bootstrap/Overlay'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { defaultFailBehavior } from '../data/FailBehavior'
-import { getPlacement } from '../handlers/EdcHelpHandler'
+import { getDark, getPlacement } from '../handlers/EdcHelpHandler'
 
 export type EdcPopoverProps = {
   edcHelp: EdcHelpProps
@@ -28,13 +28,16 @@ export function getEdcIcon(props: EdcPopoverProps): JSX.Element {
  * Can't create a functional component, OverlayTrigger cannot handle properly custom React Components
  * Temporary workaround: Function returning JSX.Element
  */
-export function getEdcPopover(data: PopoverData): JSX.Element {
+export function getEdcPopover(props: EdcPopoverProps): JSX.Element {
   return (
-    <Popover id={data.id}>
+    <Popover
+      id={props.data.id}
+      className={getDark(props.config, props.edcHelp) ? 'on-dark' : ''}
+    >
       <Popover.Title as='h3' className='popover-title'>
-        {data.title}
+        {props.data.title}
       </Popover.Title>
-      <Popover.Content>{data.content}</Popover.Content>
+      <Popover.Content>{props.data.content}</Popover.Content>
     </Popover>
   )
 }
@@ -57,7 +60,7 @@ export function getOverlayTrigger(
 
 export function EdcPopover(props: EdcPopoverProps): JSX.Element {
   if (!props.data.triggerError) {
-    return getOverlayTrigger(getEdcPopover(props.data), props)
+    return getOverlayTrigger(getEdcPopover(props), props)
   }
 
   let failBehavior = props.config.failBehavior
@@ -70,14 +73,14 @@ export function EdcPopover(props: EdcPopoverProps): JSX.Element {
 
   switch (failBehavior.popover) {
     case 'ERROR_SHOWN':
-      return getOverlayTrigger(getEdcPopover(props.data), props)
+      return getOverlayTrigger(getEdcPopover(props), props)
     case 'FRIENDLY_MSG':
       props.data.title = props.data.failBehaviorData.friendlyMsg || ''
       props.data.content = ''
-      return getOverlayTrigger(getEdcPopover(props.data), props)
+      return getOverlayTrigger(getEdcPopover(props), props)
     case 'NO_POPOVER':
       return getEdcIcon(props)
     default:
-      return getOverlayTrigger(getEdcPopover(props.data), props)
+      return getOverlayTrigger(getEdcPopover(props), props)
   }
 }
