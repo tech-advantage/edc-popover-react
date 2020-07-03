@@ -27,13 +27,19 @@
 }
 
 .help-icon {
+  color: #d3d3d3;
   height: 1em;
   cursor: pointer;
 }
 
+.help-icon:hover {
+  color: #3c8dbc;
+}
+
 .help-icon-disabled {
+  color: #d3d3d3;
   height: 1em;
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
 .help-icon-hidden {
@@ -42,6 +48,7 @@
 }
 
 .help-icon-error {
+  color: #d21e1e;
   height: 1em;
   cursor: pointer;
 }

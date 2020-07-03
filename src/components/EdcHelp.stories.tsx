@@ -144,6 +144,52 @@ export const withCustomCss: FunctionComponent = () => (
 
 export const withErrorsBehavior: FunctionComponent = () => (
   <>
+    <h2>Custom style</h2>
+    <h3>When no error happen (all popovers must be acting as usual)</h3>
+    <h6>popover:ERROR_SHOWN icon:SHOWN</h6>
+    <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'SHOWN' }}>
+      <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
+    </DefaultProvider>
+    <h6>popover:FRIENDLY_MSG icon:DISABLED</h6>
+    <DefaultProvider
+      failBehavior={{ popover: 'FRIENDLY_MSG', icon: 'DISABLED' }}
+    >
+      <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
+    </DefaultProvider>
+    <h6>popover:NO_POPOVER icon:HIDDEN</h6>
+    <DefaultProvider failBehavior={{ popover: 'NO_POPOVER', icon: 'HIDDEN' }}>
+      <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
+    </DefaultProvider>
+    <hr />
+    <h3>When error happen</h3>
+    <h6>Default behavior (should be popover:FRIENDLY_MSG icon:SHOWN)</h6>
+    <DefaultProvider>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <h6>popover:ERROR_SHOWN icon:SHOWN</h6>
+    <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'SHOWN' }}>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <h6>popover:FRIENDLY_MSG icon:DISABLED</h6>
+    <DefaultProvider
+      failBehavior={{ popover: 'FRIENDLY_MSG', icon: 'DISABLED' }}
+    >
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <h6>popover:NO_POPOVER icon:HIDDEN</h6>
+    <DefaultProvider failBehavior={{ popover: 'NO_POPOVER', icon: 'HIDDEN' }}>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <h6>popover:ERROR_SHOWN icon:ERROR</h6>
+    <DefaultProvider failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}>
+      <EdcHelp mainKey='main' subKey='sub' />
+    </DefaultProvider>
+    <br style={{ marginBottom: 200 }} />
+  </>
+)
+
+export const withErrorsBehaviorCustomStyle: FunctionComponent = () => (
+  <>
     <style>
       {`.help-icon {
           color: #ab3794;
