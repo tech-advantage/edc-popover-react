@@ -177,6 +177,7 @@ If a `string` is provided to an EdcIconData, it will be interpreted as a CSS cla
 #### Global
 
 When dark-mode is enabled, the CSS class `on-dark` is applied on the popover and the help icon.
+
 So you can override this classes by CSS select the component as below sections and `.on-dark`
 
 #### Popover
