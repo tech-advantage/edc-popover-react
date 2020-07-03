@@ -11,6 +11,7 @@ export type PopoverConfig = {
   i18nPath: string
   icon?: EdcIconData
   lang?: string
+  dark?: boolean
   placement?: Placement
   trigger?: OverlayTriggerType | OverlayTriggerType[]
   failBehavior?: FailBehavior

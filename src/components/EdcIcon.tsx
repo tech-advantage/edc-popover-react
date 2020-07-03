@@ -2,6 +2,8 @@ import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import React from 'react'
 import { FailBehavior } from '..'
 import { defaultFailBehavior } from '../data/FailBehavior'
+import { getDark } from '../handlers/EdcHelpHandler'
+import { PopoverConfig } from '../config/PopoverConfigProvider'
 
 export type EdcIconData =
   | string
@@ -13,6 +15,7 @@ export type EdcIconData =
 export type EdcIconProps = {
   data: PopoverData
   edcHelpProps: EdcHelpProps
+  config: PopoverConfig
   failBehavior?: FailBehavior
 }
 
@@ -21,7 +24,7 @@ function getIconContent(icon: EdcIconData): string | undefined {
 }
 
 export function EdcIcon(props: EdcIconProps): JSX.Element {
-  const { data, edcHelpProps, failBehavior, ...newProps } = props
+  const { data, edcHelpProps, config, failBehavior, ...newProps } = props
   const behaviorData = data.failBehaviorData
   let icon = getIconContent(behaviorData.displayIcon)
   let cssClass = ''
@@ -54,7 +57,7 @@ export function EdcIcon(props: EdcIconProps): JSX.Element {
     cssClass += 'help-icon'
   }
 
-  cssClass += edcHelpProps.dark ? ' on-dark' : ''
+  cssClass += getDark(config, edcHelpProps) ? ' on-dark' : ''
 
   return forceCss ||
     typeof behaviorData.displayIcon === 'string' ||

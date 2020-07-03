@@ -43,6 +43,13 @@ export function getPlacement(
   return props.placement || config.placement
 }
 
+export function getDark(
+  config: PopoverConfig,
+  props: EdcHelpProps
+): boolean | undefined {
+  return props.dark || config.dark
+}
+
 export function buildContent(
   config: PopoverConfig,
   helperFactory: HelperFactory,

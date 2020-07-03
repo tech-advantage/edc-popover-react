@@ -17,6 +17,7 @@ export function getEdcIcon(props: EdcPopoverProps): JSX.Element {
   return (
     <EdcIcon
       data={props.data}
+      config={props.config}
       edcHelpProps={props.edcHelp}
       failBehavior={props.config.failBehavior}
     />
