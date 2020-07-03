@@ -11,7 +11,7 @@ const defaultProps: EdcHelpProps = {
   pluginId: undefined,
   mainKey: '',
   subKey: '',
-  placement: 'bottom',
+  placement: 'auto',
   dark: false,
   lang: undefined,
   trigger: 'click'

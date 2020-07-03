@@ -5,6 +5,7 @@ import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { HelperFactory } from '../helper/HelperFactory'
 import { EdcIconData } from '..'
 import { BehaviorData } from '../data/FailBehavior'
+import { Placement } from 'react-bootstrap/Overlay'
 
 const errorProviderIcon = 'fas fa-exclamation-triangle'
 const errorDebugIcon = 'fas fa-exclamation-circle'
@@ -33,6 +34,20 @@ export function getIcon(
   props: EdcHelpProps
 ): EdcIconData | undefined {
   return props.icon || config.icon
+}
+
+export function getPlacement(
+  config: PopoverConfig,
+  props: EdcHelpProps
+): Placement | undefined {
+  return props.placement || config.placement
+}
+
+export function getDark(
+  config: PopoverConfig,
+  props: EdcHelpProps
+): boolean | undefined {
+  return props.dark || config.dark
 }
 
 export function buildContent(

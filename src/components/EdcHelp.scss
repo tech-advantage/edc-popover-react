@@ -1,5 +1,9 @@
+.popover {
+  border: 1px solid #3c8dbc;
+}
 .popover-header {
-  border-bottom: 3px solid #1e82fd;
+  border-bottom: 3px solid #3c8dbc;
+  font-weight: bold;
 }
 
 .popover-section-item {
@@ -27,18 +31,30 @@
 }
 
 .help-icon {
+  color: #d3d3d3;
   height: 1em;
   cursor: pointer;
 }
 
+.help-icon:hover {
+  color: #3c8dbc;
+}
+
 .help-icon-disabled {
+  color: #d3d3d3;
   height: 1em;
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
 .help-icon-hidden {
   height: 1em;
   opacity: 0.0;
+}
+
+.help-icon-error {
+  color: #d21e1e;
+  height: 1em;
+  cursor: pointer;
 }
 
 .help-container {

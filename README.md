@@ -67,6 +67,8 @@ Optional prop that can be overridden :
 |---|---|---|---|
 | icon | `EdcIconData` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
+| dark | `boolean` | true if dark mode enabled | `false` |
+| placement | `Placement` | The popover placement | `auto` |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
 | failBehavior | `FailBehavior` | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
@@ -172,9 +174,30 @@ If a `string` is provided to an EdcIconData, it will be interpreted as a CSS cla
 
 ### CSS
 
+#### Global
+
+When dark-mode is enabled, the CSS class `on-dark` is applied on the popover and the help icon.
+
+So you can override this classes by CSS select the component as below sections and `.on-dark`
+
+#### Popover
+
 You can customize the popover's design with CSS classes as below:
 
 ![CSS Classes](CSSClasses.png "CSS Classes")
+
+#### Help icon
+
+Each behavior (see [Fail behavior](#Fail-behavior)) can be customized as below:
+
+| Behavior | CSS selector |
+|---|---|
+| `SHOWN` | `.help-icon` |
+| `DISABLED` | `.help-icon-disabled` |
+| `HIDDEN` | `.help-icon-hidden` |
+| `ERROR` | `.help-icon-error` |
+
+(You can see the default values [here](./src/components/EdcHelp.scss))
 
 ## Tests
 
