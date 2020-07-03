@@ -189,6 +189,8 @@ Each behavior (see [Fail behavior](#Fail-behavior)) can be customized as below:
 | `HIDDEN` | `.help-icon-hidden` |
 | `ERROR` | `.help-icon-error` |
 
+(You can see the default values [here](./src/components/EdcHelp.scss))
+
 ## Tests
 
 ### Unit
