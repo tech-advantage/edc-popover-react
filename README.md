@@ -67,6 +67,7 @@ Optional prop that can be overridden :
 |---|---|---|---|
 | icon | `EdcIconData` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
+| placement | `Placement` | The popover placement | `auto` |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
 | failBehavior | `FailBehavior` | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 

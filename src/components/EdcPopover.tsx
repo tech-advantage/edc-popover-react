@@ -5,6 +5,7 @@ import { PopoverConfig } from '../config/PopoverConfigProvider'
 import { OverlayChildren } from 'react-bootstrap/Overlay'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { defaultFailBehavior } from '../data/FailBehavior'
+import { getPlacement } from '../handlers/EdcHelpHandler'
 
 export type EdcPopoverProps = {
   edcHelp: EdcHelpProps
@@ -46,7 +47,7 @@ export function getOverlayTrigger(
       overlay={overlay}
       trigger={props.edcHelp.trigger || props.config.trigger || 'click'}
       rootClose
-      placement={props.edcHelp.placement}
+      placement={getPlacement(props.config, props.edcHelp)}
     >
       {getEdcIcon(props)}
     </OverlayTrigger>
