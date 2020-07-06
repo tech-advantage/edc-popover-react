@@ -2,10 +2,16 @@ import React from 'react'
 import { EdcIcon, EdcIconData } from './EdcIcon'
 import { mount } from 'enzyme'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
+import { PopoverConfig } from '../config/PopoverConfigProvider'
 
 describe('EdcIcon', () => {
+  const config: PopoverConfig = {
+    pluginId: 'pluginId',
+    docPath: 'docPath',
+    helpPath: 'helpPath',
+    i18nPath: 'i18n'
+  }
   const data: PopoverData = {
-    fetched: true,
     triggerError: false,
     id: 'myId',
     title: 'myTitle',
@@ -43,6 +49,7 @@ describe('EdcIcon', () => {
         data={data}
         edcHelpProps={dummyEdcHelpProps}
         failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
+        config={config}
       />
     )
     expect(wrapper.find('i').length).toEqual(1)
@@ -56,6 +63,7 @@ describe('EdcIcon', () => {
         data={data}
         edcHelpProps={dummyEdcHelpProps}
         failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
+        config={config}
       />
     )
     expect(wrapper.find('img').length).toEqual(1)
@@ -69,6 +77,7 @@ describe('EdcIcon', () => {
         data={data}
         edcHelpProps={dummyEdcHelpProps}
         failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
+        config={config}
       />
     )
     expect(wrapper.find('i').length).toEqual(1)
@@ -83,6 +92,7 @@ describe('EdcIcon', () => {
         data={data}
         failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
         edcHelpProps={dummyDarkEdcHelpProps}
+        config={config}
       />
     )
 
