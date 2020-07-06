@@ -7,14 +7,23 @@
 }
 
 .popover-header {
-  border-bottom: 3px solid #3c8dbc;
   font-weight: bold;
+}
+
+.hide-content .popover-header {
+  font-weight: normal;
 }
 
 .on-dark .popover-header {
   background-color: #455a64;
-  border-bottom: 3px solid #7eb0cd;
-  font-weight: bold;
+}
+
+.popover-body {
+  border-top: 3px solid #3c8dbc;
+}
+
+.on-dark .popover-body {
+  border-top: 3px solid #7eb0cd;
 }
 
 .popover-section-item {

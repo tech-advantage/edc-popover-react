@@ -17,7 +17,6 @@ describe('EdcPopover', () => {
     i18nPath: 'i18n'
   }
   const popoverData: PopoverData = {
-    fetched: true,
     triggerError: true,
     id: 'myId',
     title: 'myTitle',
@@ -37,7 +36,7 @@ describe('EdcPopover', () => {
     expect(wrapper.find(PopoverTitle).text()).toContain(
       popoverData.failBehaviorData.friendlyMsg
     )
-    expect(wrapper.find(PopoverContent).text()).toEqual('')
+    expect(wrapper.find(PopoverContent).length).toEqual(0)
     expect(
       wrapper
         .find('i')
@@ -73,7 +72,7 @@ describe('EdcPopover', () => {
     )
     wrapper.simulate('click')
 
-    expect(wrapper.find(PopoverContent).text()).toEqual('')
+    expect(wrapper.find(PopoverContent).length).toEqual(0)
     expect(wrapper.find(PopoverTitle).text()).toContain(
       popoverData.failBehaviorData.friendlyMsg
     )

@@ -28,16 +28,22 @@ export function getEdcIcon(props: EdcPopoverProps): JSX.Element {
  * Can't create a functional component, OverlayTrigger cannot handle properly custom React Components
  * Temporary workaround: Function returning JSX.Element
  */
-export function getEdcPopover(props: EdcPopoverProps): JSX.Element {
+export function getEdcPopover(
+  props: EdcPopoverProps,
+  hideContent?: boolean
+): JSX.Element {
   return (
     <Popover
       id={props.data.id}
-      className={getDark(props.config, props.edcHelp) ? 'on-dark' : ''}
+      className={
+        (getDark(props.config, props.edcHelp) ? 'on-dark ' : '') +
+        (hideContent ? 'hide-content' : '')
+      }
     >
       <Popover.Title as='h3' className='popover-title'>
         {props.data.title}
       </Popover.Title>
-      <Popover.Content>{props.data.content}</Popover.Content>
+      {!hideContent && <Popover.Content>{props.data.content}</Popover.Content>}
     </Popover>
   )
 }
@@ -76,8 +82,7 @@ export function EdcPopover(props: EdcPopoverProps): JSX.Element {
       return getOverlayTrigger(getEdcPopover(props), props)
     case 'FRIENDLY_MSG':
       props.data.title = props.data.failBehaviorData.friendlyMsg || ''
-      props.data.content = ''
-      return getOverlayTrigger(getEdcPopover(props), props)
+      return getOverlayTrigger(getEdcPopover(props, true), props)
     case 'NO_POPOVER':
       return getEdcIcon(props)
     default:
