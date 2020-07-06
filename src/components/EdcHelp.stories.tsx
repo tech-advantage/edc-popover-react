@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FunctionComponent } from 'react'
+import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { EdcIconData, FailBehavior, PopoverProvider } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
@@ -65,6 +65,47 @@ class DefaultProvider extends React.Component<ProviderProps> {
   }
 }
 
+class DarkSwitcher extends Component<{}> {
+  dark: boolean
+
+  constructor(props: Readonly<{}>) {
+    super(props)
+    this.dark = false
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event: ChangeEvent<HTMLSelectElement>): void {
+    this.dark = event.target.value === 'true'
+    this.forceUpdate(() => console.log('Dark mode updated'))
+  }
+
+  render(): JSX.Element {
+    return (
+      <DefaultProvider dark={this.dark}>
+        <style>
+          {this.dark
+            ? `body {
+            color: white;
+            background-color: black;
+          }`
+            : `body {
+            color: black;
+            background-color: white;
+          }`}
+        </style>
+        Dark mode enabled:
+        <select onChange={this.handleChange}>
+          <option value='false'>false</option>
+          <option value='true'>true</option>
+        </select>
+        <br />
+        <br />
+        <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
+      </DefaultProvider>
+    )
+  }
+}
+
 export const withDefaultIcon: FunctionComponent = () => (
   <DefaultProvider>
     <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
@@ -97,11 +138,7 @@ export const withLanguageOverride: FunctionComponent = () => (
   </DefaultProvider>
 )
 
-export const withDarkMode: FunctionComponent = () => (
-  <DefaultProvider dark>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
-  </DefaultProvider>
-)
+export const withDarkMode: FunctionComponent = () => <DarkSwitcher />
 
 export const withCustomPlacements: FunctionComponent = () => (
   <DefaultProvider>

@@ -1,8 +1,19 @@
 .popover {
   border: 1px solid #3c8dbc;
 }
+
+.on-dark.popover {
+  border: 1px solid #7eb0cd;
+}
+
 .popover-header {
   border-bottom: 3px solid #3c8dbc;
+  font-weight: bold;
+}
+
+.on-dark .popover-header {
+  background-color: #455a64;
+  border-bottom: 3px solid #7eb0cd;
   font-weight: bold;
 }
 
@@ -17,9 +28,18 @@
   padding: 0;
 }
 
+.on-dark .popover-section-item {
+  color: #88bbff;
+}
+
 .popover-section-item:hover,
 .popover-section-item:focus {
   text-decoration: none;
+}
+
+.on-dark .popover-body {
+  color: #ffffff;
+  background-color: #37474f;
 }
 
 .popover-desc {
@@ -38,6 +58,10 @@
 
 .help-icon:hover {
   color: #3c8dbc;
+}
+
+.help-icon.on-dark:hover {
+  color: #7eb0cd;
 }
 
 .help-icon-disabled {
