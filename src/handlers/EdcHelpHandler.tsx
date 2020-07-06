@@ -145,14 +145,6 @@ export function buildData(
     return
   }
 
-  const failedData: PopoverData = {
-    triggerError: true,
-    id: id,
-    content: "Can't fetch data, check your pluginId and docPath !",
-    title: 'Error',
-    failBehaviorData: behaviorData
-  }
-
   const helperFact = config.helpFactory()
 
   const helperProvider = helperFact.getHelp(
@@ -161,6 +153,14 @@ export function buildData(
     props.pluginId,
     lang
   )
+
+  const failedData: PopoverData = {
+    triggerError: true,
+    id: id,
+    content: "Can't fetch any data, check your pluginId and docPath !",
+    title: 'Error',
+    failBehaviorData: behaviorData
+  }
 
   const popoverLabels = helperFact.getPopoverLabels(lang, props.pluginId)
 
@@ -180,6 +180,7 @@ export function buildData(
       behaviorData.iconAlt = labels.iconAlt
 
       failedData.content = labels.errors.failedData || failedData.content
+      failedData.title = labels.errorTitle || failedData.title
 
       if (!helperProvider) {
         behaviorData.errorIcon = errorDebugIcon
