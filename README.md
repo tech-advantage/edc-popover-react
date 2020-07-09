@@ -65,11 +65,11 @@ Props to specify for the `PopoverProvider` :
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `EdcIconData` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
+| icon | `[EdcIconData](./src/components/EdcIcon.tsx#L8)` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | dark | `boolean` | true if dark mode enabled | `false` |
-| placement | `Placement` | The popover placement | `auto` |
-| trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
+| placement | [`Placement`](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
+| trigger | [`OverlayTriggerType \| OverlayTriggerType[]`](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | The trigger type | `click` |
 | failBehavior | `FailBehavior` | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
@@ -134,7 +134,7 @@ Optional prop that can be overridden :
 | dark | `boolean` | true if dark mode enabled | `false` |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
 | trigger | `OverlayTriggerType \| OverlayTriggerType[]` | A trigger | `click` |
-| icon | `EdcIconData` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
+| icon | `[EdcIconData](./src/components/EdcIcon.tsx#L8)` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
@@ -170,7 +170,7 @@ You can choose with the `type` prop:
  - `class`: The `content` must represent the CSS class
  - `url`: The `content` must represent the image's URL
 
-If a `string` is provided to an EdcIconData, it will be interpreted as a CSS class by default.
+If a `string` is provided to an [EdcIconData](./src/components/EdcIcon.tsx#L8), it will be interpreted as a CSS class by default.
 
 ### CSS
 
