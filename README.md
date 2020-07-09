@@ -70,7 +70,7 @@ Optional prop that can be overridden :
 | dark | `boolean` | true if dark mode enabled | `false` |
 | placement | [Placement](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
 | trigger | [OverlayTriggerType \| OverlayTriggerType[]](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | The trigger type | `click` |
-| failBehavior | `FailBehavior` | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
+| failBehavior | [FailBehavior](./src/data/FailBehavior.tsx#L6) | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
@@ -132,9 +132,10 @@ Optional prop that can be overridden :
 |---|---|---|---|
 | pluginId | `string` | A custom pluginId | `undefined` (keeps the pluginId from the provider) |
 | dark | `boolean` | true if dark mode enabled | `false` |
+| placement | [Placement](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
-| trigger | `OverlayTriggerType \| OverlayTriggerType[]` | A trigger | `click` |
-| icon | `[EdcIconData](./src/components/EdcIcon.tsx#L8)` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
+| trigger | [OverlayTriggerType \| OverlayTriggerType[]](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | A trigger | `click` |
+| icon | [EdcIconData](./src/components/EdcIcon.tsx#L8) | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
