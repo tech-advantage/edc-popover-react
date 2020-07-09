@@ -34,7 +34,7 @@ yarn add edc-popover-react
 
 ### Setup
 
-To work properly, this module needs a basic configuration, you must implement your own configuration by using a high-level Component `PopoverConfigProvider` like the example below:
+To work properly, this module needs a basic configuration, you must implement your own configuration by using a high-level Component [PopoverProvider](./src/config/PopoverConfigProvider.tsx) like the example below:
 ```typescript jsx
 import { PopoverProvider } from 'edc-popover-react'
 import { EdcHelp } from 'edc-popover-react'
@@ -54,7 +54,7 @@ import { EdcHelp } from 'edc-popover-react'
 </PopoverProvider>
 ```
 
-Props to specify for the `PopoverProvider` :
+Props to specify for the [PopoverProvider](./src/config/PopoverConfigProvider.tsx) (see [PopoverConfig](./src/config/PopoverConfigProvider.tsx)) :
 | Prop | Type | Description |
 |---|---|---|
 | pluginId | `string` | The identifier of the target plugin documentation export |
@@ -65,12 +65,12 @@ Props to specify for the `PopoverProvider` :
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `EdcIconData` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
+| icon | [EdcIconData](./src/components/EdcIcon.tsx) | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | dark | `boolean` | true if dark mode enabled | `false` |
-| placement | `Placement` | The popover placement | `auto` |
-| trigger | `OverlayTriggerType \| OverlayTriggerType[]` | The trigger type | `click` |
-| failBehavior | `FailBehavior` | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
+| placement | [Placement](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
+| trigger | [OverlayTriggerType \| OverlayTriggerType[]](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | The trigger type | `click` |
+| failBehavior | [FailBehavior](./src/data/FailBehavior.tsx) | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
@@ -108,7 +108,7 @@ render(){
 
 ### Usage
 
-The main component is `EdcHelp`, you can use the component as follows:
+The main component is [EdcHelp](./src/components/EdcHelp.tsx), you can use the component as follows:
 ```typescript jsx
 import { EdcHelp } from 'edc-popover-react'
 
@@ -119,9 +119,7 @@ import { EdcHelp } from 'edc-popover-react'
 
 All EdcHelp props that override the Provider are in the EdcHelp scope and completely isolated.
 
-You can safely use several languages without modifying the provider !
-
-Props to specify for the `EdcHelp` :
+Props to specify for the `EdcHelp` (see [EdcHelpProps](./src/data/EdcHelpData.tsx)):
 | Prop | Type | Description |
 |---|---|---|
 | mainKey | `string` | The main key of the contextual help |
@@ -132,9 +130,10 @@ Optional prop that can be overridden :
 |---|---|---|---|
 | pluginId | `string` | A custom pluginId | `undefined` (keeps the pluginId from the provider) |
 | dark | `boolean` | true if dark mode enabled | `false` |
+| placement | [Placement](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
-| trigger | `OverlayTriggerType \| OverlayTriggerType[]` | A trigger | `click` |
-| icon | `EdcIconData` | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
+| trigger | [OverlayTriggerType \| OverlayTriggerType[]](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | A trigger | `click` |
+| icon | [EdcIconData](./src/components/EdcIcon.tsx) | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
@@ -142,7 +141,7 @@ Optional prop that can be overridden :
 
 ### Fail behavior
 
-You can customize the popover's behavior when an error occurs with the `FailBehavior` object.
+You can customize the popover's behavior when an error occurs with the [FailBehavior](./src/data/FailBehavior.tsx) object.
 
 There are separate behaviors for the help icon, and the popover itself.
 For the help icon when an error occurs:
@@ -163,14 +162,14 @@ By default, the icon is `SHOWN` and the popover is set to `FRIENDLY_MSG`.
 ### Icons
 
 The popover icons support 2 formats:
- - A CSS class (Font Awesome, Glyphicon, ...) using a `<i />`
- - An image which will have the same size as the text (height: 1em;) (PNG, JPG, SVG, ...) using a `<img />`
+ - A CSS class ([Font Awesome](https://fontawesome.com), [Glyphicon](https://www.glyphicons.com), ...) using a `<i />`
+ - An image which will have the same size as the text (`height: 1em;`) (PNG, JPG, SVG, ...) using a `<img />`
 
 You can choose with the `type` prop:
  - `class`: The `content` must represent the CSS class
  - `url`: The `content` must represent the image's URL
 
-If a `string` is provided to an EdcIconData, it will be interpreted as a CSS class by default.
+If a `string` is provided to an [EdcIconData](./src/components/EdcIcon.tsx), it will be interpreted as a CSS class by default.
 
 ### CSS
 
@@ -179,6 +178,8 @@ If a `string` is provided to an EdcIconData, it will be interpreted as a CSS cla
 When dark-mode is enabled, the CSS class `on-dark` is applied on the popover, and the help icon only.
 
 So you can override this classes by CSS select the component as below sections and `.on-dark`
+
+(see [EdcHelp.scss](./src/components/EdcHelp.scss))
 
 #### Popover
 
