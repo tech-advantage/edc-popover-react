@@ -34,7 +34,7 @@ yarn add edc-popover-react
 
 ### Setup
 
-To work properly, this module needs a basic configuration, you must implement your own configuration by using a high-level Component [PopoverProvider](./src/config/PopoverConfigProvider.tsx#L35) like the example below:
+To work properly, this module needs a basic configuration, you must implement your own configuration by using a high-level Component [PopoverProvider](./src/config/PopoverConfigProvider.tsx) like the example below:
 ```typescript jsx
 import { PopoverProvider } from 'edc-popover-react'
 import { EdcHelp } from 'edc-popover-react'
@@ -141,7 +141,7 @@ Optional prop that can be overridden :
 
 ### Fail behavior
 
-You can customize the popover's behavior when an error occurs with the [FailBehavior](./src/data/FailBehavior.tsx#L6) object.
+You can customize the popover's behavior when an error occurs with the [FailBehavior](./src/data/FailBehavior.tsx) object.
 
 There are separate behaviors for the help icon, and the popover itself.
 For the help icon when an error occurs:
