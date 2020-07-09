@@ -34,7 +34,7 @@ yarn add edc-popover-react
 
 ### Setup
 
-To work properly, this module needs a basic configuration, you must implement your own configuration by using a high-level Component `PopoverConfigProvider` like the example below:
+To work properly, this module needs a basic configuration, you must implement your own configuration by using a high-level Component [PopoverProvider](./src/config/PopoverConfigProvider.tsx#L35) like the example below:
 ```typescript jsx
 import { PopoverProvider } from 'edc-popover-react'
 import { EdcHelp } from 'edc-popover-react'
@@ -54,7 +54,7 @@ import { EdcHelp } from 'edc-popover-react'
 </PopoverProvider>
 ```
 
-Props to specify for the `PopoverProvider` (see [PopoverConfig](./src/config/PopoverConfigProvider.tsx#L7)) :
+Props to specify for the [PopoverProvider](./src/config/PopoverConfigProvider.tsx#L35) (see [PopoverConfig](./src/config/PopoverConfigProvider.tsx#L7)) :
 | Prop | Type | Description |
 |---|---|---|
 | pluginId | `string` | The identifier of the target plugin documentation export |
@@ -108,7 +108,7 @@ render(){
 
 ### Usage
 
-The main component is `EdcHelp`, you can use the component as follows:
+The main component is [EdcHelp](./src/components/EdcHelp.tsx#L20), you can use the component as follows:
 ```typescript jsx
 import { EdcHelp } from 'edc-popover-react'
 
@@ -118,8 +118,6 @@ import { EdcHelp } from 'edc-popover-react'
 ```
 
 All EdcHelp props that override the Provider are in the EdcHelp scope and completely isolated.
-
-You can safely use several languages without modifying the provider !
 
 Props to specify for the `EdcHelp` (see [EdcHelpProps](./src/data/EdcHelpData.tsx#L6)):
 | Prop | Type | Description |
@@ -164,8 +162,8 @@ By default, the icon is `SHOWN` and the popover is set to `FRIENDLY_MSG`.
 ### Icons
 
 The popover icons support 2 formats:
- - A CSS class (Font Awesome, Glyphicon, ...) using a `<i />`
- - An image which will have the same size as the text (height: 1em;) (PNG, JPG, SVG, ...) using a `<img />`
+ - A CSS class ([Font Awesome](https://fontawesome.com), [Glyphicon](https://www.glyphicons.com), ...) using a `<i />`
+ - An image which will have the same size as the text (`height: 1em;`) (PNG, JPG, SVG, ...) using a `<img />`
 
 You can choose with the `type` prop:
  - `class`: The `content` must represent the CSS class
