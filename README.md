@@ -54,7 +54,7 @@ import { EdcHelp } from 'edc-popover-react'
 </PopoverProvider>
 ```
 
-Props to specify for the [PopoverProvider](./src/config/PopoverConfigProvider.tsx#L35) (see [PopoverConfig](./src/config/PopoverConfigProvider.tsx#L7)) :
+Props to specify for the [PopoverProvider](./src/config/PopoverConfigProvider.tsx) (see [PopoverConfig](./src/config/PopoverConfigProvider.tsx)) :
 | Prop | Type | Description |
 |---|---|---|
 | pluginId | `string` | The identifier of the target plugin documentation export |
@@ -65,12 +65,12 @@ Props to specify for the [PopoverProvider](./src/config/PopoverConfigProvider.ts
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | [EdcIconData](./src/components/EdcIcon.tsx#L8) | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
+| icon | [EdcIconData](./src/components/EdcIcon.tsx) | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | dark | `boolean` | true if dark mode enabled | `false` |
 | placement | [Placement](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
 | trigger | [OverlayTriggerType \| OverlayTriggerType[]](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | The trigger type | `click` |
-| failBehavior | [FailBehavior](./src/data/FailBehavior.tsx#L6) | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
+| failBehavior | [FailBehavior](./src/data/FailBehavior.tsx) | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
 ```typescript jsx
@@ -108,7 +108,7 @@ render(){
 
 ### Usage
 
-The main component is [EdcHelp](./src/components/EdcHelp.tsx#L20), you can use the component as follows:
+The main component is [EdcHelp](./src/components/EdcHelp.tsx), you can use the component as follows:
 ```typescript jsx
 import { EdcHelp } from 'edc-popover-react'
 
@@ -119,7 +119,7 @@ import { EdcHelp } from 'edc-popover-react'
 
 All EdcHelp props that override the Provider are in the EdcHelp scope and completely isolated.
 
-Props to specify for the `EdcHelp` (see [EdcHelpProps](./src/data/EdcHelpData.tsx#L6)):
+Props to specify for the `EdcHelp` (see [EdcHelpProps](./src/data/EdcHelpData.tsx)):
 | Prop | Type | Description |
 |---|---|---|
 | mainKey | `string` | The main key of the contextual help |
@@ -133,7 +133,7 @@ Optional prop that can be overridden :
 | placement | [Placement](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
 | trigger | [OverlayTriggerType \| OverlayTriggerType[]](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | A trigger | `click` |
-| icon | [EdcIconData](./src/components/EdcIcon.tsx#L8) | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
+| icon | [EdcIconData](./src/components/EdcIcon.tsx) | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
@@ -169,7 +169,7 @@ You can choose with the `type` prop:
  - `class`: The `content` must represent the CSS class
  - `url`: The `content` must represent the image's URL
 
-If a `string` is provided to an [EdcIconData](./src/components/EdcIcon.tsx#L8), it will be interpreted as a CSS class by default.
+If a `string` is provided to an [EdcIconData](./src/components/EdcIcon.tsx), it will be interpreted as a CSS class by default.
 
 ### CSS
 
