@@ -65,11 +65,11 @@ Props to specify for the `PopoverProvider` (see [PopoverConfig](./src/config/Pop
 Optional prop that can be overridden :
 | Method | Return type | Description | Default value |
 |---|---|---|---|
-| icon | `[EdcIconData](./src/components/EdcIcon.tsx#L8)` | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
+| icon | [EdcIconData](./src/components/EdcIcon.tsx#L8) | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
 | dark | `boolean` | true if dark mode enabled | `false` |
-| placement | [`Placement`](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
-| trigger | [`OverlayTriggerType \| OverlayTriggerType[]`](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | The trigger type | `click` |
+| placement | [Placement](https://react-bootstrap.github.io/components/overlays/#overlay-props) | The popover placement | `auto` |
+| trigger | [OverlayTriggerType \| OverlayTriggerType[]](https://react-bootstrap.github.io/components/overlays/#overlay-trigger-props) | The trigger type | `click` |
 | failBehavior | `FailBehavior` | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
