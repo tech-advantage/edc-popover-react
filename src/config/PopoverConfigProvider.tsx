@@ -15,6 +15,8 @@ export type PopoverConfig = {
   placement?: Placement
   trigger?: OverlayTriggerType | OverlayTriggerType[]
   failBehavior?: FailBehavior
+
+  // Only backend side, if you want to use your custom helpFactory
   helpFactory?: Function
 }
 

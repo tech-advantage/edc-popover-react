@@ -54,7 +54,7 @@ import { EdcHelp } from 'edc-popover-react'
 </PopoverProvider>
 ```
 
-Props to specify for the `PopoverProvider` :
+Props to specify for the `PopoverProvider` (see [PopoverConfig](./src/config/PopoverConfigProvider.tsx#L7)) :
 | Prop | Type | Description |
 |---|---|---|
 | pluginId | `string` | The identifier of the target plugin documentation export |
@@ -121,7 +121,7 @@ All EdcHelp props that override the Provider are in the EdcHelp scope and comple
 
 You can safely use several languages without modifying the provider !
 
-Props to specify for the `EdcHelp` :
+Props to specify for the `EdcHelp` (see [EdcHelpProps](./src/data/EdcHelpData.tsx#L6)):
 | Prop | Type | Description |
 |---|---|---|
 | mainKey | `string` | The main key of the contextual help |
@@ -142,7 +142,7 @@ Optional prop that can be overridden :
 
 ### Fail behavior
 
-You can customize the popover's behavior when an error occurs with the `FailBehavior` object.
+You can customize the popover's behavior when an error occurs with the [FailBehavior](./src/data/FailBehavior.tsx#L6) object.
 
 There are separate behaviors for the help icon, and the popover itself.
 For the help icon when an error occurs:
@@ -179,6 +179,8 @@ If a `string` is provided to an [EdcIconData](./src/components/EdcIcon.tsx#L8), 
 When dark-mode is enabled, the CSS class `on-dark` is applied on the popover, and the help icon only.
 
 So you can override this classes by CSS select the component as below sections and `.on-dark`
+
+(see [EdcHelp.scss](./src/components/EdcHelp.scss))
 
 #### Popover
 
