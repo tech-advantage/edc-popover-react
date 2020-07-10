@@ -223,6 +223,11 @@ export function buildData(
     })
     .catch((err: Error) => {
       console.error(err)
+      // Very important error, must be shown
+      failedData.failBehaviorData.forceBehavior = {
+        popover: 'ERROR_SHOWN',
+        icon: 'ERROR'
+      }
       if (isMounted) {
         setData(failedData)
       }
