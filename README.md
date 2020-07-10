@@ -157,7 +157,7 @@ For the popover when an error occurs:
 
 By default, the icon is `SHOWN` and the popover is set to `FRIENDLY_MSG`.
 
-**:warning: In case of a missing provider error, an error is always shown !**
+**:warning: In case of a missing provider error or a wrong global configuration, an error is always shown !**
 
 ### Icons
 
