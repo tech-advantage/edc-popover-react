@@ -1,6 +1,6 @@
 {
   "name": "edc-popover-react",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "The React edc popover to display the contextual help",
   "author": "Nitorac",
   "license": "MIT",
