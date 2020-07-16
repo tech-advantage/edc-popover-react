@@ -62,7 +62,7 @@ Props to specify for the [PopoverProvider](./src/config/PopoverConfigProvider.ts
 | Prop | Type | Description |
 |---|---|---|
 | pluginId | `string` | The identifier of the target plugin documentation export |
-| helpPath | `string` | The path to edc-help-ng application |
+| helpPath | `string` | The path to [edc-help-viewer](https://github.com/tech-advantage/edc-help-viewer) for opening the documentation. It needs to be the same as the **base href** parameter used by the viewer. See [here](https://github.com/tech-advantage/edc-help-viewer) for more information.|
 | docPath  | `string` | The path to exported documentation |
 | i18nPath | `string` | The path to translation json files |
 
