@@ -1,6 +1,7 @@
 import React from 'react'
 import { HelperFactory } from '../helper/HelperFactory'
 import { EdcIconData, FailBehavior } from '..'
+import { PopoverOptions } from 'edc-popover-js'
 
 export type EdcPopoverConfig = {
   pluginId: string
@@ -9,9 +10,7 @@ export type EdcPopoverConfig = {
   i18nPath: string
   icon?: EdcIconData
   lang?: string
-  dark?: boolean
-  placement?: Placement
-  trigger?: OverlayTriggerType | OverlayTriggerType[]
+  options?: PopoverOptions
   failBehavior?: FailBehavior
 
   // Only backend side, if you want to use your custom helpFactory
@@ -39,8 +38,8 @@ export function EdcPopoverProvider(
     value.helpFactory = (): HelperFactory => new HelperFactory(value)
   }
 
-  value.docPath = value.docPath.replace(/[/]*$/gm, '') + '/'
-  value.helpPath = value.helpPath.replace(/[/]*$/gm, '') + '/'
+  value.docPath = value.docPath.replace(/[/]*$/gm, '')
+  value.helpPath = value.helpPath.replace(/[/]*$/gm, '')
   return (
     <PopoverConfigContext.Provider value={{ ...defaultConfig, ...value }}>
       {children}
