@@ -1,8 +1,8 @@
 import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
-import { EdcIconData, FailBehavior, PopoverProvider } from '..'
+import { EdcIconData, FailBehavior, EdcPopoverProvider } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
-import { Placement } from 'react-bootstrap/Overlay'
+import { PopoverOptions } from 'edc-popover-js'
 
 export default { title: 'EdcHelp' }
 
@@ -12,9 +12,8 @@ type ProviderProps = {
   docPath?: string
   i18nPath?: string
   icon?: EdcIconData
-  placement?: Placement
-  dark?: boolean
   lang?: string
+  options?: PopoverOptions
   failBehavior?: FailBehavior
   helpFactory?: Function
 }
@@ -38,7 +37,7 @@ class DefaultProvider extends React.Component<ProviderProps> {
 
   render(): JSX.Element {
     return (
-      <PopoverProvider
+      <EdcPopoverProvider
         {...{
           ...{
             pluginId: 'edc',
@@ -60,7 +59,7 @@ class DefaultProvider extends React.Component<ProviderProps> {
         <br />
         <br />
         {this.props.children}
-      </PopoverProvider>
+      </EdcPopoverProvider>
     )
   }
 }
@@ -81,7 +80,7 @@ class DarkSwitcher extends Component<{}> {
 
   render(): JSX.Element {
     return (
-      <DefaultProvider dark={this.dark}>
+      <DefaultProvider>
         <style>
           {this.dark
             ? `body {
@@ -143,35 +142,27 @@ export const withDarkMode: FunctionComponent = () => <DarkSwitcher />
 export const withCustomPlacements: FunctionComponent = () => (
   <DefaultProvider>
     <h4>Auto</h4>
-    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='auto' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
     <h4>Top</h4>
-    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='top' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
     <h4>Bottom</h4>
-    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='bottom' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
     <h4>Left</h4>
-    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='left' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
     <h4>Right</h4>
-    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' placement='right' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
 export const withHoverTrigger: FunctionComponent = () => (
   <DefaultProvider>
-    <EdcHelp
-      mainKey='fr.techad.edc'
-      subKey='documentation_type'
-      trigger='hover'
-    />
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
   </DefaultProvider>
 )
 
 export const withHoverFocusTrigger: FunctionComponent = () => (
   <DefaultProvider>
-    <EdcHelp
-      mainKey='fr.techad.edc'
-      subKey='documentation_type'
-      trigger={['hover', 'focus']}
-    />
+    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
   </DefaultProvider>
 )
 

@@ -1,11 +1,11 @@
 import { EdcClient, Helper, PopoverLabel } from 'edc-client-js'
-import { PopoverConfig } from '../config/PopoverConfigProvider'
+import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 
 export class HelperFactory {
   private readonly edcClient?: EdcClient
-  private readonly popoverConfig?: PopoverConfig
+  private readonly popoverConfig?: EdcPopoverConfig
 
-  constructor(popoverConfig?: PopoverConfig) {
+  constructor(popoverConfig?: EdcPopoverConfig) {
     this.popoverConfig = popoverConfig
     if (popoverConfig) {
       this.edcClient = popoverConfig.pluginId

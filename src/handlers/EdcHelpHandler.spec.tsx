@@ -7,7 +7,7 @@ import {
   PopoverLabel,
   PopoverError
 } from 'edc-client-js'
-import { PopoverConfig } from '../config/PopoverConfigProvider'
+import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import React, { SetStateAction } from 'react'
 import { buildData } from './EdcHelpHandler'
@@ -33,7 +33,7 @@ const correctPopoverError = new PopoverError()
 correctPopoverError.failedData = 'myFailedData'
 correctPopoverLabel.errors = correctPopoverError
 
-const popoverConfig: PopoverConfig = {
+const popoverConfig: EdcPopoverConfig = {
   pluginId: 'myPluginId',
   helpPath: '/help',
   docPath: '/doc',

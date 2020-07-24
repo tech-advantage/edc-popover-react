@@ -2,10 +2,10 @@ import React from 'react'
 import { EdcIcon, EdcIconData } from './EdcIcon'
 import { mount } from 'enzyme'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
-import { PopoverConfig } from '../config/PopoverConfigProvider'
+import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 
 describe('EdcIcon', () => {
-  const config: PopoverConfig = {
+  const config: EdcPopoverConfig = {
     pluginId: 'pluginId',
     docPath: 'docPath',
     helpPath: 'helpPath',

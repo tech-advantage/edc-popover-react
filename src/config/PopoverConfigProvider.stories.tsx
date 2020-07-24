@@ -1,10 +1,13 @@
 import React, { FunctionComponent } from 'react'
-import { PopoverConfigContext, PopoverProvider } from './PopoverConfigProvider'
+import {
+  PopoverConfigContext,
+  EdcPopoverProvider
+} from './PopoverConfigProvider'
 
 export default { title: 'PopoverConfigProvider' }
 
 export const withExampleConsumer: FunctionComponent = () => (
-  <PopoverProvider
+  <EdcPopoverProvider
     pluginId='myedchelp'
     docPath='/doc'
     helpPath='/help'
@@ -48,5 +51,5 @@ export const withExampleConsumer: FunctionComponent = () => (
       </PopoverConfigContext.Consumer>
     </div>
     <hr />
-  </PopoverProvider>
+  </EdcPopoverProvider>
 )

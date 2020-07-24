@@ -2,15 +2,14 @@ import { EdcPopover } from './EdcPopover'
 import { mount } from 'enzyme'
 import React from 'react'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
-import { PopoverConfig } from '../config/PopoverConfigProvider'
-import { PopoverContent, PopoverTitle } from 'react-bootstrap'
+import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 
 describe('EdcPopover', () => {
   const edcHelpProps: EdcHelpProps = {
     mainKey: 'main',
     subKey: 'sub'
   }
-  const config: PopoverConfig = {
+  const config: EdcPopoverConfig = {
     pluginId: 'pluginId',
     helpPath: 'helpPath',
     docPath: 'failingDocPath',

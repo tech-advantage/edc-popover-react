@@ -1,10 +1,8 @@
 import React from 'react'
 import { HelperFactory } from '../helper/HelperFactory'
-import { OverlayTriggerType } from 'react-bootstrap/OverlayTrigger'
 import { EdcIconData, FailBehavior } from '..'
-import { Placement } from 'react-bootstrap/Overlay'
 
-export type PopoverConfig = {
+export type EdcPopoverConfig = {
   pluginId: string
   helpPath: string
   docPath: string
@@ -20,7 +18,7 @@ export type PopoverConfig = {
   helpFactory?: Function
 }
 
-export const defaultConfig: PopoverConfig = {
+export const defaultConfig: EdcPopoverConfig = {
   pluginId: '',
   helpPath: '',
   docPath: '',
@@ -28,12 +26,12 @@ export const defaultConfig: PopoverConfig = {
   icon: 'far fa-question-circle'
 }
 
-export const PopoverConfigContext = React.createContext<PopoverConfig>(
+export const PopoverConfigContext = React.createContext<EdcPopoverConfig>(
   defaultConfig
 )
 
-export function PopoverProvider(
-  props: PopoverConfig & { children: React.ReactNode }
+export function EdcPopoverProvider(
+  props: EdcPopoverConfig & { children: React.ReactNode }
 ): JSX.Element {
   const { children, ...value } = props
 

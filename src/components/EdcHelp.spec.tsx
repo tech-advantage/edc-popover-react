@@ -1,12 +1,11 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { EdcHelp } from './EdcHelp'
-import { PopoverProvider } from '..'
-import { OverlayTrigger, PopoverContent, PopoverTitle } from 'react-bootstrap'
+import { EdcPopoverProvider } from '..'
 
 describe('EdcHelp', () => {
   const casualEdcHelpClick = mount(
-    <PopoverProvider
+    <EdcPopoverProvider
       pluginId='myedchelp'
       docPath='/doc'
       helpPath='/help'
@@ -14,11 +13,11 @@ describe('EdcHelp', () => {
       icon='fas fa-test'
     >
       <EdcHelp mainKey='a' subKey='b' trigger='click' />
-    </PopoverProvider>
+    </EdcPopoverProvider>
   )
 
   const casualEdcHelpSVG = mount(
-    <PopoverProvider
+    <EdcPopoverProvider
       pluginId='myedchelp'
       docPath='/doc'
       helpPath='/help'
@@ -26,18 +25,18 @@ describe('EdcHelp', () => {
       icon={{ type: 'url', content: '/icon.svg' }}
     >
       <EdcHelp mainKey='a' subKey='b' trigger='click' />
-    </PopoverProvider>
+    </EdcPopoverProvider>
   )
 
   const tempEdcHelp = mount(
-    <PopoverProvider
+    <EdcPopoverProvider
       pluginId='myedchelp'
       docPath='/doc'
       helpPath='/help'
       i18nPath='/doc/i18n'
     >
       <EdcHelp mainKey='a' subKey='b' trigger='click' />
-    </PopoverProvider>
+    </EdcPopoverProvider>
   )
 
   tempEdcHelp.find(OverlayTrigger).simulate('click')
@@ -45,14 +44,14 @@ describe('EdcHelp', () => {
   const popover = tempEdcHelp.find('.popover')
 
   const casualEdcHelpHover = mount(
-    <PopoverProvider
+    <EdcPopoverProvider
       pluginId='myedchelp'
       docPath='/doc'
       helpPath='/help'
       i18nPath='/doc/i18n'
     >
       <EdcHelp mainKey='a' subKey='b' trigger='hover' />
-    </PopoverProvider>
+    </EdcPopoverProvider>
   )
 
   const malformedEdcHelp = mount(<EdcHelp mainKey='a' subKey='b' />)

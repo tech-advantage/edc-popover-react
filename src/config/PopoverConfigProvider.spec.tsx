@@ -1,15 +1,15 @@
 import React from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import {
-  PopoverProvider,
-  PopoverConfig,
+  EdcPopoverProvider,
+  EdcPopoverConfig,
   PopoverConfigContext,
   defaultConfig
 } from './PopoverConfigProvider'
 
 function exceptAllPropsOk(
   wrapper: ReactWrapper,
-  rightVals: PopoverConfig
+  rightVals: EdcPopoverConfig
 ): void {
   expect(wrapper.find('#pluginId').text()).toEqual(rightVals.pluginId)
   expect(wrapper.find('#helpPath').text()).toEqual(rightVals.helpPath)
@@ -19,7 +19,7 @@ function exceptAllPropsOk(
 }
 
 describe('AbstractPopoverConfigProvider', () => {
-  const rightProps: PopoverConfig = {
+  const rightProps: EdcPopoverConfig = {
     ...defaultConfig,
     ...{
       pluginId: 'mypluginid',
@@ -30,7 +30,7 @@ describe('AbstractPopoverConfigProvider', () => {
   }
   it('should allow to fetch all props from ConfigContext', () => {
     const wrapper = mount(
-      <PopoverProvider
+      <EdcPopoverProvider
         pluginId={rightProps.pluginId}
         docPath={rightProps.docPath}
         helpPath={rightProps.helpPath}
@@ -61,7 +61,7 @@ describe('AbstractPopoverConfigProvider', () => {
             {(value): string | undefined => value.icon?.toString()}
           </PopoverConfigContext.Consumer>
         </button>
-      </PopoverProvider>
+      </EdcPopoverProvider>
     )
 
     exceptAllPropsOk(wrapper, rightProps)
@@ -70,7 +70,7 @@ describe('AbstractPopoverConfigProvider', () => {
   it('should handle multiple declaration of implemented provider', () => {
     const wrapper = mount(
       <>
-        <PopoverProvider
+        <EdcPopoverProvider
           pluginId={rightProps.pluginId}
           docPath={rightProps.docPath}
           helpPath={rightProps.helpPath}
@@ -81,8 +81,8 @@ describe('AbstractPopoverConfigProvider', () => {
               {(value): string => value.pluginId}
             </PopoverConfigContext.Consumer>
           </button>
-        </PopoverProvider>
-        <PopoverProvider
+        </EdcPopoverProvider>
+        <EdcPopoverProvider
           pluginId={rightProps.pluginId}
           docPath={rightProps.docPath}
           helpPath={rightProps.helpPath}
@@ -93,8 +93,8 @@ describe('AbstractPopoverConfigProvider', () => {
               {(value): string => value.helpPath}
             </PopoverConfigContext.Consumer>
           </button>
-        </PopoverProvider>
-        <PopoverProvider
+        </EdcPopoverProvider>
+        <EdcPopoverProvider
           pluginId={rightProps.pluginId}
           docPath={rightProps.docPath}
           helpPath={rightProps.helpPath}
@@ -105,8 +105,8 @@ describe('AbstractPopoverConfigProvider', () => {
               {(value): string => value.docPath}
             </PopoverConfigContext.Consumer>
           </button>
-        </PopoverProvider>
-        <PopoverProvider
+        </EdcPopoverProvider>
+        <EdcPopoverProvider
           pluginId={rightProps.pluginId}
           docPath={rightProps.docPath}
           helpPath={rightProps.helpPath}
@@ -117,8 +117,8 @@ describe('AbstractPopoverConfigProvider', () => {
               {(value): string => value.i18nPath}
             </PopoverConfigContext.Consumer>
           </button>
-        </PopoverProvider>
-        <PopoverProvider
+        </EdcPopoverProvider>
+        <EdcPopoverProvider
           pluginId={rightProps.pluginId}
           docPath={rightProps.docPath}
           helpPath={rightProps.helpPath}
@@ -129,7 +129,7 @@ describe('AbstractPopoverConfigProvider', () => {
               {(value): string | undefined => value.icon?.toString()}
             </PopoverConfigContext.Consumer>
           </button>
-        </PopoverProvider>
+        </EdcPopoverProvider>
       </>
     )
 

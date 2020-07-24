@@ -1,20 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './EdcHelp.scss'
 import { PopoverConfigContext } from '../config/PopoverConfigProvider'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
-import { buildData, getIcon, getId } from '../handlers/EdcHelpHandler'
+import { buildData, getIcon } from '../handlers/EdcHelpHandler'
 import { EdcPopover } from './EdcPopover'
+import { PopoverContent } from 'edc-popover-js'
 
 const defaultProps: EdcHelpProps = {
   pluginId: undefined,
   mainKey: '',
   subKey: '',
-  placement: 'auto',
-  dark: false,
-  lang: undefined,
-  trigger: 'click'
+  lang: undefined
 }
 
 export function EdcHelp(props: EdcHelpProps): JSX.Element {
@@ -24,9 +21,8 @@ export function EdcHelp(props: EdcHelpProps): JSX.Element {
   // setData can be used to rerender the Component with new data (useful for async task)
   const [data, setData] = useState<PopoverData>({
     triggerError: false,
-    id: getId(finalProps),
-    title: 'Loading...',
-    content: 'Loading...',
+    content: new PopoverContent('Loading...', 'Loading...'),
+    labels: {},
     failBehaviorData: {
       displayIcon: getIcon(config, props) || '',
       errorIcon: ''

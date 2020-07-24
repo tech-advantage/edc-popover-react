@@ -1,23 +1,17 @@
-import { PopoverConfig } from '../config/PopoverConfigProvider'
+import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 import React from 'react'
-import { Helper, PopoverLabel } from 'edc-client-js'
+import { Helper, PopoverLabel, Article, Link } from 'edc-client-js'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { HelperFactory } from '../helper/HelperFactory'
 import { EdcIconData } from '..'
 import { BehaviorData } from '../data/FailBehavior'
-import { Placement } from 'react-bootstrap/Overlay'
+import { PopoverContent, PopoverItem } from 'edc-popover-js'
 
 const errorProviderIcon = 'fas fa-exclamation-triangle'
 const errorDebugIcon = 'fas fa-exclamation-circle'
 
-function open(link?: string): void {
-  if (link) {
-    window.open(link, 'help', 'scrollbars=1,resizable=1,height=750,width=1200')
-  }
-}
-
 function getLang(
-  config: PopoverConfig,
+  config: EdcPopoverConfig,
   props: EdcHelpProps
 ): string | undefined {
   return props.lang || config.lang
@@ -30,98 +24,48 @@ export function getId(props: EdcHelpProps): string {
 }
 
 export function getIcon(
-  config: PopoverConfig,
+  config: EdcPopoverConfig,
   props: EdcHelpProps
 ): EdcIconData | undefined {
   return props.icon || config.icon
 }
 
-export function getPlacement(
-  config: PopoverConfig,
-  props: EdcHelpProps
-): Placement | undefined {
-  return props.placement || config.placement
-}
-
-export function getDark(
-  config: PopoverConfig,
-  props: EdcHelpProps
-): boolean | undefined {
-  return props.dark || config.dark
-}
-
 export function buildContent(
-  config: PopoverConfig,
+  config: EdcPopoverConfig,
   helperFactory: HelperFactory,
   helper: Helper,
-  props: EdcHelpProps,
-  labels: PopoverLabel
-): JSX.Element {
+  props: EdcHelpProps
+): PopoverContent {
   const lang = getLang(config, props)
-  return (
-    <div className='popover-content'>
-      <article className='popover-desc'>{helper.description}</article>
-      <div className='popover-section'>
-        {helper.articles && helper.articles.length > 0 && (
-          <div className='popover-need-more'>
-            <span className='popover-section-title'>{labels.articles}</span>
-            <ul>
-              {helper.articles.map((value, index) => {
-                // Loads url whilst loading popover, instead of loading during onClick
-                const url = helperFactory.getContextUrl(
-                  props.mainKey,
-                  props.subKey,
-                  index,
-                  lang,
-                  props.pluginId
-                )
-                return (
-                  <li key={index}>
-                    <span
-                      className='popover-section-item'
-                      onClick={(): void => open(url)}
-                    >
-                      {value.label}
-                    </span>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        )}
-        {helper.links && helper.links.length > 0 && (
-          <div className='popover-related-topics'>
-            <span className='popover-section-title'>{labels.links}</span>
-            <ul>
-              {helper.links.map((value, index) => {
-                // Loads url whilst loading popover, instead of loading during onClick
-                const url = helperFactory.getDocumentationUrl(value.id, lang)
-                return (
-                  <li key={index}>
-                    <span
-                      className='popover-section-item'
-                      onClick={(): void => open(url)}
-                    >
-                      {value.label}
-                    </span>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        )}
-      </div>
-    </div>
-  )
+  const content = new PopoverContent(helper.label, helper.description)
+  content.articles = helper.articles.map((value: Article, index: number) => {
+    return new PopoverItem(
+      value.label,
+      helperFactory.getContextUrl(
+        props.mainKey,
+        props.subKey,
+        index,
+        lang,
+        props.pluginId
+      ) || ''
+    )
+  })
+  content.links = helper.links.map((value: Link) => {
+    return new PopoverItem(
+      value.label,
+      helperFactory.getDocumentationUrl(value.id, lang) || ''
+    )
+  })
+
+  return content
 }
 
 export function buildData(
-  config: PopoverConfig,
+  config: EdcPopoverConfig,
   props: EdcHelpProps,
   setData: React.Dispatch<React.SetStateAction<PopoverData>>,
   isMounted: boolean
 ): void {
-  const id = getId(props)
   const lang = getLang(config, props)
 
   const behaviorData: BehaviorData = {
@@ -137,9 +81,11 @@ export function buildData(
     }
     setData({
       triggerError: true,
-      id: id,
-      content: 'This EdcHelp is not a deep child of a PopoverConfigProvider',
-      title: 'Failed to find a provider',
+      content: new PopoverContent(
+        'Failed to find a provider',
+        'This EdcHelp is not a deep child of a PopoverConfigProvider'
+      ),
+      labels: {},
       failBehaviorData: behaviorData
     })
     return
@@ -156,9 +102,11 @@ export function buildData(
 
   const failedData: PopoverData = {
     triggerError: true,
-    id: id,
-    content: "Can't fetch any data, check your pluginId and docPath !",
-    title: 'Error',
+    content: new PopoverContent(
+      'Error',
+      "Can't fetch any data, check your pluginId and docPath !"
+    ),
+    labels: {},
     failBehaviorData: behaviorData
   }
 
@@ -176,11 +124,19 @@ export function buildData(
 
   popoverLabels
     .then((labels: PopoverLabel) => {
-      behaviorData.friendlyMsg = labels.comingSoon
+      const popoverLabels = {
+        articles: labels.articles,
+        links: labels.links,
+        comingSoon: labels.comingSoon
+      }
       behaviorData.iconAlt = labels.iconAlt
 
-      failedData.content = labels.errors.failedData || failedData.content
-      failedData.title = labels.errorTitle || failedData.title
+      failedData.content = new PopoverContent(
+        labels.errorTitle || failedData.content.title,
+        labels.errors.failedData || failedData.content.description
+      )
+
+      failedData.labels = popoverLabels
 
       if (!helperProvider) {
         behaviorData.errorIcon = errorDebugIcon
@@ -200,15 +156,8 @@ export function buildData(
                 ? failedData
                 : {
                     triggerError: false,
-                    id: id,
-                    content: buildContent(
-                      config,
-                      helperFact,
-                      helper,
-                      props,
-                      labels
-                    ),
-                    title: helper.label,
+                    content: buildContent(config, helperFact, helper, props),
+                    labels: popoverLabels,
                     failBehaviorData: behaviorData
                   }
             )

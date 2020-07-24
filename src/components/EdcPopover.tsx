@@ -1,91 +1,97 @@
-import React from 'react'
+import React, { RefObject, useEffect } from 'react'
 import { EdcIcon } from './EdcIcon'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
-import { PopoverConfig } from '../config/PopoverConfigProvider'
-import { OverlayChildren } from 'react-bootstrap/Overlay'
-import { OverlayTrigger, Popover } from 'react-bootstrap'
+import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 import { defaultFailBehavior } from '../data/FailBehavior'
-import { getDark, getPlacement } from '../handlers/EdcHelpHandler'
+import { Popover, PopoverConfig, PopoverContent } from 'edc-popover-js'
+import 'edc-popover-js/dist/edc-popover.css'
 
 export type EdcPopoverProps = {
   edcHelp: EdcHelpProps
-  config: PopoverConfig
+  config: EdcPopoverConfig
   data: PopoverData
 }
 
-export function getEdcIcon(props: EdcPopoverProps): JSX.Element {
+function popoverFactory(
+  props: EdcPopoverProps,
+  triggerRef: RefObject<HTMLImageElement>
+): Popover {
+  const config = new PopoverConfig()
+  config.icon = ''
+  if (triggerRef.current) {
+    config.target = triggerRef.current
+  }
+
+  config.content = props.data.content
+  config.labels = props.data.labels
+  config.options = props.edcHelp.options
+
+  return new Popover(config)
+}
+
+export function getEdcIcon(
+  props: EdcPopoverProps,
+  ref: RefObject<HTMLImageElement>
+): JSX.Element {
   return (
     <EdcIcon
       data={props.data}
       config={props.config}
       edcHelpProps={props.edcHelp}
       failBehavior={props.config.failBehavior}
+      ref={ref}
     />
   )
 }
 
-/*
- * Can't create a functional component, OverlayTrigger cannot handle properly custom React Components
- * Temporary workaround: Function returning JSX.Element
- */
-export function getEdcPopover(
-  props: EdcPopoverProps,
-  hideContent?: boolean
-): JSX.Element {
-  return (
-    <Popover
-      id={props.data.id}
-      className={
-        (getDark(props.config, props.edcHelp) ? 'on-dark ' : '') +
-        (hideContent ? 'hide-content' : '')
-      }
-    >
-      <Popover.Title as='h3' className='popover-title'>
-        {props.data.title}
-      </Popover.Title>
-      {!hideContent && <Popover.Content>{props.data.content}</Popover.Content>}
-    </Popover>
-  )
-}
-
-export function getOverlayTrigger(
-  overlay: OverlayChildren,
-  props: EdcPopoverProps
-): JSX.Element {
-  return (
-    <OverlayTrigger
-      overlay={overlay}
-      trigger={props.edcHelp.trigger || props.config.trigger || 'click'}
-      rootClose
-      placement={getPlacement(props.config, props.edcHelp)}
-    >
-      {getEdcIcon(props)}
-    </OverlayTrigger>
-  )
-}
-
 export function EdcPopover(props: EdcPopoverProps): JSX.Element {
+  const ref = React.createRef<HTMLImageElement>()
+
+  let hasPopover = true
+  let icon: JSX.Element
+
   if (!props.data.triggerError) {
-    return getOverlayTrigger(getEdcPopover(props), props)
+    hasPopover = true
+    icon = getEdcIcon(props, ref)
+  } else {
+    let failBehavior = props.config.failBehavior
+
+    if (!failBehavior) {
+      failBehavior = defaultFailBehavior
+    }
+
+    failBehavior = props.data.failBehaviorData.forceBehavior || failBehavior
+
+    switch (failBehavior.popover) {
+      case 'ERROR_SHOWN':
+        icon = getEdcIcon(props, ref)
+        hasPopover = true
+        break
+      case 'FRIENDLY_MSG':
+        props.data.content = new PopoverContent()
+        icon = getEdcIcon(props, ref)
+        hasPopover = true
+        break
+      case 'NO_POPOVER':
+        icon = getEdcIcon(props, ref)
+        hasPopover = false
+        break
+      default:
+        icon = getEdcIcon(props, ref)
+        hasPopover = true
+    }
   }
 
-  let failBehavior = props.config.failBehavior
+  useEffect(() => {
+    if (hasPopover) {
+      const popover = popoverFactory(props, ref)
+      return (): void => {
+        popover.instance.destroy()
+      }
+    }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return (): void => {}
+  })
 
-  if (!failBehavior) {
-    failBehavior = defaultFailBehavior
-  }
-
-  failBehavior = props.data.failBehaviorData.forceBehavior || failBehavior
-
-  switch (failBehavior.popover) {
-    case 'ERROR_SHOWN':
-      return getOverlayTrigger(getEdcPopover(props), props)
-    case 'FRIENDLY_MSG':
-      props.data.title = props.data.failBehaviorData.friendlyMsg || ''
-      return getOverlayTrigger(getEdcPopover(props, true), props)
-    case 'NO_POPOVER':
-      return getEdcIcon(props)
-    default:
-      return getOverlayTrigger(getEdcPopover(props), props)
-  }
+  return icon
 }
