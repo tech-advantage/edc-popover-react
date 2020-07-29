@@ -38,8 +38,10 @@ export function EdcPopoverProvider(
     value.helpFactory = (): HelperFactory => new HelperFactory(value)
   }
 
-  value.docPath = value.docPath.replace(/[/]*$/gm, '')
-  value.helpPath = value.helpPath.replace(/[/]*$/gm, '')
+  value.docPath =
+    value.docPath !== '/' ? value.docPath.replace(/[/]*$/gm, '') : '/'
+  value.helpPath =
+    value.helpPath !== '/' ? value.helpPath.replace(/[/]*$/gm, '') : '/'
   return (
     <PopoverConfigContext.Provider value={{ ...defaultConfig, ...value }}>
       {children}
