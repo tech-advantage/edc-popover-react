@@ -9,15 +9,19 @@ export class HelperFactory {
     this.popoverConfig = popoverConfig
     if (popoverConfig) {
       this.edcClient = popoverConfig.pluginId
-        ? new EdcClient(
-            popoverConfig.docPath,
-            popoverConfig.helpPath,
-            popoverConfig.pluginId,
-            true,
-            popoverConfig.i18nPath
-          )
+        ? this.edcClientFactory(popoverConfig)
         : undefined
     }
+  }
+
+  edcClientFactory(popoverConfig: EdcPopoverConfig): EdcClient | undefined {
+    return new EdcClient(
+      popoverConfig.docPath,
+      popoverConfig.helpPath,
+      popoverConfig.pluginId,
+      true,
+      popoverConfig.i18nPath
+    )
   }
 
   getHelp(

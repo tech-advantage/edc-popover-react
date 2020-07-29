@@ -38,24 +38,28 @@ export function buildContent(
 ): PopoverContent {
   const lang = getLang(config, props)
   const content = new PopoverContent(helper.label, helper.description)
-  content.articles = helper.articles.map((value: Article, index: number) => {
-    return new PopoverItem(
-      value.label,
-      helperFactory.getContextUrl(
-        props.mainKey,
-        props.subKey,
-        index,
-        lang,
-        props.pluginId
-      ) || ''
-    )
-  })
-  content.links = helper.links.map((value: Link) => {
-    return new PopoverItem(
-      value.label,
-      helperFactory.getDocumentationUrl(value.id, lang) || ''
-    )
-  })
+  content.articles = helper.articles
+    ? helper.articles.map((value: Article, index: number) => {
+        return new PopoverItem(
+          value.label,
+          helperFactory.getContextUrl(
+            props.mainKey,
+            props.subKey,
+            index,
+            lang,
+            props.pluginId
+          ) || ''
+        )
+      })
+    : []
+  content.links = helper.links
+    ? helper.links.map((value: Link) => {
+        return new PopoverItem(
+          value.label,
+          helperFactory.getDocumentationUrl(value.id, lang) || ''
+        )
+      })
+    : []
 
   return content
 }
