@@ -17,7 +17,6 @@ function popoverFactory(
   triggerRef: RefObject<HTMLImageElement>
 ): Popover {
   const config = new PopoverConfig()
-  config.icon = ''
   if (triggerRef.current) {
     config.target = triggerRef.current
   }
