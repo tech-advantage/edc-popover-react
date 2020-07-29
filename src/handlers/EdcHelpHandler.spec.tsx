@@ -7,7 +7,7 @@ import {
   PopoverLabel,
   PopoverError
 } from 'edc-client-js'
-import { PopoverConfig } from '../config/PopoverConfigProvider'
+import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import React, { SetStateAction } from 'react'
 import { buildData } from './EdcHelpHandler'
@@ -33,7 +33,7 @@ const correctPopoverError = new PopoverError()
 correctPopoverError.failedData = 'myFailedData'
 correctPopoverLabel.errors = correctPopoverError
 
-const popoverConfig: PopoverConfig = {
+const popoverConfig: EdcPopoverConfig = {
   pluginId: 'myPluginId',
   helpPath: '/help',
   docPath: '/doc',
@@ -69,12 +69,13 @@ describe('EdcHelpHandler', () => {
     ) => {
       const data = dataAction as PopoverData
 
-      expect(getText(data.title)).toEqual(correctHelper.label)
-      expect(getText(data.content)).toContain(article1.label)
-      expect(getText(data.content)).toContain(link1.label)
-      expect(getText(data.content)).toContain(correctHelper.description)
+      expect(getText(data.content.title)).toEqual(correctHelper.label)
+      expect(getText(data.content.articles[0].label)).toEqual(article1.label)
+      expect(getText(data.content.links[0].label)).toContain(link1.label)
+      expect(getText(data.content.description)).toContain(
+        correctHelper.description
+      )
       expect(data.failBehaviorData.displayIcon).toContain(popoverConfig.icon)
-      expect(data.id).toBeDefined()
       done()
     }
 
@@ -96,9 +97,10 @@ describe('EdcHelpHandler', () => {
       dataAction: SetStateAction<PopoverData>
     ) => {
       const data = dataAction as PopoverData
-      expect(getText(data.title)).not.toEqual(correctHelper.label)
-      expect(getText(data.content)).toContain(correctPopoverError.failedData)
-      expect(data.id).toBeDefined()
+      expect(getText(data.content.title)).not.toEqual(correctHelper.label)
+      expect(getText(data.content.description)).toEqual(
+        correctPopoverError.failedData
+      )
       done()
     }
 
@@ -114,15 +116,21 @@ describe('EdcHelpHandler', () => {
       .spyOn(HelperFactory.prototype, 'getPopoverLabels')
       .mockReturnValue(Promise.resolve(correctPopoverLabel))
 
+    const savedHelp = popoverConfig.helpFactory
+    popoverConfig.helpFactory = undefined
+
     const callback: React.Dispatch<React.SetStateAction<PopoverData>> = (
       dataAction: SetStateAction<PopoverData>
     ) => {
       const data = dataAction as PopoverData
-      expect(getText(data.title)).not.toEqual(correctHelper.label)
-      expect(getText(data.content)).not.toContain(article1.label)
-      expect(getText(data.content)).not.toContain(link1.label)
-      expect(getText(data.content)).not.toContain(correctHelper.description)
-      expect(data.id).toBeDefined()
+      expect(getText(data.content.title)).not.toEqual(correctHelper.label)
+      expect(data.content.articles.length).toEqual(0)
+      expect(data.content.links.length).toEqual(0)
+      expect(getText(data.content.description)).not.toContain(
+        correctHelper.description
+      )
+
+      popoverConfig.helpFactory = savedHelp
       done()
     }
 

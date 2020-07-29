@@ -16,7 +16,6 @@ export const defaultFailBehavior: FailBehavior = {
 export type BehaviorData = {
   displayIcon: EdcIconData
   errorIcon: EdcIconData
-  friendlyMsg?: string
   iconAlt?: string
   forceBehavior?: FailBehavior
 }

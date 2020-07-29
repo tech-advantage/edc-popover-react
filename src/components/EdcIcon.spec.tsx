@@ -2,10 +2,11 @@ import React from 'react'
 import { EdcIcon, EdcIconData } from './EdcIcon'
 import { mount } from 'enzyme'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
-import { PopoverConfig } from '../config/PopoverConfigProvider'
+import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
+import { PopoverContent, PopoverLabels } from 'edc-popover-js'
 
 describe('EdcIcon', () => {
-  const config: PopoverConfig = {
+  const config: EdcPopoverConfig = {
     pluginId: 'pluginId',
     docPath: 'docPath',
     helpPath: 'helpPath',
@@ -13,9 +14,8 @@ describe('EdcIcon', () => {
   }
   const data: PopoverData = {
     triggerError: false,
-    id: 'myId',
-    title: 'myTitle',
-    content: 'myContent',
+    content: new PopoverContent('myTitle', 'myContent'),
+    labels: new PopoverLabels(),
     failBehaviorData: {
       displayIcon: 'displayIcon',
       errorIcon: 'errorIcon'
@@ -26,11 +26,11 @@ describe('EdcIcon', () => {
     subKey: 'dummy'
   }
 
-  const dummyDarkEdcHelpProps: EdcHelpProps = {
+  /* const dummyDarkEdcHelpProps: EdcHelpProps = {
     mainKey: 'dummy',
     subKey: 'dummy',
     dark: true
-  }
+  } */
 
   const defaultStringIcon: EdcIconData = 'myClass'
   const cssEdcIcon: EdcIconData = {
@@ -85,7 +85,7 @@ describe('EdcIcon', () => {
     expect(wrapper.find('i').hasClass(cssEdcIcon.content || '')).toBeTruthy()
   })
 
-  it('should handle dark mode when enabled', () => {
+  /* it('should handle dark mode when enabled', () => {
     data.failBehaviorData.displayIcon = cssEdcIcon
     const wrapper = mount(
       <EdcIcon
@@ -97,5 +97,5 @@ describe('EdcIcon', () => {
     )
 
     expect(wrapper.find('i').hasClass('on-dark')).toBeTruthy()
-  })
+  }) */
 })
