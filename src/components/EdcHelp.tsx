@@ -16,6 +16,8 @@ const defaultProps: EdcHelpProps = {
 
 export function EdcHelp(props: EdcHelpProps): JSX.Element {
   const config = React.useContext(PopoverConfigContext)
+  // Mixing options by overriding global with local ones
+  config.options = { ...config.options, ...props.options }
   const finalProps = { ...defaultProps, ...props }
 
   // setData can be used to rerender the Component with new data (useful for async task)

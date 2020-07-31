@@ -1,7 +1,7 @@
 import React from 'react'
 import { EdcIcon, EdcIconData } from './EdcIcon'
 import { mount } from 'enzyme'
-import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
+import { PopoverData } from '../data/EdcHelpData'
 import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 import { PopoverContent, PopoverLabels } from 'edc-popover-js'
 
@@ -20,10 +20,6 @@ describe('EdcIcon', () => {
       displayIcon: 'displayIcon',
       errorIcon: 'errorIcon'
     }
-  }
-  const dummyEdcHelpProps: EdcHelpProps = {
-    mainKey: 'dummy',
-    subKey: 'dummy'
   }
 
   /* const dummyDarkEdcHelpProps: EdcHelpProps = {
@@ -47,7 +43,6 @@ describe('EdcIcon', () => {
     const wrapper = mount(
       <EdcIcon
         data={data}
-        edcHelpProps={dummyEdcHelpProps}
         failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
         config={config}
       />
@@ -61,7 +56,6 @@ describe('EdcIcon', () => {
     const wrapper = mount(
       <EdcIcon
         data={data}
-        edcHelpProps={dummyEdcHelpProps}
         failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
         config={config}
       />
@@ -75,7 +69,6 @@ describe('EdcIcon', () => {
     const wrapper = mount(
       <EdcIcon
         data={data}
-        edcHelpProps={dummyEdcHelpProps}
         failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
         config={config}
       />
@@ -85,17 +78,20 @@ describe('EdcIcon', () => {
     expect(wrapper.find('i').hasClass(cssEdcIcon.content || '')).toBeTruthy()
   })
 
-  /* it('should handle dark mode when enabled', () => {
+  it('should handle dark mode when enabled', () => {
     data.failBehaviorData.displayIcon = cssEdcIcon
+    config.options = {
+      dark: true
+    }
     const wrapper = mount(
       <EdcIcon
         data={data}
         failBehavior={{ popover: 'ERROR_SHOWN', icon: 'ERROR' }}
-        edcHelpProps={dummyDarkEdcHelpProps}
         config={config}
       />
     )
 
     expect(wrapper.find('i').hasClass('on-dark')).toBeTruthy()
-  }) */
+    config.options = undefined
+  })
 })
