@@ -118,7 +118,7 @@ import { EdcHelp } from 'edc-popover-react'
 ...
 ```
 
-All EdcHelp props that override the Provider are in the EdcHelp scope and completely isolated from others EdcHelp.
+All EdcHelp props that override the Provider are in the EdcHelp scope and completely isolated from other EdcHelps.
 
 Props to specify for the `EdcHelp` (see [EdcHelpProps](./src/data/EdcHelpData.tsx)):
 | Prop | Type | Description |
