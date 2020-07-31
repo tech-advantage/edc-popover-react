@@ -36,7 +36,6 @@ export function getEdcIcon(
     <EdcIcon
       data={props.data}
       config={props.config}
-      edcHelpProps={props.edcHelp}
       failBehavior={props.config.failBehavior}
       ref={ref}
     />
