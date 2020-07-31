@@ -49,6 +49,11 @@ class DefaultProvider extends React.Component<ProviderProps> {
           ...this.props
         }}
       >
+        <style>
+          {`h6 {
+            font-size: 1.0em;
+          }`}
+        </style>
         Language:
         <select onChange={this.handleChange}>
           <option value='en'>en</option>
@@ -99,7 +104,11 @@ class DarkSwitcher extends Component<{}> {
         </select>
         <br />
         <br />
-        <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
+        <EdcHelp
+          mainKey='fr.techad.edc'
+          subKey='help.center'
+          options={{ dark: this.dark }}
+        />
       </DefaultProvider>
     )
   }
@@ -141,6 +150,13 @@ export const withDarkMode: FunctionComponent = () => <DarkSwitcher />
 
 export const withCustomPlacements: FunctionComponent = () => (
   <DefaultProvider>
+    <style>
+      {`#root {
+            margin-left: 35%;
+            margin-top: 10%;
+            margin-bottom: 50%;
+          }`}
+    </style>
     <h4>Auto</h4>
     <EdcHelp
       mainKey='fr.techad.edc'

@@ -1,4 +1,4 @@
-import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
+import { PopoverData } from '../data/EdcHelpData'
 import React, { forwardRef } from 'react'
 import { FailBehavior } from '..'
 import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
@@ -13,7 +13,6 @@ export type EdcIconData =
 
 export type EdcIconProps = {
   data: PopoverData
-  edcHelpProps: EdcHelpProps
   config: EdcPopoverConfig
   failBehavior?: FailBehavior
 }
@@ -24,7 +23,7 @@ function getIconContent(icon: EdcIconData): string | undefined {
 
 export const EdcIcon = forwardRef<HTMLImageElement, EdcIconProps>(
   (props, ref) => {
-    const { data, edcHelpProps, config, failBehavior, ...newProps } = props
+    const { data, config, failBehavior, ...newProps } = props
     const behaviorData = data.failBehaviorData
     let icon = getIconContent(behaviorData.displayIcon)
     let cssClass = ''
@@ -56,6 +55,8 @@ export const EdcIcon = forwardRef<HTMLImageElement, EdcIconProps>(
     } else {
       cssClass += 'help-icon'
     }
+
+    cssClass += config.options?.dark ? ' on-dark' : ''
 
     return forceCss ||
       typeof behaviorData.displayIcon === 'string' ||
