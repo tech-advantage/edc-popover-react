@@ -5,7 +5,7 @@ import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { HelperFactory } from '../helper/HelperFactory'
 import { EdcIconData } from '..'
 import { BehaviorData } from '../data/FailBehavior'
-import { PopoverContent, PopoverItem } from 'edc-popover-js'
+import { PopoverContent, PopoverItem } from 'edc-popover-utils'
 
 const errorProviderIcon = 'fas fa-exclamation-triangle'
 const errorDebugIcon = 'fas fa-exclamation-circle'

@@ -1,6 +1,10 @@
 import { EdcIconData } from '..'
 import { BehaviorData } from './FailBehavior'
-import { PopoverContent, PopoverLabels, IPopoverOptions } from 'edc-popover-js'
+import {
+  PopoverContent,
+  PopoverLabels,
+  IPopoverOptions
+} from 'edc-popover-utils'
 
 export type EdcHelpProps = {
   pluginId?: string

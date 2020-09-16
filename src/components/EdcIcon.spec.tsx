@@ -3,7 +3,7 @@ import { EdcIcon, EdcIconData } from './EdcIcon'
 import { mount } from 'enzyme'
 import { PopoverData } from '../data/EdcHelpData'
 import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
-import { PopoverContent, PopoverLabels } from 'edc-popover-js'
+import { PopoverContent, PopoverLabels } from 'edc-popover-utils'
 
 describe('EdcIcon', () => {
   const config: EdcPopoverConfig = {
