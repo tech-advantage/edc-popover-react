@@ -131,7 +131,8 @@ export function buildData(
       const popoverLabels = {
         articles: labels.articles,
         links: labels.links,
-        comingSoon: labels.comingSoon
+        comingSoon: labels.comingSoon,
+        iconAlt: labels.iconAlt
       }
       behaviorData.iconAlt = labels.iconAlt
 
