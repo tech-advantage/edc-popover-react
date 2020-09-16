@@ -174,9 +174,9 @@ If a `string` is provided to an [EdcIconData](./src/components/EdcIcon.tsx), it 
 
 #### Global
 
-When dark-mode is enabled, the CSS class `on-dark` is applied on the help icon.
+When dark-mode is enabled, the CSS class `edc-on-dark` is applied on the help icon.
 
-So you can override this classes by CSS select the component as below sections and `.on-dark`
+So you can override this classes by CSS select the component as below sections and `.edc-on-dark`
 
 (see [EdcHelp.scss](./src/components/EdcHelp.scss))
 
@@ -190,10 +190,10 @@ Each behavior (see [Fail behavior](#Fail-behavior)) can be customized as below:
 
 | Behavior | CSS selector |
 |---|---|
-| `SHOWN` | `.help-icon` |
-| `DISABLED` | `.help-icon-disabled` |
-| `HIDDEN` | `.help-icon-hidden` |
-| `ERROR` | `.help-icon-error` |
+| `SHOWN` | `.edc-help-icon` |
+| `DISABLED` | `.edc-help-icon-disabled` |
+| `HIDDEN` | `.edc-help-icon-hidden` |
+| `ERROR` | `.edc-help-icon-error` |
 
 (You can see the default values [here](./src/components/EdcHelp.scss))
 

@@ -39,24 +39,24 @@ export const EdcIcon = forwardRef<HTMLImageElement, EdcIconProps>(
 
       switch (newFailBehavior.icon) {
         case 'SHOWN':
-          cssClass += 'help-icon'
+          cssClass += 'edc-help-icon'
           break
         case 'DISABLED':
-          cssClass += 'help-icon-disabled'
+          cssClass += 'edc-help-icon-disabled'
           break
         case 'HIDDEN':
-          cssClass += 'help-icon-hidden'
+          cssClass += 'edc-help-icon-hidden'
           break
         case 'ERROR':
           forceCss = true
-          cssClass += 'help-icon-error'
+          cssClass += 'edc-help-icon-error'
           icon = getIconContent(behaviorData.errorIcon)
       }
     } else {
-      cssClass += 'help-icon'
+      cssClass += 'edc-help-icon'
     }
 
-    cssClass += config.options?.dark ? ' on-dark' : ''
+    cssClass += config.options?.dark ? ' edc-on-dark' : ''
 
     return forceCss ||
       typeof behaviorData.displayIcon === 'string' ||

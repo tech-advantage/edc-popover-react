@@ -23,8 +23,7 @@ function popoverFactory(
 
   config.content = props.data.content
   config.labels = props.data.labels
-  config.options = props.edcHelp.options
-
+  config.options = { ...config.options, ...props.edcHelp.options }
   return new Popover(config)
 }
 
@@ -84,7 +83,7 @@ export function EdcPopover(props: EdcPopoverProps): JSX.Element {
     if (hasPopover) {
       const popover = popoverFactory(props, ref)
       return (): void => {
-        popover.instance.destroy()
+        popover.instance && popover.instance.destroy()
       }
     }
     // eslint-disable-next-line @typescript-eslint/no-empty-function

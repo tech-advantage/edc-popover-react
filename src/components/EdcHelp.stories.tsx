@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { EdcIconData, EdcPopoverProvider, FailBehavior } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
-import { IPopoverOptions } from 'edc-popover-js'
+import { AnimationType, IPopoverOptions } from 'edc-popover-js'
 
 export default { title: 'EdcHelp' }
 
@@ -259,19 +259,19 @@ export const withErrorsBehavior: FunctionComponent = () => (
 export const withErrorsBehaviorCustomStyle: FunctionComponent = () => (
   <>
     <style>
-      {`.help-icon {
+      {`.edc-help-icon {
           color: #ab3794;
         }
 
-        .help-icon-disabled {
+        .edc-help-icon-disabled {
           color: #ab3794;
         }
 
-        .help-icon-hidden {
+        .edc-help-icon-hidden {
           color: #ab3794;
         }
 
-        .help-icon-error {
+        .edc-help-icon-error {
           color: #ff0000;
         }`}
     </style>
@@ -359,4 +359,165 @@ export const withWrongKeys: FunctionComponent = () => (
   <DefaultProvider>
     <EdcHelp mainKey='fr.techad.edc' subKey='nonexistingkey' />
   </DefaultProvider>
+)
+
+/* Display options */
+class DisplaySwitcher extends Component<{}> {
+  state = {
+    displayArticles: true,
+    displayRelatedTopics: true,
+    displayTitle: true,
+    displayPopover: true,
+    displayTooltip: true,
+    displaySeparator: true
+  }
+
+  render(): JSX.Element {
+    return (
+      <DefaultProvider>
+        <div>
+          Display articles:
+          <input
+            id='articles'
+            type='checkbox'
+            checked={this.state.displayArticles}
+            onChange={() =>
+              this.setState({ displayArticles: !this.state.displayArticles })
+            }
+          />
+        </div>
+        <br />
+        <div>
+          Display related topics:
+          <input
+            id='relatedTopics'
+            type='checkbox'
+            checked={this.state.displayRelatedTopics}
+            onChange={() =>
+              this.setState({
+                displayRelatedTopics: !this.state.displayRelatedTopics
+              })
+            }
+          />
+        </div>
+        <div>
+          Display Title:
+          <input
+            id='displayTitle'
+            type='checkbox'
+            checked={this.state.displayTitle}
+            onChange={() =>
+              this.setState({ displayTitle: !this.state.displayTitle })
+            }
+          />
+        </div>
+        <div>
+          Display Popover:
+          <input
+            id='displayPopover'
+            type='checkbox'
+            checked={this.state.displayPopover}
+            onChange={() =>
+              this.setState({ displayPopover: !this.state.displayPopover })
+            }
+          />
+        </div>
+        <div>
+          Display Tooltip:
+          <input
+            id='displayTooltip'
+            type='checkbox'
+            checked={this.state.displayTooltip}
+            onChange={() =>
+              this.setState({ displayTooltip: !this.state.displayTooltip })
+            }
+          />
+        </div>
+        <div>
+          Display Separator:
+          <input
+            id='displaySeparator'
+            type='checkbox'
+            checked={this.state.displaySeparator}
+            onChange={() =>
+              this.setState({ displaySeparator: !this.state.displaySeparator })
+            }
+          />
+        </div>
+        <br />
+        <br />
+        <EdcHelp
+          mainKey='fr.techad.edc'
+          subKey='documentation_type'
+          options={{
+            displayArticles: this.state.displayArticles,
+            displayRelatedTopics: this.state.displayRelatedTopics,
+            displayTitle: this.state.displayTitle,
+            displayPopover: this.state.displayPopover,
+            displayTooltip: this.state.displayTooltip,
+            displaySeparator: this.state.displaySeparator
+          }}
+        />
+      </DefaultProvider>
+    )
+  }
+}
+export const withDisplayOptions: FunctionComponent = () => <DisplaySwitcher />
+
+/* Animations */
+class AnimationsSwitcher extends Component<{}> {
+  options: string[] = []
+  state: { animation: AnimationType | undefined; delay: number } = {
+    animation: undefined,
+    delay: 200
+  }
+
+  constructor(props: Readonly<{}>) {
+    super(props)
+    this.options = Object.keys(AnimationType).map((key: string) => key)
+  }
+
+  getOptions() {
+    return this.options.map((opt: any, index: number) => (
+      <option value={AnimationType[opt]} key={`option${index}`}>
+        {opt}
+      </option>
+    ))
+  }
+
+  render(): JSX.Element {
+    return (
+      <DefaultProvider>
+        <div>
+          Animation mode:
+          <select
+            onChange={(event: ChangeEvent<HTMLSelectElement>) =>
+              this.setState({ animation: event.target.value })
+            }
+          >
+            {this.getOptions()}
+          </select>
+        </div>
+        <br />
+        <div>
+          Delay in milliseconds:
+          <input
+            type='number'
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              this.setState({ delay: Number(event.target.value) })
+            }
+          />
+        </div>
+        <br />
+        <EdcHelp
+          mainKey='fr.techad.edc'
+          subKey='documentation_type'
+          options={{ animation: this.state.animation, delay: this.state.delay }}
+        />
+      </DefaultProvider>
+    )
+  }
+}
+export const withAnimationOptions: FunctionComponent = () => (
+  <AnimationsSwitcher />
 )
