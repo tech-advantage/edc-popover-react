@@ -3,8 +3,8 @@ import { EdcIcon } from './EdcIcon'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
 import { defaultFailBehavior } from '../data/FailBehavior'
-import { Popover, PopoverConfig, PopoverContent } from 'edc-popover-js'
-import 'edc-popover-js/dist/edc-popover.css'
+import { Popover, PopoverConfig, PopoverContent } from 'edc-popover-utils'
+import 'edc-popover-utils/dist/edc-popover.css'
 
 export type EdcPopoverProps = {
   edcHelp: EdcHelpProps

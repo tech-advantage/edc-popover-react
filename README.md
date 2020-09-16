@@ -19,7 +19,7 @@ The required dependencies are:
 - [ReactJS](https://reactjs.org/) 16.4.0 or higher
 - [FontAwesome](https://github.com/FortAwesome/Font-Awesome) 5.13.0 or higher
 - [edc-client-js](https://github.com/tech-advantage/edc-client-js) 3.1.3 or higher
-- [edc-popover-js](https://github.com/tech-advantage/edc-popover-js) 1.0.2 or higher
+- [edc-popover-utils](https://github.com/tech-advantage/edc-popover-utils) 1.0.0 or higher
 
 ## How to use
 
@@ -70,7 +70,7 @@ Optional prop that can be overridden :
 |---|---|---|---|
 | icon | [EdcIconData](./src/components/EdcIcon.tsx) | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
-| options | [IPopoverOptions](https://github.com/tech-advantage/edc-popover-js) | Global popover options | see [PopoverOptions](https://github.com/tech-advantage/edc-popover-js) |
+| options | [IPopoverOptions](https://github.com/tech-advantage/edc-popover-utils) | Global popover options | see [PopoverOptions](https://github.com/tech-advantage/edc-popover-utils) |
 | failBehavior | [FailBehavior](./src/data/FailBehavior.tsx) | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
@@ -132,7 +132,7 @@ Optional prop that can be overridden :
 | pluginId | `string` | A custom pluginId | `undefined` (keeps the pluginId from the provider) |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
 | icon | [EdcIconData](./src/components/EdcIcon.tsx) | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
-| options | [IPopoverOptions](https://github.com/tech-advantage/edc-popover-js) | Global popover options | see [PopoverOptions](https://github.com/tech-advantage/edc-popover-js) |
+| options | [IPopoverOptions](https://github.com/tech-advantage/edc-popover-utils) | Global popover options | see [PopoverOptions](https://github.com/tech-advantage/edc-popover-utils) |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
@@ -182,7 +182,7 @@ So you can override this classes by CSS select the component as below sections a
 
 #### Popover
 
-You can customize the popover's design as described in [edc-popover-js](https://github.com/tech-advantage/edc-popover-js)
+You can customize the popover's design as described in [edc-popover-utils](https://github.com/tech-advantage/edc-popover-utils)
 
 #### Help icon
 

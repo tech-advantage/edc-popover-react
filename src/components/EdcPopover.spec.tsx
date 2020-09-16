@@ -3,9 +3,13 @@ import { mount } from 'enzyme'
 import React from 'react'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
-import { Popover, PopoverContent, PopoverLabels } from 'edc-popover-js'
+import {
+  Popover,
+  PopoverContent,
+  PopoverLabels,
+  PopoverConfig
+} from 'edc-popover-utils'
 import { act } from 'react-dom/test-utils'
-import { PopoverConfig } from 'edc-popover-js/index'
 import waitForExpect from 'wait-for-expect'
 
 describe('EdcPopover', () => {
@@ -48,7 +52,7 @@ describe('EdcPopover', () => {
     if (mockedInitPopover) {
       mockedInitPopover.mockClear()
     }
-    mockedInitPopover = jest.spyOn(Popover.prototype, 'initPopover')
+    mockedInitPopover = jest.spyOn(Popover.prototype, 'buildPopover')
   })
 
   it('should handle properly the default behavior : FRIENDLY_MSG and SHOWN', async () => {
@@ -76,7 +80,7 @@ describe('EdcPopover', () => {
         popover: 'ERROR_SHOWN',
         icon: 'ERROR'
       }
-      mockedInitPopover = jest.spyOn(Popover.prototype, 'initPopover')
+      mockedInitPopover = jest.spyOn(Popover.prototype, 'buildPopover')
       const wrapper = mount(
         <EdcPopover edcHelp={edcHelpProps} config={config} data={popoverData} />
       )

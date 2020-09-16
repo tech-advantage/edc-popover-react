@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { EdcIconData, EdcPopoverProvider, FailBehavior } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
-import { AnimationType, IPopoverOptions } from 'edc-popover-js'
+import { AnimationType, IPopoverOptions } from 'edc-popover-utils'
 
 export default { title: 'EdcHelp' }
 
@@ -381,7 +381,7 @@ class DisplaySwitcher extends Component<{}> {
             id='articles'
             type='checkbox'
             checked={this.state.displayArticles}
-            onChange={() =>
+            onChange={(): void =>
               this.setState({ displayArticles: !this.state.displayArticles })
             }
           />
@@ -393,7 +393,7 @@ class DisplaySwitcher extends Component<{}> {
             id='relatedTopics'
             type='checkbox'
             checked={this.state.displayRelatedTopics}
-            onChange={() =>
+            onChange={(): void =>
               this.setState({
                 displayRelatedTopics: !this.state.displayRelatedTopics
               })
@@ -406,7 +406,7 @@ class DisplaySwitcher extends Component<{}> {
             id='displayTitle'
             type='checkbox'
             checked={this.state.displayTitle}
-            onChange={() =>
+            onChange={(): void =>
               this.setState({ displayTitle: !this.state.displayTitle })
             }
           />
@@ -417,7 +417,7 @@ class DisplaySwitcher extends Component<{}> {
             id='displayPopover'
             type='checkbox'
             checked={this.state.displayPopover}
-            onChange={() =>
+            onChange={(): void =>
               this.setState({ displayPopover: !this.state.displayPopover })
             }
           />
@@ -428,7 +428,7 @@ class DisplaySwitcher extends Component<{}> {
             id='displayTooltip'
             type='checkbox'
             checked={this.state.displayTooltip}
-            onChange={() =>
+            onChange={(): void =>
               this.setState({ displayTooltip: !this.state.displayTooltip })
             }
           />
@@ -439,7 +439,7 @@ class DisplaySwitcher extends Component<{}> {
             id='displaySeparator'
             type='checkbox'
             checked={this.state.displaySeparator}
-            onChange={() =>
+            onChange={(): void =>
               this.setState({ displaySeparator: !this.state.displaySeparator })
             }
           />
@@ -477,12 +477,23 @@ class AnimationsSwitcher extends Component<{}> {
     this.options = Object.keys(AnimationType).map((key: string) => key)
   }
 
-  getOptions() {
-    return this.options.map((opt: any, index: number) => (
-      <option value={AnimationType[opt]} key={`option${index}`}>
-        {opt}
-      </option>
-    ))
+  getOptions(): React.DetailedHTMLProps<
+    React.OptionHTMLAttributes<HTMLOptionElement>,
+    HTMLOptionElement
+  >[] {
+    return this.options.map(
+      (
+        opt: string,
+        index: number
+      ): React.DetailedHTMLProps<
+        React.OptionHTMLAttributes<HTMLOptionElement>,
+        HTMLOptionElement
+      > => (
+        <option value={AnimationType[opt]} key={`option${index}`}>
+          {opt}
+        </option>
+      )
+    )
   }
 
   render(): JSX.Element {
@@ -491,7 +502,7 @@ class AnimationsSwitcher extends Component<{}> {
         <div>
           Animation mode:
           <select
-            onChange={(event: ChangeEvent<HTMLSelectElement>) =>
+            onChange={(event: ChangeEvent<HTMLSelectElement>): void =>
               this.setState({ animation: event.target.value })
             }
           >
@@ -503,7 +514,7 @@ class AnimationsSwitcher extends Component<{}> {
           Delay in milliseconds:
           <input
             type='number'
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            onChange={(event: ChangeEvent<HTMLInputElement>): void =>
               this.setState({ delay: Number(event.target.value) })
             }
           />

@@ -5,7 +5,7 @@ import { PopoverConfigContext } from '../config/PopoverConfigProvider'
 import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { buildData, getIcon } from '../handlers/EdcHelpHandler'
 import { EdcPopover } from './EdcPopover'
-import { PopoverContent } from 'edc-popover-js'
+import { PopoverContent } from 'edc-popover-utils'
 
 const defaultProps: EdcHelpProps = {
   pluginId: undefined,
