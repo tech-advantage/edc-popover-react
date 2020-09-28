@@ -2,7 +2,8 @@ import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { EdcIconData, EdcPopoverProvider, FailBehavior } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
-import { AnimationType, IPopoverOptions } from 'edc-popover-utils'
+import { AnimationType, PopoverPlacement } from 'edc-popover-utils'
+import { EdcIPopoverOptions } from './EdcIPopoverOptions'
 
 export default { title: 'EdcHelp' }
 
@@ -13,7 +14,7 @@ type ProviderProps = {
   i18nPath?: string
   icon?: EdcIconData
   lang?: string
-  options?: IPopoverOptions
+  options?: EdcIPopoverOptions
   failBehavior?: FailBehavior
   helpFactory?: Function
 }
@@ -161,31 +162,31 @@ export const withCustomPlacements: FunctionComponent = () => (
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'auto' }}
+      options={{ placement: PopoverPlacement.AUTO }}
     />
     <h4>Top</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'top' }}
+      options={{ placement: PopoverPlacement.TOP }}
     />
     <h4>Bottom</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'bottom' }}
+      options={{ placement: PopoverPlacement.BOTTOM }}
     />
     <h4>Left</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'left' }}
+      options={{ placement: PopoverPlacement.LEFT }}
     />
     <h4>Right</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'right' }}
+      options={{ placement: PopoverPlacement.RIGHT }}
     />
   </DefaultProvider>
 )
@@ -363,13 +364,26 @@ export const withWrongKeys: FunctionComponent = () => (
 
 /* Display options */
 class DisplaySwitcher extends Component<{}> {
-  state = {
-    displayArticles: true,
-    displayRelatedTopics: true,
-    displayTitle: true,
-    displayPopover: true,
-    displayTooltip: true,
-    displaySeparator: true
+  state: {
+    displayArticles: boolean
+    displayRelatedTopics: boolean
+    displayTitle: boolean
+    displayPopover: boolean
+    displayTooltip: boolean
+    displaySeparator: boolean
+  }
+
+  constructor() {
+    // @ts-ignore
+    super()
+    this.state = {
+      displayArticles: true,
+      displayRelatedTopics: true,
+      displayTitle: true,
+      displayPopover: true,
+      displayTooltip: true,
+      displaySeparator: true
+    }
   }
 
   render(): JSX.Element {

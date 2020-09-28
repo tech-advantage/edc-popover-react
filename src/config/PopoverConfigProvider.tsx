@@ -1,7 +1,7 @@
 import React from 'react'
 import { HelperFactory } from '../helper/HelperFactory'
 import { EdcIconData, FailBehavior } from '..'
-import { IPopoverOptions } from 'edc-popover-utils'
+import { EdcIPopoverOptions } from '../components/EdcIPopoverOptions'
 
 export type EdcPopoverConfig = {
   pluginId: string
@@ -10,7 +10,7 @@ export type EdcPopoverConfig = {
   i18nPath: string
   icon?: EdcIconData
   lang?: string
-  options?: IPopoverOptions
+  options?: EdcIPopoverOptions
   failBehavior?: FailBehavior
 
   // Only backend side, if you want to use your custom helpFactory
