@@ -117,26 +117,26 @@ class DarkSwitcher extends Component<{}> {
 
 export const withDefaultIcon: FunctionComponent = () => (
   <DefaultProvider>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
 export const withCustomIconClass: FunctionComponent = () => (
   <DefaultProvider icon='fas fa-ad'>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
 export const withCustomIconSVG: FunctionComponent = () => (
   <DefaultProvider icon={{ type: 'url', content: '/icon.svg' }}>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
 export const withCustomIconPNG: FunctionComponent = () => (
   <DefaultProvider icon={{ type: 'url', content: '/icon.png' }}>
     <h4>lang: 'fr'</h4>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' lang='fr' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
   </DefaultProvider>
 )
 
@@ -195,7 +195,7 @@ export const withHoverTrigger: FunctionComponent = () => (
   <DefaultProvider>
     <EdcHelp
       mainKey='fr.techad.edc'
-      subKey='documentation_type'
+      subKey='help.center'
       options={{ trigger: 'mouseenter' }}
     />
   </DefaultProvider>
@@ -205,7 +205,7 @@ export const withHoverFocusTrigger: FunctionComponent = () => (
   <DefaultProvider>
     <EdcHelp
       mainKey='fr.techad.edc'
-      subKey='documentation_type'
+      subKey='help.center'
       options={{ trigger: 'mouseenter focus' }}
     />
   </DefaultProvider>
@@ -333,7 +333,7 @@ export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
     <h4>lang: 'zz'</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
-      subKey='documentation_type'
+      subKey='help.center'
       lang='zz'
       icon='fab fa-angular'
     />
@@ -342,7 +342,7 @@ export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
 )
 
 export const withNoProvider: FunctionComponent = () => (
-  <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+  <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
 )
 
 export const withFailingDocPath: FunctionComponent = () => (
@@ -352,7 +352,7 @@ export const withFailingDocPath: FunctionComponent = () => (
     i18nPath='ohnono'
     helpFactory={(): HelperFactory => new HelperFactory()}
   >
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
@@ -462,7 +462,7 @@ class DisplaySwitcher extends Component<{}> {
         <br />
         <EdcHelp
           mainKey='fr.techad.edc'
-          subKey='documentation_type'
+          subKey='help.center'
           options={{
             displayArticles: this.state.displayArticles,
             displayRelatedTopics: this.state.displayRelatedTopics,
@@ -536,7 +536,7 @@ class AnimationsSwitcher extends Component<{}> {
         <br />
         <EdcHelp
           mainKey='fr.techad.edc'
-          subKey='documentation_type'
+          subKey='help.center'
           options={{ animation: this.state.animation, delay: this.state.delay }}
         />
       </DefaultProvider>
