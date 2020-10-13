@@ -3,7 +3,7 @@ import { EdcIcon, EdcIconData } from './EdcIcon'
 import { mount } from 'enzyme'
 import { PopoverData } from '../data/EdcHelpData'
 import { EdcPopoverConfig } from '../config/PopoverConfigProvider'
-import { PopoverContent, PopoverLabels } from 'edc-popover-js'
+import { PopoverContent, PopoverLabels } from 'edc-popover-utils'
 
 describe('EdcIcon', () => {
   const config: EdcPopoverConfig = {
@@ -21,12 +21,6 @@ describe('EdcIcon', () => {
       errorIcon: 'errorIcon'
     }
   }
-
-  /* const dummyDarkEdcHelpProps: EdcHelpProps = {
-    mainKey: 'dummy',
-    subKey: 'dummy',
-    dark: true
-  } */
 
   const defaultStringIcon: EdcIconData = 'myClass'
   const cssEdcIcon: EdcIconData = {
@@ -91,7 +85,7 @@ describe('EdcIcon', () => {
       />
     )
 
-    expect(wrapper.find('i').hasClass('on-dark')).toBeTruthy()
+    expect(wrapper.find('i').hasClass('edc-on-dark')).toBeTruthy()
     config.options = undefined
   })
 })

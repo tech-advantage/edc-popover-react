@@ -19,7 +19,7 @@ The required dependencies are:
 - [ReactJS](https://reactjs.org/) 16.4.0 or higher
 - [FontAwesome](https://github.com/FortAwesome/Font-Awesome) 5.13.0 or higher
 - [edc-client-js](https://github.com/tech-advantage/edc-client-js) 3.1.3 or higher
-- [edc-popover-js](https://github.com/tech-advantage/edc-popover-js) 1.0.2 or higher
+- [edc-popover-utils](https://github.com/tech-advantage/edc-popover-utils) 1.0.0 or higher
 
 ## How to use
 
@@ -70,7 +70,7 @@ Optional prop that can be overridden :
 |---|---|---|---|
 | icon | [EdcIconData](./src/components/EdcIcon.tsx) | The icon (see [Icons](#Icons)) | `far fa-question-circle` |
 | lang | `string` | The default language | `en` |
-| options | [IPopoverOptions](https://github.com/tech-advantage/edc-popover-js) | Global popover options | see [PopoverOptions](https://github.com/tech-advantage/edc-popover-js) |
+| options | [IPopoverOptions](https://github.com/tech-advantage/edc-popover-utils) | Global popover options | see [PopoverOptions](https://github.com/tech-advantage/edc-popover-utils) |
 | failBehavior | [FailBehavior](./src/data/FailBehavior.tsx) | The popover's behavior when an error occurs (see [Behavior](#Fail-behavior)) | `{ popover: 'FRIENDLY_MSG', icon: 'SHOWN' }` |
 
 You can also reuse your provider to make your app more flexible (but not recommended) :
@@ -132,7 +132,7 @@ Optional prop that can be overridden :
 | pluginId | `string` | A custom pluginId | `undefined` (keeps the pluginId from the provider) |
 | lang | `string` | A language | `undefined` (keeps the language from the provider) |
 | icon | [EdcIconData](./src/components/EdcIcon.tsx) | An icon (see [Icons](#Icons)) | `undefined` (keeps the icon from the provider) |
-| options | [IPopoverOptions](https://github.com/tech-advantage/edc-popover-js) | Global popover options | see [PopoverOptions](https://github.com/tech-advantage/edc-popover-js) |
+| options | [IPopoverOptions](https://github.com/tech-advantage/edc-popover-utils) | Global popover options | see [PopoverOptions](https://github.com/tech-advantage/edc-popover-utils) |
 
 **:warning: All `EdcHelp` components must be surrounded by your configured provider** (see [Setup](#Setup))
 
@@ -174,15 +174,15 @@ If a `string` is provided to an [EdcIconData](./src/components/EdcIcon.tsx), it 
 
 #### Global
 
-When dark-mode is enabled, the CSS class `on-dark` is applied on the help icon.
+When dark-mode is enabled, the CSS class `edc-on-dark` is applied on the help icon.
 
-So you can override this classes by CSS select the component as below sections and `.on-dark`
+So you can override this classes by CSS select the component as below sections and `.edc-on-dark`
 
 (see [EdcHelp.scss](./src/components/EdcHelp.scss))
 
 #### Popover
 
-You can customize the popover's design as described in [edc-popover-js](https://github.com/tech-advantage/edc-popover-js)
+You can customize the popover's design as described in [edc-popover-utils](https://github.com/tech-advantage/edc-popover-utils)
 
 #### Help icon
 
@@ -190,10 +190,10 @@ Each behavior (see [Fail behavior](#Fail-behavior)) can be customized as below:
 
 | Behavior | CSS selector |
 |---|---|
-| `SHOWN` | `.help-icon` |
-| `DISABLED` | `.help-icon-disabled` |
-| `HIDDEN` | `.help-icon-hidden` |
-| `ERROR` | `.help-icon-error` |
+| `SHOWN` | `.edc-help-icon` |
+| `DISABLED` | `.edc-help-icon-disabled` |
+| `HIDDEN` | `.edc-help-icon-hidden` |
+| `ERROR` | `.edc-help-icon-error` |
 
 (You can see the default values [here](./src/components/EdcHelp.scss))
 

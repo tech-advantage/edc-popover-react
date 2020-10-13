@@ -1,29 +1,29 @@
-.help-icon {
+.edc-help-icon {
   color: #d3d3d3;
   height: 1em;
   cursor: pointer;
 }
 
-.help-icon:hover {
+.edc-help-icon:hover {
   color: #3c8dbc;
 }
 
-.help-icon.on-dark:hover {
+.edc-help-icon.edc-on-dark:hover {
   color: #7eb0cd;
 }
 
-.help-icon-disabled {
+.edc-help-icon-disabled {
   color: #d3d3d3;
   height: 1em;
   opacity: 0.6;
 }
 
-.help-icon-hidden {
+.edc-help-icon-hidden {
   height: 1em;
   opacity: 0.0;
 }
 
-.help-icon-error {
+.edc-help-icon-error {
   color: #d21e1e;
   height: 1em;
   cursor: pointer;

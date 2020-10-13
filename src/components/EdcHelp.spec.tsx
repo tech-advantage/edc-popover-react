@@ -2,7 +2,7 @@ import React from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import { EdcHelp } from './EdcHelp'
 import { EdcPopoverProvider } from '..'
-import { Popover, PopoverConfig } from 'edc-popover-js'
+import { Popover, PopoverConfig } from 'edc-popover-utils'
 import waitForExpect from 'wait-for-expect'
 import { HelperFactory } from '../helper/HelperFactory'
 import { Helper, PopoverError, PopoverLabel } from 'edc-client-js'
@@ -114,7 +114,7 @@ describe('EdcHelp', () => {
       if (mockedInitPopover) {
         mockedInitPopover.mockClear()
       }
-      mockedInitPopover = jest.spyOn(Popover.prototype, 'initPopover')
+      mockedInitPopover = jest.spyOn(Popover.prototype, 'buildPopover')
       casualEdcHelpClick()
       let config = correctPopoverConfig()
       await waitForExpect(() => {
@@ -130,7 +130,7 @@ describe('EdcHelp', () => {
       if (mockedInitPopover) {
         mockedInitPopover.mockClear()
       }
-      mockedInitPopover = jest.spyOn(Popover.prototype, 'initPopover')
+      mockedInitPopover = jest.spyOn(Popover.prototype, 'buildPopover')
       casualEdcHelpHover()
       let config = correctPopoverConfig()
       await waitForExpect(() => {

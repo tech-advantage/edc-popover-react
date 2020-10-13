@@ -5,7 +5,7 @@ import { EdcHelpProps, PopoverData } from '../data/EdcHelpData'
 import { HelperFactory } from '../helper/HelperFactory'
 import { EdcIconData } from '..'
 import { BehaviorData } from '../data/FailBehavior'
-import { PopoverContent, PopoverItem } from 'edc-popover-js'
+import { PopoverContent, PopoverItem } from 'edc-popover-utils'
 
 const errorProviderIcon = 'fas fa-exclamation-triangle'
 const errorDebugIcon = 'fas fa-exclamation-circle'
@@ -131,7 +131,8 @@ export function buildData(
       const popoverLabels = {
         articles: labels.articles,
         links: labels.links,
-        comingSoon: labels.comingSoon
+        comingSoon: labels.comingSoon,
+        iconAlt: labels.iconAlt
       }
       behaviorData.iconAlt = labels.iconAlt
 

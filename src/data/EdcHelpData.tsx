@@ -1,6 +1,7 @@
 import { EdcIconData } from '..'
 import { BehaviorData } from './FailBehavior'
-import { PopoverContent, PopoverLabels, IPopoverOptions } from 'edc-popover-js'
+import { PopoverContent, PopoverLabels } from 'edc-popover-utils'
+import { EdcIPopoverOptions } from '../components/EdcIPopoverOptions'
 
 export type EdcHelpProps = {
   pluginId?: string
@@ -8,7 +9,7 @@ export type EdcHelpProps = {
   subKey: string
   lang?: string
   icon?: EdcIconData
-  options?: IPopoverOptions
+  options?: EdcIPopoverOptions
 }
 
 export type PopoverData = {

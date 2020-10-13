@@ -2,7 +2,8 @@ import React, { ChangeEvent, Component, FunctionComponent } from 'react'
 import { EdcHelp } from './EdcHelp'
 import { EdcIconData, EdcPopoverProvider, FailBehavior } from '..'
 import { HelperFactory } from '../helper/HelperFactory'
-import { IPopoverOptions } from 'edc-popover-js'
+import { AnimationType, PopoverPlacement } from 'edc-popover-utils'
+import { EdcIPopoverOptions } from './EdcIPopoverOptions'
 
 export default { title: 'EdcHelp' }
 
@@ -13,7 +14,7 @@ type ProviderProps = {
   i18nPath?: string
   icon?: EdcIconData
   lang?: string
-  options?: IPopoverOptions
+  options?: EdcIPopoverOptions
   failBehavior?: FailBehavior
   helpFactory?: Function
 }
@@ -116,26 +117,26 @@ class DarkSwitcher extends Component<{}> {
 
 export const withDefaultIcon: FunctionComponent = () => (
   <DefaultProvider>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
 export const withCustomIconClass: FunctionComponent = () => (
   <DefaultProvider icon='fas fa-ad'>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
 export const withCustomIconSVG: FunctionComponent = () => (
   <DefaultProvider icon={{ type: 'url', content: '/icon.svg' }}>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
 export const withCustomIconPNG: FunctionComponent = () => (
   <DefaultProvider icon={{ type: 'url', content: '/icon.png' }}>
     <h4>lang: 'fr'</h4>
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' lang='fr' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' lang='fr' />
   </DefaultProvider>
 )
 
@@ -161,31 +162,31 @@ export const withCustomPlacements: FunctionComponent = () => (
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'auto' }}
+      options={{ placement: PopoverPlacement.AUTO }}
     />
     <h4>Top</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'top' }}
+      options={{ placement: PopoverPlacement.TOP }}
     />
     <h4>Bottom</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'bottom' }}
+      options={{ placement: PopoverPlacement.BOTTOM }}
     />
     <h4>Left</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'left' }}
+      options={{ placement: PopoverPlacement.LEFT }}
     />
     <h4>Right</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
       subKey='help.center'
-      options={{ placement: 'right' }}
+      options={{ placement: PopoverPlacement.RIGHT }}
     />
   </DefaultProvider>
 )
@@ -194,7 +195,7 @@ export const withHoverTrigger: FunctionComponent = () => (
   <DefaultProvider>
     <EdcHelp
       mainKey='fr.techad.edc'
-      subKey='documentation_type'
+      subKey='help.center'
       options={{ trigger: 'mouseenter' }}
     />
   </DefaultProvider>
@@ -204,7 +205,7 @@ export const withHoverFocusTrigger: FunctionComponent = () => (
   <DefaultProvider>
     <EdcHelp
       mainKey='fr.techad.edc'
-      subKey='documentation_type'
+      subKey='help.center'
       options={{ trigger: 'mouseenter focus' }}
     />
   </DefaultProvider>
@@ -259,19 +260,19 @@ export const withErrorsBehavior: FunctionComponent = () => (
 export const withErrorsBehaviorCustomStyle: FunctionComponent = () => (
   <>
     <style>
-      {`.help-icon {
+      {`.edc-help-icon {
           color: #ab3794;
         }
 
-        .help-icon-disabled {
+        .edc-help-icon-disabled {
           color: #ab3794;
         }
 
-        .help-icon-hidden {
+        .edc-help-icon-hidden {
           color: #ab3794;
         }
 
-        .help-icon-error {
+        .edc-help-icon-error {
           color: #ff0000;
         }`}
     </style>
@@ -332,7 +333,7 @@ export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
     <h4>lang: 'zz'</h4>
     <EdcHelp
       mainKey='fr.techad.edc'
-      subKey='documentation_type'
+      subKey='help.center'
       lang='zz'
       icon='fab fa-angular'
     />
@@ -341,7 +342,7 @@ export const withMultipleEdcHelpSameProvider: FunctionComponent = () => (
 )
 
 export const withNoProvider: FunctionComponent = () => (
-  <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+  <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
 )
 
 export const withFailingDocPath: FunctionComponent = () => (
@@ -351,7 +352,7 @@ export const withFailingDocPath: FunctionComponent = () => (
     i18nPath='ohnono'
     helpFactory={(): HelperFactory => new HelperFactory()}
   >
-    <EdcHelp mainKey='fr.techad.edc' subKey='documentation_type' />
+    <EdcHelp mainKey='fr.techad.edc' subKey='help.center' />
   </DefaultProvider>
 )
 
@@ -359,4 +360,189 @@ export const withWrongKeys: FunctionComponent = () => (
   <DefaultProvider>
     <EdcHelp mainKey='fr.techad.edc' subKey='nonexistingkey' />
   </DefaultProvider>
+)
+
+/* Display options */
+class DisplaySwitcher extends Component<{}> {
+  state: {
+    displayArticles: boolean
+    displayRelatedTopics: boolean
+    displayTitle: boolean
+    displayPopover: boolean
+    displayTooltip: boolean
+    displaySeparator: boolean
+  }
+
+  constructor() {
+    // @ts-ignore
+    super()
+    this.state = {
+      displayArticles: true,
+      displayRelatedTopics: true,
+      displayTitle: true,
+      displayPopover: true,
+      displayTooltip: true,
+      displaySeparator: true
+    }
+  }
+
+  render(): JSX.Element {
+    return (
+      <DefaultProvider>
+        <div>
+          Display articles:
+          <input
+            id='articles'
+            type='checkbox'
+            checked={this.state.displayArticles}
+            onChange={(): void =>
+              this.setState({ displayArticles: !this.state.displayArticles })
+            }
+          />
+        </div>
+        <br />
+        <div>
+          Display related topics:
+          <input
+            id='relatedTopics'
+            type='checkbox'
+            checked={this.state.displayRelatedTopics}
+            onChange={(): void =>
+              this.setState({
+                displayRelatedTopics: !this.state.displayRelatedTopics
+              })
+            }
+          />
+        </div>
+        <div>
+          Display Title:
+          <input
+            id='displayTitle'
+            type='checkbox'
+            checked={this.state.displayTitle}
+            onChange={(): void =>
+              this.setState({ displayTitle: !this.state.displayTitle })
+            }
+          />
+        </div>
+        <div>
+          Display Popover:
+          <input
+            id='displayPopover'
+            type='checkbox'
+            checked={this.state.displayPopover}
+            onChange={(): void =>
+              this.setState({ displayPopover: !this.state.displayPopover })
+            }
+          />
+        </div>
+        <div>
+          Display Tooltip:
+          <input
+            id='displayTooltip'
+            type='checkbox'
+            checked={this.state.displayTooltip}
+            onChange={(): void =>
+              this.setState({ displayTooltip: !this.state.displayTooltip })
+            }
+          />
+        </div>
+        <div>
+          Display Separator:
+          <input
+            id='displaySeparator'
+            type='checkbox'
+            checked={this.state.displaySeparator}
+            onChange={(): void =>
+              this.setState({ displaySeparator: !this.state.displaySeparator })
+            }
+          />
+        </div>
+        <br />
+        <br />
+        <EdcHelp
+          mainKey='fr.techad.edc'
+          subKey='help.center'
+          options={{
+            displayArticles: this.state.displayArticles,
+            displayRelatedTopics: this.state.displayRelatedTopics,
+            displayTitle: this.state.displayTitle,
+            displayPopover: this.state.displayPopover,
+            displayTooltip: this.state.displayTooltip,
+            displaySeparator: this.state.displaySeparator
+          }}
+        />
+      </DefaultProvider>
+    )
+  }
+}
+export const withDisplayOptions: FunctionComponent = () => <DisplaySwitcher />
+
+/* Animations */
+class AnimationsSwitcher extends Component<{}> {
+  options: string[] = []
+  state: { animation: AnimationType | undefined; delay: number } = {
+    animation: undefined,
+    delay: 200
+  }
+
+  constructor(props: Readonly<{}>) {
+    super(props)
+    this.options = Object.keys(AnimationType).map((key: string) => key)
+  }
+
+  getOptions(): React.DetailedHTMLProps<
+    React.OptionHTMLAttributes<HTMLOptionElement>,
+    HTMLOptionElement
+  >[] {
+    return this.options.map(
+      (
+        opt: string,
+        index: number
+      ): React.DetailedHTMLProps<
+        React.OptionHTMLAttributes<HTMLOptionElement>,
+        HTMLOptionElement
+      > => (
+        <option value={AnimationType[opt]} key={`option${index}`}>
+          {opt}
+        </option>
+      )
+    )
+  }
+
+  render(): JSX.Element {
+    return (
+      <DefaultProvider>
+        <div>
+          Animation mode:
+          <select
+            onChange={(event: ChangeEvent<HTMLSelectElement>): void =>
+              this.setState({ animation: event.target.value })
+            }
+          >
+            {this.getOptions()}
+          </select>
+        </div>
+        <br />
+        <div>
+          Delay in milliseconds:
+          <input
+            type='number'
+            onChange={(event: ChangeEvent<HTMLInputElement>): void =>
+              this.setState({ delay: Number(event.target.value) })
+            }
+          />
+        </div>
+        <br />
+        <EdcHelp
+          mainKey='fr.techad.edc'
+          subKey='help.center'
+          options={{ animation: this.state.animation, delay: this.state.delay }}
+        />
+      </DefaultProvider>
+    )
+  }
+}
+export const withAnimationOptions: FunctionComponent = () => (
+  <AnimationsSwitcher />
 )
